@@ -6,12 +6,14 @@ using UnityEngine.UI;
 public class ButtonManager : MonoBehaviour
 {
     public Button spawnGuard;
+   
     public GameObject guardPrefab;
     
 
     // Start is called before the first frame update
     void Start()
     {
+
         spawnGuard.onClick.AddListener(spawnGuardFunc);
     }
 
@@ -25,4 +27,6 @@ public class ButtonManager : MonoBehaviour
     {
         Instantiate(guardPrefab);
     }
+
+
 }

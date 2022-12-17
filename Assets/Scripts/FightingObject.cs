@@ -7,15 +7,15 @@ public class FightingObject : AnimatableObject
 {
     public Player player;
     public GameObject blood;
-    public float playerDistance;
-    public float fightingDistance;
-    public float agroDistance;
+    private float playerDistance;
+    private float fightingDistance;
+    private float agroDistance;
     public float health;
     public float damage;
-    public bool isSlashing;
+    private bool isSlashing;
     public GameObject enemyObject;
-    public bool isFlankingLeft;
-    public bool isFlankingRight;
+    private bool isFlankingLeft;
+    private bool isFlankingRight;
    
 
     // Start is called before the first frame update

@@ -26,7 +26,7 @@ public class Player : FightingObject
         maxHealth = 30;
         health = maxHealth;
 
-        damage = 5;
+        damage = 4;
         enemyIndex = 0;
         
      
@@ -40,7 +40,7 @@ public class Player : FightingObject
         
         if (lockedEnemy != null)
             lockedDistance = lockedEnemy.transform.position.x - gameObject.transform.position.x;
-
+        
     }
 
     private void scanEnemy()
@@ -97,26 +97,22 @@ public class Player : FightingObject
                 case 2: walkleft(); break;
                 case 3: dash(); break;
             }
+
         UpdatePolygonCollider2D();
         die();
 
    
 
-
+        // MOVES TARGET INDICATOR
         if (lockedEnemy != null)
         {
             targetIndicator.transform.position = new Vector3(lockedEnemy.transform.position.x, lockedEnemy.transform.position.y + 3 + Mathf.Sin(Time.realtimeSinceStartup * 3) / 3, lockedEnemy.transform.position.z);
         }
 
 
-
+        // RESIZES HEALTH BAR
         healthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(400 * ((300 / maxHealth) * health / 300), 40);
     
-    }
-
-    private void manageCollider()
-    {
-
     }
 
     private void handleKeys()
@@ -238,19 +234,20 @@ public class Player : FightingObject
     }
 
     public new void OnCollisionStay2D(Collision2D collision)
-    {
-        enemyObject = collision.gameObject;
-        //Debug.Log("Player:" + gameObject.name + " " + enemyObject.gameObject.name);
-        //collision.transform.position += new Vector3(0, 0.1f, 0);
-
-        /*if (collision.gameObject.tag == "Enemy" && playerState == DASH)
+    {   
+        if (spriteRenderer.flipX == false && collision.gameObject.transform.position.x - gameObject.transform.position.x > 1 )
         {
-            /*Debug.Log("hit");
-            collision.gameObject.GetComponent<FightingObject>().bleed();
-            enemyCollision = collision;
-            Debug.Log(collision.gameObject.name);
-            Debug.Log(collision.gameObject.name);
-        }*/
+            enemyObject = collision.gameObject;
+        }
+        else if (spriteRenderer.flipX == true && collision.gameObject.transform.position.x - gameObject.transform.position.x < 1)
+        {
+            enemyObject = collision.gameObject;
+        } else
+        {
+            enemyObject = null;
+        }
+
+
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -298,7 +295,7 @@ public class Player : FightingObject
 
     public override void bleed()
     {
-        if (playerState != DASH || true)
+        if (true)
         {
             blood.GetComponent<BloodObject>().startBleed(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.2f));
         }

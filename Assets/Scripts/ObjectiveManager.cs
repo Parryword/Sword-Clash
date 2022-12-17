@@ -8,6 +8,7 @@ public class ObjectiveManager : MonoBehaviour
     public GameObject[] enemies;
     public TextMeshProUGUI textArea;
     public GameObject[] music;
+    
     bool allEnemiesDead;
     // Start is called before the first frame update
     void Start()
@@ -26,13 +27,14 @@ public class ObjectiveManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (enemies[0] == null)
+        if (enemies[0] == null && enemies[1] != null && enemies[2] != null)
         {
             textArea.text = "Objectives\n•Reach the castle.";
             //textArea = "Objectives\n•Reach the castle";
-            
-            if (enemies[1] == null && enemies[2] == null && allEnemiesDead == false)
-            {
+        }
+
+        if (enemies[0] == null && enemies[1] == null && enemies[2] == null && allEnemiesDead == false)
+        {
                 allEnemiesDead = true;
                 textArea.text = "Objectives\nEnter the castle.";
                 Debug.Log("Will stop");
@@ -40,8 +42,10 @@ public class ObjectiveManager : MonoBehaviour
                 Debug.Log("Will play");
                 music[1].GetComponent<AudioSource>().Play();
 
-            }
         }
         
+        
     }
+
+    
 }

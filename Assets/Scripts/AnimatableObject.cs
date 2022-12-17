@@ -6,8 +6,8 @@ using System.Linq;
 public class AnimatableObject : MonoBehaviour
 {
     public string entityName;
-    public float horizontalSpeed;
-    public float verticalSpeed;
+    protected float horizontalSpeed;
+    protected float verticalSpeed;
     public Animator animator;
     public Rigidbody2D rigidBody;
     public PolygonCollider2D colliderBox;
