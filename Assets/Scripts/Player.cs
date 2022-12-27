@@ -23,7 +23,6 @@ public class Player : FightingObject
         isBusy = false;
         enemyObject = null;
         maxHealth = 30;
-        maxHealth = 30;
         health = maxHealth;
 
         damage = 4;
@@ -72,6 +71,7 @@ public class Player : FightingObject
 
     private void changeFocus()
     {
+        if (enemies.Length == 0) return;
         if (enemies.Length - 1 > enemyIndex)
         {
             lockedEnemy = enemies[++enemyIndex];

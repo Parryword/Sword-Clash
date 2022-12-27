@@ -8,11 +8,10 @@ public class FightingObject : AnimatableObject
     public Player player;
     public GameObject blood;
     private float playerDistance;
-    private float fightingDistance;
+    public float fightingDistance;
     private float agroDistance;
     public float health;
     public float damage;
-    private bool isSlashing;
     public GameObject enemyObject;
     private bool isFlankingLeft;
     private bool isFlankingRight;
@@ -49,7 +48,7 @@ public class FightingObject : AnimatableObject
 
     void slash()
     {
-        if (Mathf.Abs(playerDistance) < fightingDistance && isFlankingLeft == false && isFlankingRight == false)
+        if (Mathf.Abs(playerDistance) < fightingDistance && isFlankingLeft == false && isFlankingRight == false && player.transform.position.y > -5)
         {
             animator.SetTrigger("slash");
         }
@@ -59,7 +58,7 @@ public class FightingObject : AnimatableObject
     {
         playerDistance = gameObject.transform.position.x - player.transform.position.x;
 
-        if (Mathf.Abs(playerDistance) < agroDistance && Mathf.Abs(playerDistance) > fightingDistance && !isFlankingRight && !isFlankingRight)
+        if (Mathf.Abs(playerDistance) < agroDistance && Mathf.Abs(playerDistance) > fightingDistance && !isFlankingLeft && !isFlankingRight)
         {
             if (playerDistance < 0 && isRightClear())
             {
@@ -106,7 +105,7 @@ public class FightingObject : AnimatableObject
 
     public virtual void hitEnemy()
     {
-        if (enemyObject.tag == "Player")
+        if (enemyObject != null && enemyObject.tag == "Player")
         {
             Debug.Log("Player has been hit by" + gameObject.name);
             enemyObject.GetComponent<FightingObject>().health -= damage;
@@ -220,7 +219,7 @@ public class FightingObject : AnimatableObject
         
         float seconds = Mathf.Abs(getDistance(player)) * 2 / (0.08f * 50);
         Debug.Log(seconds);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(seconds);
         isFlankingLeft = false;
         isFlankingRight = false;
         if (getDistance(player) > 0)
