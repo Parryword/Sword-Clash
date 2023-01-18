@@ -1,0 +1,7 @@
+*title screen
+*prologoue & epilogoue
+*polish sprites
+*basic inventory
+Possible
+*more levels?
+*more attack styles?

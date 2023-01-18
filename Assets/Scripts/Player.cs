@@ -15,6 +15,7 @@ public class Player : FightingObject
     public GameObject targetIndicator;
     public GameObject healthBar;
     public int maxHealth;
+    public int stage;
 
 
     void Start()
@@ -27,6 +28,7 @@ public class Player : FightingObject
 
         damage = 4;
         enemyIndex = 0;
+        stage = 1;
         
      
     }
@@ -233,7 +235,7 @@ public class Player : FightingObject
         
     }
 
-    public new void OnCollisionStay2D(Collision2D collision)
+    public new void OnTriggerStay2D(Collider2D collision)
     {   
         if (spriteRenderer.flipX == false && collision.gameObject.transform.position.x - gameObject.transform.position.x > 1 )
         {
@@ -250,10 +252,12 @@ public class Player : FightingObject
 
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         enemyObject = null;
     }
+
+   
 
     private bool isFighting(string direction)
     {

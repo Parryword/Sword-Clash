@@ -9,7 +9,7 @@ public class ObjectiveManager : MonoBehaviour
     public TextMeshProUGUI textArea;
     public GameObject[] music;
     
-    bool allEnemiesDead;
+    public bool allEnemiesDead;
     // Start is called before the first frame update
     void Start()
     {

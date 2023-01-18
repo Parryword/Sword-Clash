@@ -10,6 +10,7 @@ public class BossScript : FightingObject
     void Start()
     {
         fightingDistance = 2.5f;
+        health = 15;
         horizontalSpeed = 0.08f;
         damage = 5;
 
@@ -22,10 +23,15 @@ public class BossScript : FightingObject
     }
 
     private void FixedUpdate()
-    {
-        UpdatePolygonCollider2D();
-        slash();
-        walk();
+    {   
+        if (player.stage == 2)
+        {
+            UpdatePolygonCollider2D();
+            slash();
+            walk();
+            die();
+        }
+        
     }
 
     private void slash()
@@ -64,7 +70,7 @@ public class BossScript : FightingObject
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private new void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {

@@ -19,9 +19,13 @@ public class GateScript : MonoBehaviour
 
     void OnMouseDown()
     {
-        Debug.Log("Clicked");
-        GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(-30,-23,0);
-        GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(-30, -23, -10);
+        if(GameObject.Find("Objective").GetComponent<ObjectiveManager>().allEnemiesDead == true)
+        {
+            Debug.Log("Clicked");
+            GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(-30, -23, 0);
+            GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(-30, -23, -10);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().stage = 2;
+        }
     }
 
 }
