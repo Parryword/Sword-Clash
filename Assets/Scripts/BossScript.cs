@@ -24,7 +24,7 @@ public class BossScript : FightingObject
 
     private void FixedUpdate()
     {   
-        if (player.stage == 2)
+        if (player.stage == level)
         {
             UpdatePolygonCollider2D();
             slash();

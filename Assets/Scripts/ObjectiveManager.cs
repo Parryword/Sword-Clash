@@ -7,9 +7,13 @@ public class ObjectiveManager : MonoBehaviour
 {
     public GameObject[] enemies;
     public TextMeshProUGUI textArea;
+    public TextMeshProUGUI victoryText;
     public GameObject[] music;
+    [SerializeField] GateScript[] doors;
     
-    public bool allEnemiesDead;
+    public bool level1Completed;
+    public bool level2Completed;
+    public bool level3Completed;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,18 +37,51 @@ public class ObjectiveManager : MonoBehaviour
             //textArea = "Objectives\n•Reach the castle";
         }
 
-        if (enemies[0] == null && enemies[1] == null && enemies[2] == null && allEnemiesDead == false)
+        if (enemies[0] == null && enemies[1] == null && enemies[2] == null && level1Completed == false)
         {
-                allEnemiesDead = true;
-                textArea.text = "Objectives\nEnter the castle.";
-                Debug.Log("Will stop");
-                music[0].GetComponent<AudioSource>().Stop();
-                Debug.Log("Will play");
-                music[1].GetComponent<AudioSource>().Play();
+            level1Completed = true;
+            doors[0].unlock();
+            textArea.text = "Objectives\nEnter the castle.";
+            Debug.Log("Will stop");
+            music[0].GetComponent<AudioSource>().Stop();
+            Debug.Log("Will play");
+            music[1].GetComponent<AudioSource>().Play();
 
         }
-        
-        
+
+        if (enemies[3] == null && enemies[4] == null && level2Completed == false)
+        {
+            level2Completed = true;
+            doors[1].unlock();
+            textArea.text = "Objectives\nEnter the dungeon.";
+            Debug.Log("Will stop");
+            music[0].GetComponent<AudioSource>().Stop();
+            Debug.Log("Will play");
+            music[1].GetComponent<AudioSource>().Play();
+        }
+
+        if (level1Completed && !level2Completed && GameObject.FindObjectOfType<Player>().stage == 2)
+        {
+            textArea.text = "Objective\nKill the guards.";
+        }
+
+        if (level2Completed && !level3Completed && GameObject.FindObjectOfType<Player>().stage == 3)
+        {
+            textArea.text = "Objective\nKill the lord.";
+        }
+
+        if (enemies[5] == null && level3Completed == false)
+        {
+            level3Completed = true;
+            textArea.text = "Objectives\nAll completed.";
+            Debug.Log("Will stop");
+            music[0].GetComponent<AudioSource>().Stop();
+            Debug.Log("Will play");
+            music[1].GetComponent<AudioSource>().Play();
+            victoryText.gameObject.SetActive(true);
+        }
+
+
     }
 
     

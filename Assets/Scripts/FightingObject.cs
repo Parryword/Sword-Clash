@@ -13,8 +13,9 @@ public class FightingObject : AnimatableObject
     public float health;
     public float damage;
     public GameObject enemyObject;
-    private bool isFlankingLeft;
-    private bool isFlankingRight;
+    [SerializeField] private bool isFlankingLeft;
+    [SerializeField] private bool isFlankingRight;
+    public int level;
    
 
     // Start is called before the first frame update
@@ -36,19 +37,23 @@ public class FightingObject : AnimatableObject
 
     private void FixedUpdate()
     {   
-        walk();
-        flankRight();
-        flankLeft();
-        slash();
-        UpdatePolygonCollider2D();
-        die();
+        if (player.level == level)
+        {
+            walk();
+            flankRight();
+            flankLeft();
+            slash();
+            UpdatePolygonCollider2D();
+            die();
+        }
+        
 
     }
 
 
     void slash()
     {
-        if (Mathf.Abs(playerDistance) < fightingDistance && isFlankingLeft == false && isFlankingRight == false && player.transform.position.y > -5)
+        if (Mathf.Abs(playerDistance) < fightingDistance && isFlankingLeft == false && isFlankingRight == false)
         {
             animator.SetTrigger("slash");
         }
@@ -124,7 +129,7 @@ public class FightingObject : AnimatableObject
 
         foreach (FightingObject f in near)
         {
-            //Debug.Log("On left of " + gameObject.name + " " + f.name);
+            Debug.Log("On left of " + gameObject.name + " " + f.name);
         }
 
         if (near.Count == 0)
@@ -148,7 +153,7 @@ public class FightingObject : AnimatableObject
 
         foreach (FightingObject f in near)
         {
-            //Debug.Log("On right of " + gameObject.name + " " + f.name);
+            Debug.Log("On right of " + gameObject.name + " " + f.name);
         }
         if (near.Count == 0)
         {
@@ -165,7 +170,7 @@ public class FightingObject : AnimatableObject
 
     private void flankLeft()
     {
-        if (!isLeftClear() && getDistance(player) < fightingDistance && !isFlankingLeft && !isFlankingRight && getDistance(player) < 0 && !isFlankingRight || isFlankingLeft)
+        if (!isLeftClear() && Mathf.Abs(getDistance(player)) > fightingDistance && !isFlankingLeft && !isFlankingRight && getDistance(player) < 0 && !isFlankingRight || isFlankingLeft)
         {
             spriteRenderer.flipX = true;
             if (isFlankingLeft == false)
@@ -176,8 +181,21 @@ public class FightingObject : AnimatableObject
             gameObject.transform.position += new Vector3(-0.08f, 0, 0);
             animator.SetBool("walking", true);
             
+            if (Mathf.Abs(getDistance(player)) > 4)
+            {
+                isFlankingLeft = false;
+                if (getDistance(player) > 0)
+                {
+                    spriteRenderer.flipX = false;
+                }
+                else
+                {
+                    spriteRenderer.flipX = true;
+                }
+            }
+            
         }
-        else if (isFlankingLeft && getDistance(player) < fightingDistance)
+        else if (isFlankingLeft && Mathf.Abs(getDistance(player)) < fightingDistance)
         {
             gameObject.transform.position += new Vector3(-0.08f, 0, 0);
             animator.SetBool("walking", true);
@@ -191,7 +209,7 @@ public class FightingObject : AnimatableObject
 
     private void flankRight()
     {
-        if (!isRightClear() && getDistance(player) > fightingDistance && !isFlankingLeft && !isFlankingRight && getDistance(player) > 0 && !isFlankingLeft || isFlankingRight)
+        if (!isRightClear() && Mathf.Abs(getDistance(player)) > fightingDistance && !isFlankingLeft && !isFlankingRight && getDistance(player) > 0 && !isFlankingLeft || isFlankingRight)
         {
             spriteRenderer.flipX = false;
             if (isFlankingRight == false)
@@ -202,8 +220,21 @@ public class FightingObject : AnimatableObject
             gameObject.transform.position += new Vector3(0.08f, 0, 0);
             animator.SetBool("walking", true);
 
+            if (Mathf.Abs(getDistance(player)) > 4)
+            {
+                isFlankingRight = false;
+                if (getDistance(player) > 0)
+                {
+                    spriteRenderer.flipX = false;
+                }
+                else
+                {
+                    spriteRenderer.flipX = true;
+                }
+            }
+
         }
-        else if (isFlankingRight && getDistance(player) > fightingDistance)
+        else if (isFlankingRight && Mathf.Abs(getDistance(player)) > fightingDistance)
         {
             gameObject.transform.position += new Vector3(0.08f, 0, 0);
             animator.SetBool("walking", true);

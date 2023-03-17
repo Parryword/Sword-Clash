@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Player : FightingObject
 {
@@ -8,18 +9,20 @@ public class Player : FightingObject
     public int playerState;
     private int IDLE = 0, WALKRIGHT = 1, WALKLEFT = 2, DASH = 3;
     // Start is called before the first frame update
-    GameObject[] enemies;
-    public GameObject lockedEnemy;
+    FightingObject[] enemies;
+    public FightingObject lockedEnemy;
     private float lockedDistance;
     public int enemyIndex;
     public GameObject targetIndicator;
     public GameObject healthBar;
     public int maxHealth;
     public int stage;
+    public BandageScript bandage;
 
 
     void Start()
     {
+        level = 1;
         inputManager = InputManager.instance;
         isBusy = false;
         enemyObject = null;
@@ -49,12 +52,14 @@ public class Player : FightingObject
         int prev = 0;
         if (enemies != null)
             prev = enemies.Length;
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        enemies = GameObject.FindObjectsOfType<FightingObject>();
+        enemies = (from e in enemies where e.level == level && e.tag == "Enemy" select e).ToArray();
+
         int curr = enemies.Length;
 
         if (prev > curr && enemyIndex == curr && enemies.Length > 0)
-        {   
-
+        {
+            targetIndicator.SetActive(true);
             enemyIndex = 0;
             lockedEnemy = enemies[enemyIndex];
         }
@@ -225,6 +230,7 @@ public class Player : FightingObject
         //Debug.Log("Player:" + gameObject.name + " " + enemyObject.gameObject.name);
         if (enemyObject != null)
         {
+            Debug.Log(enemyObject.name);
             enemyObject.GetComponent<FightingObject>().bleed();
             enemyObject.GetComponent<FightingObject>().health -= damage;
             enemyObject = null;
@@ -237,19 +243,21 @@ public class Player : FightingObject
 
     public new void OnTriggerStay2D(Collider2D collision)
     {   
-        if (spriteRenderer.flipX == false && collision.gameObject.transform.position.x - gameObject.transform.position.x > 1 )
+        if (collision.tag == "Enemy")
         {
-            enemyObject = collision.gameObject;
+            if (spriteRenderer.flipX == false && collision.gameObject.transform.position.x - gameObject.transform.position.x > 1)
+            {
+                enemyObject = collision.gameObject;
+            }
+            else if (spriteRenderer.flipX == true && collision.gameObject.transform.position.x - gameObject.transform.position.x < 1)
+            {
+                enemyObject = collision.gameObject;
+            }
+            else
+            {
+                enemyObject = null;
+            }
         }
-        else if (spriteRenderer.flipX == true && collision.gameObject.transform.position.x - gameObject.transform.position.x < 1)
-        {
-            enemyObject = collision.gameObject;
-        } else
-        {
-            enemyObject = null;
-        }
-
-
     }
 
     private void OnTriggerExit2D(Collider2D collision)

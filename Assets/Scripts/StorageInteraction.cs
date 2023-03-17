@@ -19,18 +19,12 @@ public class StorageInteraction : MonoBehaviour
 
     private void OnMouseDown()
     {   
-        var PlayerRef = GameObject.Find("Player").GetComponent<Player>();
-        if (PlayerRef.health >= 25 && PlayerRef.health < 30 && !isUsed)
+        if(!isUsed)
         {
-            PlayerRef.health = 30;
+            var PlayerRef = GameObject.Find("Player").GetComponent<Player>();
+            PlayerRef.bandage.increaseBandage();
             isUsed = true;
-            Debug.Log("Player healed with bandages found in house.");
         }
-        else if (PlayerRef.health < 25 && !isUsed)
-        {
-            PlayerRef.health += 5;
-            isUsed = true;
-            Debug.Log("Player healed with bandages found in house.");
-        }
+        
     }
 }
