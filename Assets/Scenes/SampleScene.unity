@@ -1071,7 +1071,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1872540644}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1100,8 +1100,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: VICTORY
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a93281dd26dbf5043ac1086bf0481ad4, type: 2}
+  m_sharedMaterial: {fileID: 3843624011866979456, guid: a93281dd26dbf5043ac1086bf0481ad4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1164,7 +1164,7 @@ MonoBehaviour:
   m_margin: {x: -474.72748, y: 0, z: -494.23706, w: -247.11835}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &81503650
@@ -4910,7 +4910,7 @@ RectTransform:
   - {fileID: 1003803194}
   - {fileID: 1668260978}
   m_Father: {fileID: 1872540644}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -6726,7 +6726,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1136853993}
   m_LocalRotation: {x: -0.053694118, y: -0, z: -0, w: 0.9985575}
-  m_LocalPosition: {x: 0, y: 0, z: -0.6071}
+  m_LocalPosition: {x: 0, y: 0, z: 0.3538}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6735,8 +6735,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 203.42256, y: -44.914726}
-  m_SizeDelta: {x: 374.3242, y: 75.9792}
+  m_AnchoredPosition: {x: 203.42256, y: -53.823387}
+  m_SizeDelta: {x: 374.3242, y: 93.8999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1136853995
 MonoBehaviour:
@@ -6760,8 +6760,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Objectives\n\u2022 Kill the guard."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a93281dd26dbf5043ac1086bf0481ad4, type: 2}
+  m_sharedMaterial: {fileID: 3843624011866979456, guid: a93281dd26dbf5043ac1086bf0481ad4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6785,7 +6785,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 33.5
+  m_fontSize: 32.7
   m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -10873,8 +10873,8 @@ RectTransform:
   - {fileID: 2126128527}
   - {fileID: 2023042489}
   - {fileID: 761281775}
-  - {fileID: 81503648}
   - {fileID: 573846765}
+  - {fileID: 81503648}
   m_Father: {fileID: 0}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11224,8 +11224,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a93281dd26dbf5043ac1086bf0481ad4, type: 2}
+  m_sharedMaterial: {fileID: 3843624011866979456, guid: a93281dd26dbf5043ac1086bf0481ad4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
