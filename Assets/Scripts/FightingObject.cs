@@ -16,11 +16,13 @@ public class FightingObject : AnimatableObject
     [SerializeField] private bool isFlankingLeft;
     [SerializeField] private bool isFlankingRight;
     public int level;
-   
+    protected static SoundManager soundManager;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        soundManager = SoundManager.instance;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         agroDistance = 15;
         fightingDistance = 2.5f;
@@ -266,6 +268,8 @@ public class FightingObject : AnimatableObject
     public virtual void bleed()
     {
         Debug.Log("Enemy bleeds");
+        // music[0].GetComponent<AudioSource>().Play();
+        soundManager.playSound(Sound.BASIC_ATTACK);
         blood.GetComponent<BloodObject>().startBleed(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.2f));
     }
 
