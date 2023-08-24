@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Text;
 
 public class ObjectiveManager : MonoBehaviour
 {
     public GameObject[] enemies;
-    public TextMeshProUGUI textArea;
+    [SerializeField]
+    private TextMeshProUGUI textArea;
     public TextMeshProUGUI victoryText;
     public GameObject[] music;
     [SerializeField] GateScript[] doors;
@@ -80,9 +82,23 @@ public class ObjectiveManager : MonoBehaviour
             music[1].GetComponent<AudioSource>().Play();
             victoryText.gameObject.SetActive(true);
         }
-
-
     }
 
-    
+    public void setObjective (params string[] objectives)
+    {
+        if (objectives.Length == 0)
+        {
+            textArea.text = "Objectives\nAll completed.";
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.Append("Objectives\n");
+        foreach (var item in objectives)
+        {
+            sb.Append(item + "\n");
+        }
+
+        textArea.text = sb.ToString();
+    }
 }

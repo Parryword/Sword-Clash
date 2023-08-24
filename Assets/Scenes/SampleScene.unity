@@ -5368,7 +5368,7 @@ GameObject:
   - component: {fileID: 636123539}
   - component: {fileID: 636123538}
   m_Layer: 0
-  m_Name: Main_Theme
+  m_Name: Music Main Theme
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8945,7 +8945,7 @@ GameObject:
   - component: {fileID: 1644624838}
   - component: {fileID: 1644624837}
   m_Layer: 0
-  m_Name: Petite_March
+  m_Name: Music Petite March
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
