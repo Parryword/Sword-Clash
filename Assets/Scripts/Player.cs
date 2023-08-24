@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using TMPro;
 
 public class Player : FightingObject
 {
@@ -18,7 +19,9 @@ public class Player : FightingObject
     public int maxHealth;
     public int stage;
     public BandageScript bandage;
-
+    [SerializeField]
+    private TextMeshProUGUI textFieldGold;
+    public int goldAmount { set; get; }
 
     void Start()
     {
@@ -74,6 +77,11 @@ public class Player : FightingObject
 
     }
 
+    private void LateUpdate()
+    {
+        textFieldGold.text = goldAmount.ToString();
+    }
+
     private void scanEnemy()
     {
         int prev = 0;
@@ -99,7 +107,6 @@ public class Player : FightingObject
             lockedEnemy = null;
             targetIndicator.SetActive(false);
         }
-
     }
 
     private void changeFocus()
@@ -180,9 +187,7 @@ public class Player : FightingObject
             }
             verticalSpeed = 0.1f;
             gameObject.transform.position += new Vector3(verticalSpeed, horizontalSpeed, 0);
-
         }
-        
     }
 
     private void walkleft ()
@@ -216,8 +221,6 @@ public class Player : FightingObject
         isBusyFixed = true;
         //colliderBox.isTrigger = false;
         animator.SetTrigger("dashing");
-       
-
     }
 
     public override void hitEnemy ()
@@ -234,7 +237,6 @@ public class Player : FightingObject
         {
             Debug.Log("There are no enemies nearby.");
         }
-        
     }
 
     public new void OnTriggerStay2D(Collider2D collision)
@@ -260,8 +262,6 @@ public class Player : FightingObject
     {
         enemyObject = null;
     }
-
-   
 
     private bool isFighting(string direction)
     {
@@ -318,6 +318,4 @@ public class Player : FightingObject
             Debug.Log("YOU DIED!");
         }
     }
-
-
 }

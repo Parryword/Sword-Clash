@@ -110,7 +110,6 @@ public class FightingObject : AnimatableObject
 
     }
 
-
     public virtual void hitEnemy()
     {
         if (enemyObject != null && enemyObject.tag == "Player")
