@@ -122,8 +122,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityName: 
-  horizontalSpeed: 0
-  verticalSpeed: 0
   animator: {fileID: 8348463839135187380}
   rigidBody: {fileID: 8348463839135187376}
   colliderBox: {fileID: 8348463839135187377}
@@ -132,15 +130,15 @@ MonoBehaviour:
   isBusyFixed: 0
   player: {fileID: 0}
   blood: {fileID: 8348463839304988110}
-  playerDistance: 0
   fightingDistance: 0
-  agroDistance: 0
   health: 0
   damage: 0
-  isSlashing: 0
   enemyObject: {fileID: 0}
   isFlankingLeft: 0
   isFlankingRight: 0
+  level: 0
+  dropCount: 3
+  coinPrefab: {fileID: 5054269490438477740, guid: 4def43d3c31890b4a83daf84737e2c0b, type: 3}
 --- !u!50 &8348463839135187376
 Rigidbody2D:
   serializedVersion: 4
@@ -313,8 +311,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityName: 
-  horizontalSpeed: 0
-  verticalSpeed: 0
   animator: {fileID: 8348463839304988105}
   rigidBody: {fileID: 0}
   colliderBox: {fileID: 0}

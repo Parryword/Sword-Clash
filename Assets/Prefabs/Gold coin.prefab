@@ -100,4 +100,4 @@ MonoBehaviour:
   coef: 0.5
   period: 1
   disableAnimation: 0
-  player: {fileID: 0}
+  coinSound: {fileID: 7446975353306861328, guid: 52854806ca2660449bc444e1d19ff372, type: 3}

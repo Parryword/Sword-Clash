@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Unity.Mathematics;
 
 public class FightingObject : AnimatableObject
 {
@@ -17,7 +18,8 @@ public class FightingObject : AnimatableObject
     [SerializeField] private bool isFlankingRight;
     public int level;
     protected static SoundManager soundManager;
-
+    [SerializeField] private int dropCount = 3;
+    [SerializeField] protected GameObject coinPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -277,10 +279,19 @@ public class FightingObject : AnimatableObject
         return target.transform.position.x - gameObject.transform.position.x;
     }
 
+    private void DropLoot()
+    {
+        for (int i = 0; i < dropCount; i++)
+        {
+            Instantiate(coinPrefab, gameObject.transform.position, Quaternion.identity);
+        }
+    }
+
     public virtual void die()
     {
         if (health <= 0)
         {
+            DropLoot();
             Destroy(gameObject);
         }
     }

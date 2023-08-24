@@ -27,6 +27,7 @@ public class SoundManager : MonoBehaviour
         {
             case Sound.BASIC_ATTACK: this.sound[0].GetComponent<AudioSource>().Play(); break;
             case Sound.BLEED: this.sound[1].GetComponent<AudioSource>().Play(); break;
+            case Sound.COIN: this.sound[3].GetComponent<AudioSource>().Play(); break;
         }
     }
 }
@@ -34,5 +35,6 @@ public class SoundManager : MonoBehaviour
 public enum Sound
 {
     BASIC_ATTACK,
-    BLEED
+    BLEED,
+    COIN
 }
