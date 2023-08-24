@@ -53,7 +53,7 @@ public class ObjectiveManager : MonoBehaviour
         {
             level2Completed = true;
             doors[1].unlock();
-            setObjective("Enter the dungeon.");
+            setObjective("Enter the dungeon");
             Debug.Log("Will stop");
             music[0].GetComponent<AudioSource>().Stop();
             Debug.Log("Will play");
@@ -63,13 +63,13 @@ public class ObjectiveManager : MonoBehaviour
         if (level1Completed && !level2Completed && GameObject.FindObjectOfType<Player>().stage == 2)
         {
             //   textArea.text = "Objective\nKill the guards.";
-            setObjective("Kill the guards.");
+            setObjective("Kill the guards");
         }
 
         if (level2Completed && !level3Completed && GameObject.FindObjectOfType<Player>().stage == 3)
         {
          //   textArea.text = "Objective\nKill the lord.";
-            setObjective("Kill the lord.");
+            setObjective("Kill the lord");
         }
 
         if (enemies[5] == null && level3Completed == false)
