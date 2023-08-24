@@ -47,6 +47,33 @@ public class Player : FightingObject
         
     }
 
+    private void FixedUpdate()
+    {
+        scanEnemy();
+
+        if (!isBusyFixed)
+            switch (playerState)
+            {
+                case 0: idle(); break;
+                case 1: walkright(); break;
+                case 2: walkleft(); break;
+                case 3: dash(); break;
+            }
+
+        UpdatePolygonCollider2D();
+        die();
+
+        // MOVES TARGET INDICATOR
+        if (lockedEnemy != null)
+        {
+            targetIndicator.transform.position = new Vector3(lockedEnemy.transform.position.x, lockedEnemy.transform.position.y + 3 + Mathf.Sin(Time.realtimeSinceStartup * 3) / 3, lockedEnemy.transform.position.z);
+        }
+
+        // RESIZES HEALTH BAR
+        healthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(400 * ((300 / maxHealth) * health / 300), 40);
+
+    }
+
     private void scanEnemy()
     {
         int prev = 0;
@@ -69,7 +96,6 @@ public class Player : FightingObject
             lockedEnemy = enemies[enemyIndex];
         } else if (enemies.Length == 0)
         {   
-       
             lockedEnemy = null;
             targetIndicator.SetActive(false);
         }
@@ -90,44 +116,14 @@ public class Player : FightingObject
         }
     }
 
-   
-
-    private void FixedUpdate()
-    {
-        scanEnemy();
-
-        if (!isBusyFixed)
-            switch (playerState)
-            {
-                case 0: idle(); break;
-                case 1: walkright(); break;
-                case 2: walkleft(); break;
-                case 3: dash(); break;
-            }
-
-        UpdatePolygonCollider2D();
-        die();
-
-   
-
-        // MOVES TARGET INDICATOR
-        if (lockedEnemy != null)
-        {
-            targetIndicator.transform.position = new Vector3(lockedEnemy.transform.position.x, lockedEnemy.transform.position.y + 3 + Mathf.Sin(Time.realtimeSinceStartup * 3) / 3, lockedEnemy.transform.position.z);
-        }
-
-
-        // RESIZES HEALTH BAR
-        healthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(400 * ((300 / maxHealth) * health / 300), 40);
-    
-    }
-
     private void handleKeys()
     {   
         if (inputManager.GetKeyDown(KeyBindingActions.Dash))
         {   
-            playerState = DASH;
-            isBusy = true;
+            if (isFighting("left") || isFighting("right")) {
+                playerState = DASH;
+                isBusy = true;
+            }
         }
         else if (inputManager.GetKey(KeyBindingActions.WalkRight)) {
             playerState =  WALKRIGHT;
