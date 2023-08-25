@@ -88,7 +88,7 @@ public class ObjectiveManager : MonoBehaviour
     {
         if (objectives.Length == 0)
         {
-            textArea.text = "Objectives\nAll completed.";
+            setObjective("All completed");
             return;
         }
 

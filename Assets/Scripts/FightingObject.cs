@@ -11,15 +11,14 @@ public class FightingObject : AnimatableObject
     private float playerDistance;
     public float fightingDistance;
     private float agroDistance;
-    public float health;
-    public float damage;
     public GameObject enemyObject;
     [SerializeField] private bool isFlankingLeft;
     [SerializeField] private bool isFlankingRight;
-    public int level;
     protected static SoundManager soundManager;
     [SerializeField] private int dropCount = 3;
     [SerializeField] protected GameObject coinPrefab;
+    [SerializeField]
+    public int maxHealth = 10, health, damage = 3, defense = 0, level;
 
     // Start is called before the first frame update
     void Start()
@@ -28,9 +27,8 @@ public class FightingObject : AnimatableObject
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         agroDistance = 15;
         fightingDistance = 2.5f;
+        health = maxHealth;
         enemyObject = null;
-        health = 10;
-        damage = 3;
     }
 
     // Update is called once per frame
@@ -117,7 +115,11 @@ public class FightingObject : AnimatableObject
         if (enemyObject != null && enemyObject.tag == "Player")
         {
             Debug.Log("Player has been hit by" + gameObject.name);
-            enemyObject.GetComponent<FightingObject>().health -= damage;
+            int dmgAmount = damage - player.defense;
+            if (dmgAmount < 1) { 
+                dmgAmount = 1;
+            }
+            enemyObject.GetComponent<FightingObject>().health -= dmgAmount;
             enemyObject.GetComponent<Player>().bleed();
             
 

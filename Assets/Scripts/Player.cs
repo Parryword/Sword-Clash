@@ -16,27 +16,29 @@ public class Player : FightingObject
     public int enemyIndex;
     public GameObject targetIndicator;
     public GameObject healthBar;
-    public int maxHealth;
     public int stage;
     public BandageScript bandage;
     [SerializeField]
     private TextMeshProUGUI textFieldGold;
+    [SerializeField]
+    private StatsTextManager statsTextManager;
     public int goldAmount { set; get; }
 
     void Start()
     {
-        level = 1;
         inputManager = InputManager.instance;
-        isBusy = false;
-        enemyObject = null;
+
         maxHealth = 30;
         health = maxHealth;
-
         damage = 4;
-        enemyIndex = 0;
+        defense = 0;
+        level = 1;
         stage = 1;
-        
-     
+        enemyIndex = 0;
+
+        isBusy = false;
+        enemyObject = null;
+
     }
 
     // Update is called once per frame
@@ -73,13 +75,15 @@ public class Player : FightingObject
         }
 
         // RESIZES HEALTH BAR
-        healthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(400 * ((300 / maxHealth) * health / 300), 40);
+        int width = 400 * health / maxHealth;
+        healthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(width, 40);
 
     }
 
     private void LateUpdate()
     {
         textFieldGold.text = goldAmount.ToString();
+        statsTextManager.updateText(health.ToString(), maxHealth.ToString(), damage.ToString(), defense.ToString(), level.ToString());
     }
 
     private void scanEnemy()

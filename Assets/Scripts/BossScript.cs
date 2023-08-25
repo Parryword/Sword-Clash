@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class BossScript : FightingObject
 {
-    
     private bool isSlashing;
     // Start is called before the first frame update
     void Start()
     {
         fightingDistance = 2.5f;
-        health = 15;
         horizontalSpeed = 0.08f;
-        damage = 5;
-
     }
 
     // Update is called once per frame
@@ -85,7 +81,7 @@ public class BossScript : FightingObject
     {
         isSlashing = false;
     }
-
+    /*
     public new void hitEnemy()
     {
         if(enemyObject != null && enemyObject.tag == "Player")
@@ -95,4 +91,5 @@ public class BossScript : FightingObject
             enemyObject.GetComponent<Player>().bleed();
         }
     }
+    */
 }
