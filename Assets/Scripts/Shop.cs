@@ -42,6 +42,9 @@ public class Shop : MonoBehaviour
 
     public void UpgradeDefense()
     {
+        if (defenseLevel == defensePrices.Length)
+            return;
+
         if (player.goldAmount >= defensePrices[defenseLevel])
         {
             player.goldAmount -= defensePrices[defenseLevel++];
@@ -53,6 +56,9 @@ public class Shop : MonoBehaviour
 
     public void UpgradeAttack()
     {
+        if (attackLevel == attackPrices.Length)
+            return;
+
         if (player.goldAmount >= attackPrices[attackLevel])
         {
             player.goldAmount -= attackPrices[attackLevel++];

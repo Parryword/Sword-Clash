@@ -22,8 +22,8 @@ public class DashManager : StateMachineBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         player.GetComponent<Player>().playerState = 0;
-        player.GetComponent<Player>().isBusy = false;
-        player.GetComponent<Player>().isBusyFixed = false;
+        player.GetComponent<Player>().keyDisabled = false;
+        player.GetComponent<Player>().animationDisabled = false;
         //player.GetComponent<Collider2D>().isTrigger = true;
     }
 

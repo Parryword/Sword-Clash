@@ -12,12 +12,12 @@ public class AnimatableObject : MonoBehaviour
     public Rigidbody2D rigidBody;
     public PolygonCollider2D colliderBox;
     public SpriteRenderer spriteRenderer;
-    public bool isBusy;
-    public bool isBusyFixed;
+    public bool keyDisabled;
+    public bool animationDisabled;
    
     protected void notBusy()
     {
-        isBusy = false;
+        keyDisabled = false;
     }
 
     private List<Vector2> points = new List<Vector2>();

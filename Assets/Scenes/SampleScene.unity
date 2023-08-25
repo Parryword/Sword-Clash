@@ -1079,8 +1079,8 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   colliderBox: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  isBusy: 0
-  isBusyFixed: 0
+  keyDisabled: 0
+  animationDisabled: 0
 --- !u!95 &40002228
 Animator:
   serializedVersion: 4
@@ -1930,8 +1930,8 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   colliderBox: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  isBusy: 0
-  isBusyFixed: 0
+  keyDisabled: 0
+  animationDisabled: 0
 --- !u!1 &322581651 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8348463839135187339, guid: bccb78044c55ec94f8d381db54153e71, type: 3}
@@ -2417,8 +2417,8 @@ MonoBehaviour:
   rigidBody: {fileID: 417439478}
   colliderBox: {fileID: 417439481}
   spriteRenderer: {fileID: 417439476}
-  isBusy: 0
-  isBusyFixed: 0
+  keyDisabled: 0
+  animationDisabled: 0
   player: {fileID: 0}
   blood: {fileID: 296644974}
   fightingDistance: 0
@@ -2526,8 +2526,8 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   colliderBox: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  isBusy: 0
-  isBusyFixed: 0
+  keyDisabled: 0
+  animationDisabled: 0
 --- !u!95 &423335003
 Animator:
   serializedVersion: 4
@@ -2762,8 +2762,8 @@ MonoBehaviour:
   rigidBody: {fileID: 454336951}
   colliderBox: {fileID: 454336954}
   spriteRenderer: {fileID: 454336947}
-  isBusy: 0
-  isBusyFixed: 0
+  keyDisabled: 0
+  animationDisabled: 0
   player: {fileID: 0}
   blood: {fileID: 1099022848}
   fightingDistance: 0
@@ -2907,8 +2907,8 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   colliderBox: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  isBusy: 0
-  isBusyFixed: 0
+  keyDisabled: 0
+  animationDisabled: 0
 --- !u!95 &496658010
 Animator:
   serializedVersion: 4
@@ -6558,8 +6558,8 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   colliderBox: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  isBusy: 0
-  isBusyFixed: 0
+  keyDisabled: 0
+  animationDisabled: 0
 --- !u!95 &759183172
 Animator:
   serializedVersion: 4
@@ -6982,8 +6982,8 @@ MonoBehaviour:
   rigidBody: {fileID: 923370616}
   colliderBox: {fileID: 923370615}
   spriteRenderer: {fileID: 923370619}
-  isBusy: 0
-  isBusyFixed: 0
+  keyDisabled: 0
+  animationDisabled: 0
   player: {fileID: 0}
   blood: {fileID: 40002226}
   fightingDistance: 0
@@ -7461,8 +7461,8 @@ MonoBehaviour:
   rigidBody: {fileID: 1082727704}
   colliderBox: {fileID: 1082727703}
   spriteRenderer: {fileID: 1082727707}
-  isBusy: 0
-  isBusyFixed: 0
+  keyDisabled: 0
+  animationDisabled: 0
   player: {fileID: 0}
   blood: {fileID: 759183170}
   fightingDistance: 0
@@ -7600,8 +7600,8 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   colliderBox: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  isBusy: 0
-  isBusyFixed: 0
+  keyDisabled: 0
+  animationDisabled: 0
 --- !u!95 &1099022850
 Animator:
   serializedVersion: 4
@@ -8070,8 +8070,8 @@ MonoBehaviour:
   rigidBody: {fileID: 1225799063}
   colliderBox: {fileID: 1225799062}
   spriteRenderer: {fileID: 1225799066}
-  isBusy: 0
-  isBusyFixed: 0
+  keyDisabled: 0
+  animationDisabled: 0
   player: {fileID: 0}
   blood: {fileID: 496658008}
   fightingDistance: 0
@@ -9429,8 +9429,8 @@ MonoBehaviour:
   rigidBody: {fileID: 1388870642}
   colliderBox: {fileID: 1388870641}
   spriteRenderer: {fileID: 1388870645}
-  isBusy: 0
-  isBusyFixed: 0
+  keyDisabled: 0
+  animationDisabled: 0
   player: {fileID: 0}
   blood: {fileID: 423335001}
   fightingDistance: 0
@@ -9846,8 +9846,8 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   colliderBox: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  isBusy: 0
-  isBusyFixed: 0
+  keyDisabled: 0
+  animationDisabled: 0
 --- !u!95 &1508839429
 Animator:
   serializedVersion: 4
@@ -12634,14 +12634,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1905642819}
-  m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -95.074, y: 33.202, z: 0}
-  m_LocalScale: {x: 0.6875111, y: 1.1637735, z: 1}
+  m_LocalScale: {x: 7, y: 7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 19
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1905642821
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12683,8 +12683,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 1, g: 0.33650973, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: fb7253a601ad5a8489cc38d462f854c2, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -12977,8 +12977,8 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   colliderBox: {fileID: 1962929134}
   spriteRenderer: {fileID: 1962929130}
-  isBusy: 0
-  isBusyFixed: 0
+  keyDisabled: 0
+  animationDisabled: 0
   player: {fileID: 454336953}
   blood: {fileID: 1508839426}
   fightingDistance: 0

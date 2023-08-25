@@ -36,27 +36,25 @@ public class Player : FightingObject
         stage = 1;
         enemyIndex = 0;
 
-        isBusy = false;
+        keyDisabled = false;
         enemyObject = null;
-
     }
 
     // Update is called once per frame
     void Update()
     {   
-        if (!isBusy)
+        if (!keyDisabled)
             handleKeys();
         
         if (lockedEnemy != null)
             lockedDistance = lockedEnemy.transform.position.x - gameObject.transform.position.x;
-        
     }
 
     private void FixedUpdate()
     {
         scanEnemy();
 
-        if (!isBusyFixed)
+        if (!animationDisabled)
             switch (playerState)
             {
                 case 0: idle(); break;
@@ -77,7 +75,6 @@ public class Player : FightingObject
         // RESIZES HEALTH BAR
         int width = 400 * health / maxHealth;
         healthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(width, 40);
-
     }
 
     private void LateUpdate()
@@ -133,7 +130,7 @@ public class Player : FightingObject
         {   
             if (isFighting("left") || isFighting("right")) {
                 playerState = DASH;
-                isBusy = true;
+                keyDisabled = true;
             }
         }
         else if (inputManager.GetKey(KeyBindingActions.WalkRight)) {
@@ -206,7 +203,6 @@ public class Player : FightingObject
             else if (lockedDistance < 0)
             {
                 spriteRenderer.flipX = true;
-              
             }
         }
         if (inputManager.GetKey(KeyBindingActions.WalkLeft))
@@ -222,7 +218,7 @@ public class Player : FightingObject
 
     private void dash()
     {
-        isBusyFixed = true;
+        animationDisabled = true;
         //colliderBox.isTrigger = false;
         animator.SetTrigger("dashing");
     }
@@ -271,16 +267,17 @@ public class Player : FightingObject
     {
         if (Mathf.Abs(lockedDistance) < 10 && lockedEnemy != null)
         {
+            /*
             if (direction == "right" && lockedDistance < 0)
             {
-                animator.SetBool("fighting", true);
-                animator.SetBool("fightingfoward", false);
+                animator.SetBool("fighting", false);
+                animator.SetBool("fightingfoward", true);
             }
                 
             else if (direction == "left" && lockedDistance > 0)
             {
-                animator.SetBool("fighting", true);
-                animator.SetBool("fightingfoward", false);
+                animator.SetBool("fighting", false);
+                animator.SetBool("fightingfoward", true);
             }
                 
             else if (direction == "right" && lockedDistance > 0)
@@ -293,16 +290,18 @@ public class Player : FightingObject
             {
                 animator.SetBool("fighting", false);
                 animator.SetBool("fightingfoward", true);
-            }
-                
+            }*/
+            animator.SetBool("fighting", false);
+            animator.SetBool("fightingfoward", true);
+
             return true;
         }
         else
         {
             animator.SetBool("fighting", false);
+            animator.SetBool("fightingfoward", false);
             return false;
-        }
-            
+        }          
     }
 
     public override void bleed()
