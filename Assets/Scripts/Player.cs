@@ -225,8 +225,6 @@ public class Player : FightingObject
 
     public override void hitEnemy ()
     {
-        //Debug.Log("Animation Event worked");
-        //Debug.Log("Player:" + gameObject.name + " " + enemyObject.gameObject.name);
         if (enemyObject != null)
         {
             Debug.Log(enemyObject.name);
@@ -267,30 +265,6 @@ public class Player : FightingObject
     {
         if (Mathf.Abs(lockedDistance) < 10 && lockedEnemy != null)
         {
-            /*
-            if (direction == "right" && lockedDistance < 0)
-            {
-                animator.SetBool("fighting", false);
-                animator.SetBool("fightingfoward", true);
-            }
-                
-            else if (direction == "left" && lockedDistance > 0)
-            {
-                animator.SetBool("fighting", false);
-                animator.SetBool("fightingfoward", true);
-            }
-                
-            else if (direction == "right" && lockedDistance > 0)
-            {
-                animator.SetBool("fighting", false);
-                animator.SetBool("fightingfoward", true);
-            }
-                
-            else if (direction == "left" && lockedDistance < 0)
-            {
-                animator.SetBool("fighting", false);
-                animator.SetBool("fightingfoward", true);
-            }*/
             animator.SetBool("fighting", false);
             animator.SetBool("fightingfoward", true);
 
