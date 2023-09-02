@@ -39,7 +39,6 @@ public class Shop : MonoBehaviour
         
     }
 
-
     public void UpgradeDefense()
     {
         if (defenseLevel == defensePrices.Length)
@@ -50,8 +49,6 @@ public class Shop : MonoBehaviour
             player.goldAmount -= defensePrices[defenseLevel++];
             player.defense++;
         }
-
-
     }
 
     public void UpgradeAttack()

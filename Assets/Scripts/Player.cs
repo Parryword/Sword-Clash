@@ -1,14 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
 using TMPro;
+using UnityEngine;
+using UnityEngine.Playables;
 
 public class Player : FightingObject
 {
     public InputManager inputManager;
-    public int playerState;
-    private int IDLE = 0, WALKRIGHT = 1, WALKLEFT = 2, DASH = 3;
+    // public int playerState;
+    // private int IDLE = 0, WALKRIGHT = 1, WALKLEFT = 2, DASH = 3;
+    [SerializeField]
+    public PlayerState playerState;
     // Start is called before the first frame update
     FightingObject[] enemies;
     public FightingObject lockedEnemy;
@@ -44,7 +45,7 @@ public class Player : FightingObject
     void Update()
     {   
         if (!keyDisabled)
-            handleKeys();
+            HandleKeys();
         
         if (lockedEnemy != null)
             lockedDistance = lockedEnemy.transform.position.x - gameObject.transform.position.x;
@@ -52,19 +53,21 @@ public class Player : FightingObject
 
     private void FixedUpdate()
     {
-        scanEnemy();
+        ScanEnemy();
 
         if (!animationDisabled)
             switch (playerState)
             {
-                case 0: idle(); break;
-                case 1: walkright(); break;
-                case 2: walkleft(); break;
-                case 3: dash(); break;
+                case PlayerState.IDLE: Idle(); break;
+                case PlayerState.WALK_LEFT: WalkLeft(0.1f); break;
+                case PlayerState.WALK_RIGHT: WalkRight(0.1f); break;
+                case PlayerState.DASH: Dash(); break;
+                case PlayerState.RUN_LEFT: WalkLeft(0.15f); break;
+                case PlayerState.RUN_RIGHT: WalkRight(0.15f); break;
             }
 
         UpdatePolygonCollider2D();
-        die();
+        Die();
 
         // MOVES TARGET INDICATOR
         if (lockedEnemy != null)
@@ -83,7 +86,7 @@ public class Player : FightingObject
         statsTextManager.updateText(health.ToString(), maxHealth.ToString(), damage.ToString(), defense.ToString(), level.ToString());
     }
 
-    private void scanEnemy()
+    private void ScanEnemy()
     {
         int prev = 0;
         if (enemies != null)
@@ -110,7 +113,7 @@ public class Player : FightingObject
         }
     }
 
-    private void changeFocus()
+    private void ChangeFocus()
     {
         if (enemies.Length == 0) return;
         if (enemies.Length - 1 > enemyIndex)
@@ -124,52 +127,70 @@ public class Player : FightingObject
         }
     }
 
-    private void handleKeys()
+    private void HandleKeys()
     {   
         if (inputManager.GetKeyDown(KeyBindingActions.Dash))
         {   
-            if (isFighting("left") || isFighting("right")) {
-                playerState = DASH;
+            if (IsFighting("left") || IsFighting("right")) {
+                playerState = PlayerState.DASH;
                 keyDisabled = true;
             }
         }
-        else if (inputManager.GetKey(KeyBindingActions.WalkRight)) {
-            playerState =  WALKRIGHT;
+        else if (inputManager.GetKey(KeyBindingActions.WalkRight)) 
+        {
+            if (inputManager.GetKey(KeyBindingActions.Run))
+            {
+                playerState = PlayerState.RUN_RIGHT;
+                return;
+            }
+
+            playerState = PlayerState.WALK_RIGHT;
         }
         else if (inputManager.GetKey(KeyBindingActions.WalkLeft))
         {
-            playerState = WALKLEFT;
+            if (inputManager.GetKey(KeyBindingActions.Run))
+            {
+                playerState = PlayerState.RUN_LEFT;
+                return;
+            }
+            playerState = PlayerState.WALK_LEFT;
         }
-        else if (inputManager.GetKeyUp(KeyBindingActions.WalkRight) && playerState == WALKRIGHT)
+        /*
+        else if (playerState == PlayerState.WALK_LEFT || playerState == PlayerState.WALK_RIGHT && inputManager.GetKeyDown(KeyBindingActions.Run))
         {
-            playerState = IDLE;
-        }
-        else if (inputManager.GetKeyUp(KeyBindingActions.WalkLeft) && playerState == WALKLEFT)
+
+        }*/
+        /*
+        else if (inputManager.GetKeyUp(KeyBindingActions.WalkRight) && playerState == PlayerState.WALK_RIGHT)
         {
-            playerState = IDLE;
+            playerState = PlayerState.IDLE;
         }
+        else if (inputManager.GetKeyUp(KeyBindingActions.WalkLeft) && playerState == PlayerState.WALK_LEFT)
+        {
+            playerState = PlayerState.IDLE;
+        }*/
         else
         {
-            playerState = IDLE;
+            playerState = PlayerState.IDLE;
         }
 
         if (inputManager.GetKeyDown(KeyBindingActions.Focus))
         {
-            changeFocus();
+            ChangeFocus();
         }
     }
 
-    private void idle()
+    private void Idle()
     {
         animator.SetBool("walking", false);
         animator.SetBool("fighting", false);
         animator.SetBool("fightingfoward", false);
     }
 
-    private void walkright ()
+    private void WalkRight(float velocity)
     {
         animator.SetBool("walking", true);
-        if (isFighting("right"))
+        if (IsFighting("right"))
         {
             if (lockedDistance > 0)
             {
@@ -182,19 +203,20 @@ public class Player : FightingObject
         }
         if (inputManager.GetKey(KeyBindingActions.WalkRight))
         {
-            if (!isFighting("right"))
+            if (!IsFighting("right"))
             {
                 spriteRenderer.flipX = false;
             }
-            verticalSpeed = 0.1f;
+            // verticalSpeed = 0.1f;
+            verticalSpeed = velocity;
             gameObject.transform.position += new Vector3(verticalSpeed, horizontalSpeed, 0);
         }
     }
 
-    private void walkleft ()
+    private void WalkLeft(float velocity)
     {
         animator.SetBool("walking", true);
-        if (isFighting("left"))
+        if (IsFighting("left"))
         {
             if (lockedDistance > 0)
             {
@@ -207,16 +229,17 @@ public class Player : FightingObject
         }
         if (inputManager.GetKey(KeyBindingActions.WalkLeft))
         {
-            if (!isFighting("left"))
+            if (!IsFighting("left"))
             {
                 spriteRenderer.flipX = true;
             }
-            verticalSpeed = -0.1f;
+            // verticalSpeed = -0.1f;
+            verticalSpeed = -velocity;
             gameObject.transform.position += new Vector3(verticalSpeed, horizontalSpeed, 0);
         }
     }
 
-    private void dash()
+    private void Dash()
     {
         animationDisabled = true;
         //colliderBox.isTrigger = false;
@@ -228,7 +251,7 @@ public class Player : FightingObject
         if (enemyObject != null)
         {
             Debug.Log(enemyObject.name);
-            enemyObject.GetComponent<FightingObject>().bleed();
+            enemyObject.GetComponent<FightingObject>().Bleed();
             enemyObject.GetComponent<FightingObject>().health -= damage;
             enemyObject = null;
         } else
@@ -261,7 +284,7 @@ public class Player : FightingObject
         enemyObject = null;
     }
 
-    private bool isFighting(string direction)
+    private bool IsFighting(string direction)
     {
         if (Mathf.Abs(lockedDistance) < 10 && lockedEnemy != null)
         {
@@ -278,7 +301,7 @@ public class Player : FightingObject
         }          
     }
 
-    public override void bleed()
+    public override void Bleed()
     {
         if (true)
         {
@@ -286,7 +309,7 @@ public class Player : FightingObject
         }
     }
 
-    public override void die()
+    public override void Die()
     {
         if (health <= 0)
         {
@@ -295,4 +318,10 @@ public class Player : FightingObject
             Debug.Log("YOU DIED!");
         }
     }
+}
+
+
+public enum PlayerState
+{
+    IDLE, WALK_LEFT, WALK_RIGHT, DASH, RUN_LEFT, RUN_RIGHT
 }

@@ -12987,9 +12987,9 @@ MonoBehaviour:
   isFlankingRight: 0
   dropCount: 10
   coinPrefab: {fileID: 5054269490438477740, guid: 4def43d3c31890b4a83daf84737e2c0b, type: 3}
-  maxHealth: 50
-  health: 50
-  damage: 5
+  maxHealth: 100
+  health: 100
+  damage: 10
   defense: 1
   level: 3
 --- !u!50 &1962929133

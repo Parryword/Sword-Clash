@@ -46,7 +46,7 @@ public class FightingObject : AnimatableObject
             flankLeft();
             slash();
             UpdatePolygonCollider2D();
-            die();
+            Die();
         }
         
 
@@ -120,7 +120,7 @@ public class FightingObject : AnimatableObject
                 dmgAmount = 1;
             }
             enemyObject.GetComponent<FightingObject>().health -= dmgAmount;
-            enemyObject.GetComponent<Player>().bleed();
+            enemyObject.GetComponent<Player>().Bleed();
             
 
         }
@@ -268,7 +268,7 @@ public class FightingObject : AnimatableObject
         }
     }
 
-    public virtual void bleed()
+    public virtual void Bleed()
     {
         Debug.Log("Enemy bleeds");
         // music[0].GetComponent<AudioSource>().Play();
@@ -289,7 +289,7 @@ public class FightingObject : AnimatableObject
         }
     }
 
-    public virtual void die()
+    public virtual void Die()
     {
         if (health <= 0)
         {

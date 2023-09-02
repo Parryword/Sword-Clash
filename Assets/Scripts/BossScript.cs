@@ -25,7 +25,7 @@ public class BossScript : FightingObject
             UpdatePolygonCollider2D();
             slash();
             walk();
-            die();
+            Die();
         }
         
     }

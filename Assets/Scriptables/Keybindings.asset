@@ -19,5 +19,7 @@ MonoBehaviour:
     keyCode: 97
   - keyBindingAction: 2
     keyCode: 323
+  - keyBindingAction: 3
+    keyCode: 304
   - keyBindingAction: 4
     keyCode: 9
