@@ -62,8 +62,8 @@ public class Player : FightingObject
                 case PlayerState.WALK_LEFT: WalkLeft(0.1f); break;
                 case PlayerState.WALK_RIGHT: WalkRight(0.1f); break;
                 case PlayerState.DASH: Dash(); break;
-                case PlayerState.RUN_LEFT: WalkLeft(0.15f); break;
-                case PlayerState.RUN_RIGHT: WalkRight(0.15f); break;
+                case PlayerState.RUN_LEFT: RunLeft(0.15f); break;
+                case PlayerState.RUN_RIGHT: RunRight(0.15f); break;
             }
 
         UpdatePolygonCollider2D();
@@ -143,6 +143,10 @@ public class Player : FightingObject
                 playerState = PlayerState.RUN_RIGHT;
                 return;
             }
+            else if (inputManager.GetKeyUp(KeyBindingActions.Run))
+            {
+                animator.SetBool("running", false);
+            }
 
             playerState = PlayerState.WALK_RIGHT;
         }
@@ -152,6 +156,10 @@ public class Player : FightingObject
             {
                 playerState = PlayerState.RUN_LEFT;
                 return;
+            }
+            else if (inputManager.GetKeyUp(KeyBindingActions.Run))
+            {
+                animator.SetBool("running", false);
             }
             playerState = PlayerState.WALK_LEFT;
         }
@@ -185,6 +193,7 @@ public class Player : FightingObject
         animator.SetBool("walking", false);
         animator.SetBool("fighting", false);
         animator.SetBool("fightingfoward", false);
+        animator.SetBool("running", false);
     }
 
     private void WalkRight(float velocity)
@@ -237,6 +246,25 @@ public class Player : FightingObject
             verticalSpeed = -velocity;
             gameObject.transform.position += new Vector3(verticalSpeed, horizontalSpeed, 0);
         }
+    }
+
+    private void RunRight(float velocity)
+    {
+        animator.SetBool("running", true);
+        spriteRenderer.flipX = false;
+            verticalSpeed = velocity;
+            gameObject.transform.position += new Vector3(verticalSpeed, horizontalSpeed, 0);
+        
+    }
+
+    private void RunLeft(float velocity)
+    {
+        animator.SetBool("running", true);
+        spriteRenderer.flipX = true;
+
+        verticalSpeed = -velocity;
+            gameObject.transform.position += new Vector3(verticalSpeed, horizontalSpeed, 0);
+        
     }
 
     private void Dash()

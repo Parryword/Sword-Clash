@@ -59,7 +59,7 @@ public class Shop : MonoBehaviour
         if (player.goldAmount >= attackPrices[attackLevel])
         {
             player.goldAmount -= attackPrices[attackLevel++];
-            player.damage++;
+            player.damage+=2;
         }
     }
 
