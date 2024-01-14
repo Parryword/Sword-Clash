@@ -6,7 +6,9 @@ using System.Linq;
 public class AnimatableObject : MonoBehaviour
 {
     public string entityName;
+    [SerializeField]
     protected float horizontalSpeed;
+    [SerializeField]
     protected float verticalSpeed;
     public Animator animator;
     public Rigidbody2D rigidBody;
@@ -14,7 +16,16 @@ public class AnimatableObject : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public bool keyDisabled;
     public bool animationDisabled;
-   
+    public static Player player;
+
+    private void Awake()
+    {
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        }
+    }
+
     protected void notBusy()
     {
         keyDisabled = false;

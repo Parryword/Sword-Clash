@@ -5,25 +5,31 @@ using UnityEngine.Playables;
 
 public class Player : FightingObject
 {
-    public InputManager inputManager;
-    // public int playerState;
-    // private int IDLE = 0, WALKRIGHT = 1, WALKLEFT = 2, DASH = 3;
+    // Player stats
     [SerializeField]
     public PlayerState playerState;
-    // Start is called before the first frame update
     FightingObject[] enemies;
     public FightingObject lockedEnemy;
     private float lockedDistance;
     public int enemyIndex;
-    public GameObject targetIndicator;
-    public GameObject healthBar;
     public int stage;
     public BandageScript bandage;
+    public int goldAmount { set; get; }
+
+    // GUI
     [SerializeField]
     private TextMeshProUGUI textFieldGold;
+
+    [SerializeField]
+    private GameObject targetIndicator;
+    [SerializeField]
+    private GameObject healthBar;
+
+    // Managers
+    [SerializeField]
+    public InputManager inputManager;
     [SerializeField]
     private StatsTextManager statsTextManager;
-    public int goldAmount { set; get; }
 
     void Start()
     {
@@ -59,11 +65,11 @@ public class Player : FightingObject
             switch (playerState)
             {
                 case PlayerState.IDLE: Idle(); break;
-                case PlayerState.WALK_LEFT: WalkLeft(0.1f); break;
-                case PlayerState.WALK_RIGHT: WalkRight(0.1f); break;
+                case PlayerState.WALK_LEFT: WalkLeft(); break;
+                case PlayerState.WALK_RIGHT: WalkRight(); break;
                 case PlayerState.DASH: Dash(); break;
-                case PlayerState.RUN_LEFT: RunLeft(0.15f); break;
-                case PlayerState.RUN_RIGHT: RunRight(0.15f); break;
+                case PlayerState.RUN_LEFT: RunLeft(); break;
+                case PlayerState.RUN_RIGHT: RunRight(); break;
             }
 
         UpdatePolygonCollider2D();
@@ -196,7 +202,7 @@ public class Player : FightingObject
         animator.SetBool("running", false);
     }
 
-    private void WalkRight(float velocity)
+    private void WalkRight()
     {
         animator.SetBool("walking", true);
         if (IsFighting("right"))
@@ -216,13 +222,11 @@ public class Player : FightingObject
             {
                 spriteRenderer.flipX = false;
             }
-            // verticalSpeed = 0.1f;
-            verticalSpeed = velocity;
-            gameObject.transform.position += new Vector3(verticalSpeed, horizontalSpeed, 0);
+            gameObject.transform.position += new Vector3(horizontalSpeed, verticalSpeed, 0);
         }
     }
 
-    private void WalkLeft(float velocity)
+    private void WalkLeft()
     {
         animator.SetBool("walking", true);
         if (IsFighting("left"))
@@ -242,28 +246,24 @@ public class Player : FightingObject
             {
                 spriteRenderer.flipX = true;
             }
-            // verticalSpeed = -0.1f;
-            verticalSpeed = -velocity;
-            gameObject.transform.position += new Vector3(verticalSpeed, horizontalSpeed, 0);
+            gameObject.transform.position += new Vector3(-horizontalSpeed, verticalSpeed, 0);
         }
     }
 
-    private void RunRight(float velocity)
+    private void RunRight()
     {
         animator.SetBool("running", true);
         spriteRenderer.flipX = false;
-            verticalSpeed = velocity;
-            gameObject.transform.position += new Vector3(verticalSpeed, horizontalSpeed, 0);
+            gameObject.transform.position += new Vector3(horizontalSpeed * 1.5f, verticalSpeed, 0);
         
     }
 
-    private void RunLeft(float velocity)
+    private void RunLeft()
     {
         animator.SetBool("running", true);
         spriteRenderer.flipX = true;
 
-        verticalSpeed = -velocity;
-            gameObject.transform.position += new Vector3(verticalSpeed, horizontalSpeed, 0);
+            gameObject.transform.position += new Vector3(-horizontalSpeed * 1.5f, verticalSpeed, 0);
         
     }
 
@@ -351,5 +351,6 @@ public class Player : FightingObject
 
 public enum PlayerState
 {
-    IDLE, WALK_LEFT, WALK_RIGHT, DASH, RUN_LEFT, RUN_RIGHT
+    IDLE, WALK_LEFT, WALK_RIGHT, DASH, RUN_LEFT, RUN_RIGHT,
+    STUNNED
 }

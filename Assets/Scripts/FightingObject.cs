@@ -6,25 +6,26 @@ using Unity.Mathematics;
 
 public class FightingObject : AnimatableObject
 {
-    public Player player;
-    public GameObject blood;
+    // Stats
     private float playerDistance;
     public float fightingDistance;
     private float agroDistance;
-    public GameObject enemyObject;
-    [SerializeField] private bool isFlankingLeft;
-    [SerializeField] private bool isFlankingRight;
-    protected static SoundManager soundManager;
+    private bool active;
     [SerializeField] private int dropCount = 3;
+    [SerializeField] public int maxHealth = 10, health, damage = 3, defense = 0, level;
+    [SerializeField] private bool isFlankingLeft, isFlankingRight;
+
+    // Other
+    public GameObject blood;
+    public GameObject enemyObject;
+    protected static SoundManager soundManager;
     [SerializeField] protected GameObject coinPrefab;
-    [SerializeField]
-    public int maxHealth = 10, health, damage = 3, defense = 0, level;
+
 
     // Start is called before the first frame update
     void Start()
     {
         soundManager = SoundManager.instance;
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         agroDistance = 15;
         fightingDistance = 2.5f;
         health = maxHealth;
@@ -34,17 +35,20 @@ public class FightingObject : AnimatableObject
     // Update is called once per frame
     void Update()
     {
-        
+        if (player.level == level)
+            active = true;
+        else
+            active = false;
     }
 
     private void FixedUpdate()
     {   
-        if (player.level == level)
+        if (active)
         {
-            walk();
-            flankRight();
-            flankLeft();
-            slash();
+            Walk();
+            FlankRight();
+            FlankLeft();
+            Slash();
             UpdatePolygonCollider2D();
             Die();
         }
@@ -53,7 +57,7 @@ public class FightingObject : AnimatableObject
     }
 
 
-    void slash()
+    void Slash()
     {
         if (Mathf.Abs(playerDistance) < fightingDistance && isFlankingLeft == false && isFlankingRight == false)
         {
@@ -61,7 +65,7 @@ public class FightingObject : AnimatableObject
         }
     }
 
-    void walk()
+    void Walk()
     {
         playerDistance = gameObject.transform.position.x - player.transform.position.x;
 
@@ -173,7 +177,7 @@ public class FightingObject : AnimatableObject
 
     }
 
-    private void flankLeft()
+    private void FlankLeft()
     {
         if (!isLeftClear() && Mathf.Abs(getDistance(player)) > fightingDistance && !isFlankingLeft && !isFlankingRight && getDistance(player) < 0 && !isFlankingRight || isFlankingLeft)
         {
@@ -212,7 +216,7 @@ public class FightingObject : AnimatableObject
         }*/
     }
 
-    private void flankRight()
+    private void FlankRight()
     {
         if (!isRightClear() && Mathf.Abs(getDistance(player)) > fightingDistance && !isFlankingLeft && !isFlankingRight && getDistance(player) > 0 && !isFlankingLeft || isFlankingRight)
         {
