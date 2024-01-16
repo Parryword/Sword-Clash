@@ -12,7 +12,7 @@ public class StatsTextManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        textField = GetComponent<TextMeshProUGUI>();
+
     }
 
     // Update is called once per frame

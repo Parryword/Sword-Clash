@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using static GameManager;
+
 
 public class AnimatableObject : MonoBehaviour
 {
@@ -16,15 +18,6 @@ public class AnimatableObject : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public bool keyDisabled;
     public bool animationDisabled;
-    public static Player player;
-
-    private void Awake()
-    {
-        if (player == null)
-        {
-            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        }
-    }
 
     protected void notBusy()
     {
@@ -33,7 +26,7 @@ public class AnimatableObject : MonoBehaviour
 
     private List<Vector2> points = new List<Vector2>();
     private List<Vector2> simplifiedPoints = new List<Vector2>();
-    public void UpdatePolygonCollider2D(float tolerance = 0.05f)
+    protected void UpdatePolygonCollider2D(float tolerance = 0.05f)
     {
         colliderBox.pathCount = spriteRenderer.sprite.GetPhysicsShapeCount();
         for (int i = 0; i < colliderBox.pathCount; i++)
@@ -48,8 +41,6 @@ public class AnimatableObject : MonoBehaviour
             {
                 colliderBox.SetPath(i, simplifiedPoints);
             }
-
         }
-
     }
 }

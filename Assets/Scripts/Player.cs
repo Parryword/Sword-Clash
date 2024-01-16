@@ -2,6 +2,8 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Playables;
+using static GameManager;
+
 
 public class Player : FightingObject
 {
@@ -26,15 +28,10 @@ public class Player : FightingObject
     private GameObject healthBar;
 
     // Managers
-    [SerializeField]
-    public InputManager inputManager;
-    [SerializeField]
-    private StatsTextManager statsTextManager;
+
 
     void Start()
     {
-        inputManager = InputManager.instance;
-
         maxHealth = 30;
         health = maxHealth;
         damage = 4;
@@ -274,7 +271,7 @@ public class Player : FightingObject
         animator.SetTrigger("dashing");
     }
 
-    public override void hitEnemy ()
+    public override void HitEnemy ()
     {
         if (enemyObject != null)
         {

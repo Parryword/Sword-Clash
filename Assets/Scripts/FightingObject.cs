@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Unity.Mathematics;
+using static GameManager;
 
 public class FightingObject : AnimatableObject
 {
@@ -52,10 +53,7 @@ public class FightingObject : AnimatableObject
             UpdatePolygonCollider2D();
             Die();
         }
-        
-
     }
-
 
     void Slash()
     {
@@ -71,25 +69,25 @@ public class FightingObject : AnimatableObject
 
         if (Mathf.Abs(playerDistance) < agroDistance && Mathf.Abs(playerDistance) > fightingDistance && !isFlankingLeft && !isFlankingRight)
         {
-            if (playerDistance < 0 && isRightClear())
+            if (playerDistance < 0 && IsRightClear())
             {
                 gameObject.transform.position += new Vector3(0.08f, 0, 0);
                 spriteRenderer.flipX = false;
                 animator.SetBool("walking", true);
 
             }
-            else if (playerDistance > 0 && isLeftClear())
+            else if (playerDistance > 0 && IsLeftClear())
             {
                 gameObject.transform.position -= new Vector3(0.08f, 0, 0);
                 spriteRenderer.flipX = true;
                 animator.SetBool("walking", true);
 
             }
-            else if (playerDistance < 0 && !isRightClear())
+            else if (playerDistance < 0 && !IsRightClear())
             {
                 animator.SetBool("walking", false);
             }
-            else if (playerDistance > 0 && !isLeftClear())
+            else if (playerDistance > 0 && !IsLeftClear())
             {
                 animator.SetBool("walking", false);
             }
@@ -101,20 +99,13 @@ public class FightingObject : AnimatableObject
         }
     }
 
-    private void LateUpdate()
-    {
-     
-    }
-
     public void OnTriggerStay2D(Collider2D collision)
     {   
         if (collision.gameObject.tag == "Player")
             enemyObject = collision.gameObject;
-        
-
     }
 
-    public virtual void hitEnemy()
+    public virtual void HitEnemy()
     {
         if (enemyObject != null && enemyObject.tag == "Player")
         {
@@ -125,16 +116,13 @@ public class FightingObject : AnimatableObject
             }
             enemyObject.GetComponent<FightingObject>().health -= dmgAmount;
             enemyObject.GetComponent<Player>().Bleed();
-            
-
         }
     }
 
-    private bool isLeftClear()
+    private bool IsLeftClear()
     {
-
         List<FightingObject> allFightingObjects = GameObject.FindObjectsOfType<FightingObject>().ToList();
-        List<FightingObject> near = (from fo in allFightingObjects where fo != this && fo != player && Mathf.Abs(getDistance(fo)) < 2 && getDistance(fo) < 0 && fo.isFlankingLeft == false && fo.isFlankingRight == false select fo).ToList();
+        List<FightingObject> near = (from fo in allFightingObjects where fo != this && fo != player && Mathf.Abs(GetDistance(fo)) < 2 && GetDistance(fo) < 0 && fo.isFlankingLeft == false && fo.isFlankingRight == false select fo).ToList();
 
         foreach (FightingObject f in near)
         {
@@ -143,22 +131,18 @@ public class FightingObject : AnimatableObject
 
         if (near.Count == 0)
         {
-           
             return true;
         }
         else
         {
-         
             return false;
-        }
-        
+        }   
     }
 
-    private bool isRightClear()
+    private bool IsRightClear()
     {
-
         List<FightingObject> allFightingObjects = GameObject.FindObjectsOfType<FightingObject>().ToList();
-        List<FightingObject> near = (from fo in allFightingObjects where fo != this && fo != player && Mathf.Abs(getDistance(fo)) < 2 && getDistance(fo) > 0 && fo.isFlankingLeft == false && fo.isFlankingRight == false select fo).ToList();
+        List<FightingObject> near = (from fo in allFightingObjects where fo != this && fo != player && Mathf.Abs(GetDistance(fo)) < 2 && GetDistance(fo) > 0 && fo.isFlankingLeft == false && fo.isFlankingRight == false select fo).ToList();
 
         foreach (FightingObject f in near)
         {
@@ -166,20 +150,17 @@ public class FightingObject : AnimatableObject
         }
         if (near.Count == 0)
         {
-
             return true;
         }
         else
         {
-
             return false;
         }
-
     }
 
     private void FlankLeft()
     {
-        if (!isLeftClear() && Mathf.Abs(getDistance(player)) > fightingDistance && !isFlankingLeft && !isFlankingRight && getDistance(player) < 0 && !isFlankingRight || isFlankingLeft)
+        if (!IsLeftClear() && Mathf.Abs(GetDistance(player)) > fightingDistance && !isFlankingLeft && !isFlankingRight && GetDistance(player) < 0 && !isFlankingRight || isFlankingLeft)
         {
             spriteRenderer.flipX = true;
             if (isFlankingLeft == false)
@@ -190,10 +171,10 @@ public class FightingObject : AnimatableObject
             gameObject.transform.position += new Vector3(-0.08f, 0, 0);
             animator.SetBool("walking", true);
             
-            if (Mathf.Abs(getDistance(player)) > 4)
+            if (Mathf.Abs(GetDistance(player)) > 4)
             {
                 isFlankingLeft = false;
-                if (getDistance(player) > 0)
+                if (GetDistance(player) > 0)
                 {
                     spriteRenderer.flipX = false;
                 }
@@ -201,10 +182,9 @@ public class FightingObject : AnimatableObject
                 {
                     spriteRenderer.flipX = true;
                 }
-            }
-            
+            }   
         }
-        else if (isFlankingLeft && Mathf.Abs(getDistance(player)) < fightingDistance)
+        else if (isFlankingLeft && Mathf.Abs(GetDistance(player)) < fightingDistance)
         {
             gameObject.transform.position += new Vector3(-0.08f, 0, 0);
             animator.SetBool("walking", true);
@@ -218,7 +198,7 @@ public class FightingObject : AnimatableObject
 
     private void FlankRight()
     {
-        if (!isRightClear() && Mathf.Abs(getDistance(player)) > fightingDistance && !isFlankingLeft && !isFlankingRight && getDistance(player) > 0 && !isFlankingLeft || isFlankingRight)
+        if (!IsRightClear() && Mathf.Abs(GetDistance(player)) > fightingDistance && !isFlankingLeft && !isFlankingRight && GetDistance(player) > 0 && !isFlankingLeft || isFlankingRight)
         {
             spriteRenderer.flipX = false;
             if (isFlankingRight == false)
@@ -229,10 +209,10 @@ public class FightingObject : AnimatableObject
             gameObject.transform.position += new Vector3(0.08f, 0, 0);
             animator.SetBool("walking", true);
 
-            if (Mathf.Abs(getDistance(player)) > 4)
+            if (Mathf.Abs(GetDistance(player)) > 4)
             {
                 isFlankingRight = false;
-                if (getDistance(player) > 0)
+                if (GetDistance(player) > 0)
                 {
                     spriteRenderer.flipX = false;
                 }
@@ -241,9 +221,8 @@ public class FightingObject : AnimatableObject
                     spriteRenderer.flipX = true;
                 }
             }
-
         }
-        else if (isFlankingRight && Mathf.Abs(getDistance(player)) > fightingDistance)
+        else if (isFlankingRight && Mathf.Abs(GetDistance(player)) > fightingDistance)
         {
             gameObject.transform.position += new Vector3(0.08f, 0, 0);
             animator.SetBool("walking", true);
@@ -255,15 +234,14 @@ public class FightingObject : AnimatableObject
         }*/
     }
 
-    IEnumerator stopFlanking()
+    IEnumerator StopFlanking()
     {
-        
-        float seconds = Mathf.Abs(getDistance(player)) * 2 / (0.08f * 50);
+        float seconds = Mathf.Abs(GetDistance(player)) * 2 / (0.08f * 50);
         Debug.Log(seconds);
         yield return new WaitForSeconds(seconds);
         isFlankingLeft = false;
         isFlankingRight = false;
-        if (getDistance(player) > 0)
+        if (GetDistance(player) > 0)
         {
             spriteRenderer.flipX = false;
         } else
@@ -280,7 +258,7 @@ public class FightingObject : AnimatableObject
         blood.GetComponent<BloodObject>().startBleed(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.2f));
     }
 
-    public float getDistance(FightingObject target)
+    public float GetDistance(FightingObject target)
     {
         return target.transform.position.x - gameObject.transform.position.x;
     }
@@ -301,4 +279,8 @@ public class FightingObject : AnimatableObject
             Destroy(gameObject);
         }
     }
+}
+
+public enum FightingObjectState {
+    WALK, ATTACK, FLANK
 }
