@@ -284,3 +284,15 @@ public class FightingObject : AnimatableObject
 public enum FightingObjectState {
     WALK, ATTACK, FLANK
 }
+
+interface IArtificialIntelligence
+{
+    bool isStunned { get; set; }
+    bool isEnraged { get; set; }
+    void Walk();
+    void FlankRight();
+    void FlankLeft();
+    void Slash();
+    void UpdatePolygonCollider2D();
+    void Die();
+}
