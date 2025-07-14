@@ -1,1 +1,1 @@
-Watch the gamepaly [here](https://youtu.be/wwEytFgkZW4)
+Watch the gameplay [here](https://youtu.be/wwEytFgkZW4)
