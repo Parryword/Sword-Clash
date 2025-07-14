@@ -1,2 +1,1 @@
-# The Sword Clash
-**Preview**: https://youtu.be/wwEytFgkZW4
+Watch the gamepaly [here](https://youtu.be/wwEytFgkZW4)
