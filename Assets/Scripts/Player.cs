@@ -1,5 +1,6 @@
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
 using static GameManager;
@@ -26,6 +27,7 @@ public class Player : FightingObject
     private GameObject targetIndicator;
     [SerializeField]
     private GameObject healthBar;
+    private InputManager inputManager;
 
     // Managers
 
@@ -42,6 +44,8 @@ public class Player : FightingObject
 
         keyDisabled = false;
         enemyObject = null;
+
+        inputManager = GameObject.Find("GameManager").GetComponent<InputManager>();
     }
 
     // Update is called once per frame
@@ -86,7 +90,7 @@ public class Player : FightingObject
     private void LateUpdate()
     {
         textFieldGold.text = goldAmount.ToString();
-        statsTextManager.updateText(health.ToString(), maxHealth.ToString(), damage.ToString(), defense.ToString(), level.ToString());
+        GameObject.Find("GameManager").GetComponent<StatsTextManager>().updateText(health.ToString(), maxHealth.ToString(), damage.ToString(), defense.ToString(), level.ToString());
     }
 
     private void ScanEnemy()

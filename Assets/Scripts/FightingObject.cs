@@ -7,30 +7,27 @@ using static GameManager;
 
 public class FightingObject : AnimatableObject
 {
-    // Stats
     private float playerDistance;
-    public float fightingDistance;
+    public float attackDistance;
     private float agroDistance;
     private bool active;
     [SerializeField] private int dropCount = 3;
     [SerializeField] public int maxHealth = 10, health, damage = 3, defense = 0, level;
     [SerializeField] private bool isFlankingLeft, isFlankingRight;
 
-    // Other
     public GameObject blood;
     public GameObject enemyObject;
-    protected static SoundManager soundManager;
     [SerializeField] protected GameObject coinPrefab;
-
+    protected Player player;
 
     // Start is called before the first frame update
     void Start()
     {
-        soundManager = SoundManager.instance;
         agroDistance = 15;
-        fightingDistance = 2.5f;
+        attackDistance = 2.5f;
         health = maxHealth;
         enemyObject = null;
+        player = GameObject.Find("Player").GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -57,7 +54,7 @@ public class FightingObject : AnimatableObject
 
     void Slash()
     {
-        if (Mathf.Abs(playerDistance) < fightingDistance && isFlankingLeft == false && isFlankingRight == false)
+        if (Mathf.Abs(playerDistance) < attackDistance && isFlankingLeft == false && isFlankingRight == false)
         {
             animator.SetTrigger("slash");
         }
@@ -67,7 +64,7 @@ public class FightingObject : AnimatableObject
     {
         playerDistance = gameObject.transform.position.x - player.transform.position.x;
 
-        if (Mathf.Abs(playerDistance) < agroDistance && Mathf.Abs(playerDistance) > fightingDistance && !isFlankingLeft && !isFlankingRight)
+        if (Mathf.Abs(playerDistance) < agroDistance && Mathf.Abs(playerDistance) > attackDistance && !isFlankingLeft && !isFlankingRight)
         {
             if (playerDistance < 0 && IsRightClear())
             {
@@ -160,7 +157,7 @@ public class FightingObject : AnimatableObject
 
     private void FlankLeft()
     {
-        if (!IsLeftClear() && Mathf.Abs(GetDistance(player)) > fightingDistance && !isFlankingLeft && !isFlankingRight && GetDistance(player) < 0 && !isFlankingRight || isFlankingLeft)
+        if (!IsLeftClear() && Mathf.Abs(GetDistance(player)) > attackDistance && !isFlankingLeft && !isFlankingRight && GetDistance(player) < 0 && !isFlankingRight || isFlankingLeft)
         {
             spriteRenderer.flipX = true;
             if (isFlankingLeft == false)
@@ -184,7 +181,7 @@ public class FightingObject : AnimatableObject
                 }
             }   
         }
-        else if (isFlankingLeft && Mathf.Abs(GetDistance(player)) < fightingDistance)
+        else if (isFlankingLeft && Mathf.Abs(GetDistance(player)) < attackDistance)
         {
             gameObject.transform.position += new Vector3(-0.08f, 0, 0);
             animator.SetBool("walking", true);
@@ -198,7 +195,7 @@ public class FightingObject : AnimatableObject
 
     private void FlankRight()
     {
-        if (!IsRightClear() && Mathf.Abs(GetDistance(player)) > fightingDistance && !isFlankingLeft && !isFlankingRight && GetDistance(player) > 0 && !isFlankingLeft || isFlankingRight)
+        if (!IsRightClear() && Mathf.Abs(GetDistance(player)) > attackDistance && !isFlankingLeft && !isFlankingRight && GetDistance(player) > 0 && !isFlankingLeft || isFlankingRight)
         {
             spriteRenderer.flipX = false;
             if (isFlankingRight == false)
@@ -222,7 +219,7 @@ public class FightingObject : AnimatableObject
                 }
             }
         }
-        else if (isFlankingRight && Mathf.Abs(GetDistance(player)) > fightingDistance)
+        else if (isFlankingRight && Mathf.Abs(GetDistance(player)) > attackDistance)
         {
             gameObject.transform.position += new Vector3(0.08f, 0, 0);
             animator.SetBool("walking", true);
@@ -253,8 +250,7 @@ public class FightingObject : AnimatableObject
     public virtual void Bleed()
     {
         Debug.Log("Enemy bleeds");
-        // music[0].GetComponent<AudioSource>().Play();
-        soundManager.playSound(Sound.BASIC_ATTACK);
+        GameObject.Find("GameManager").GetComponent<SoundManager>().playSound(Sound.BASIC_ATTACK);
         blood.GetComponent<BloodObject>().startBleed(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.2f));
     }
 

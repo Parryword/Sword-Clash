@@ -4,21 +4,7 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    public static InputManager instance;
     [SerializeField] private KeyBindings keyBindings;
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else if (instance != null)
-        {
-            Destroy(this);
-        }
-        DontDestroyOnLoad(this);
-    }
 
     public KeyCode GetKeyForAction(KeyBindingActions keyBindingAction)
     {

@@ -2,31 +2,16 @@ using UnityEngine;
 
 public sealed class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
-    public static Player player;
-    [SerializeField]
-    public static InputManager inputManager;
-    [SerializeField]
-    public static StatsTextManager statsTextManager;
-    public static ObjectiveManager objectiveManager;
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else if (instance != null)
-        {
-            Destroy(this);
-        }
-        DontDestroyOnLoad(this);
-    }
+    public GameManager instance;
+    public Player player;
+    public InputManager inputManager;
+    public StatsTextManager statsTextManager;
+    public ObjectiveManager objectiveManager;
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        inputManager = InputManager.instance;
+        player = GameObject.Find("Player").GetComponent<Player>();
+        inputManager = GetComponent<InputManager>();
         statsTextManager = GetComponent<StatsTextManager>();
     }
 }

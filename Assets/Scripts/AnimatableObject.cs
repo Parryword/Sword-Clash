@@ -7,11 +7,9 @@ using static GameManager;
 
 public class AnimatableObject : MonoBehaviour
 {
+    [SerializeField] protected float horizontalSpeed;
+    [SerializeField] protected float verticalSpeed;
     public string entityName;
-    [SerializeField]
-    protected float horizontalSpeed;
-    [SerializeField]
-    protected float verticalSpeed;
     public Animator animator;
     public Rigidbody2D rigidBody;
     public PolygonCollider2D colliderBox;

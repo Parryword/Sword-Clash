@@ -6,6 +6,7 @@ public class TowerScript : MonoBehaviour
 {
     [SerializeField] private int deltaTime = 5;
     [SerializeField] private GameObject arrowPrefab;
+    [SerializeField] private int range = 15;
 
     private float timer = 0f;
     
@@ -24,7 +25,7 @@ public class TowerScript : MonoBehaviour
         if (timer >= deltaTime)
         {
             var spawnPosition = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 5);
-            if (Mathf.Abs(player.transform.position.x - gameObject.transform.position.x) < 20)
+            if (Mathf.Abs(player.transform.position.x - gameObject.transform.position.x) < range)
                 Instantiate(arrowPrefab, spawnPosition, Quaternion.identity);
             timer = 0f;
         }

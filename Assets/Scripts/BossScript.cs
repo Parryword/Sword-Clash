@@ -9,8 +9,9 @@ public class BossScript : FightingObject
     // Start is called before the first frame update
     void Start()
     {
-        fightingDistance = 2.5f;
+        attackDistance = 2.5f;
         horizontalSpeed = 0.08f;
+        player = GameObject.Find("Player").GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -43,7 +44,7 @@ public class BossScript : FightingObject
     {
         float playerDistance = gameObject.transform.position.x - player.transform.position.x;
 
-        if (Mathf.Abs(playerDistance) > fightingDistance && !isSlashing)
+        if (Mathf.Abs(playerDistance) > attackDistance && !isSlashing)
         {
             if (playerDistance < 0)
             {

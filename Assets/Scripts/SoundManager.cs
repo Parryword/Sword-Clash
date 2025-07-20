@@ -4,22 +4,8 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager instance;
     [SerializeField]
     private GameObject[] sound;
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else if (instance != null)
-        {
-            Destroy(this);
-        }
-        DontDestroyOnLoad(this);
-    }
 
     public void playSound(Sound sound)
     {

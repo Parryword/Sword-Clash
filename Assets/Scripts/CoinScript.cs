@@ -21,7 +21,7 @@ public class CoinScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        soundManager = SoundManager.instance;
+        soundManager = GameObject.Find("GameManager").GetComponent<SoundManager>();
         player = GameObject.Find("Player").GetComponent<Player>();
         yPos = gameObject.transform.position.y;
     }
