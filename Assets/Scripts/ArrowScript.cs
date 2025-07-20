@@ -5,37 +5,61 @@ using UnityEngine;
 public class ArrowScript : MonoBehaviour
 {
     [SerializeField] private bool isGrounded = false;
-    private bool flippedX = false;
     [SerializeField] private int forceMultiplier = 50;
+    private SpriteRenderer spriteRenderer;
+    private BoxCollider2D boxCollider;
+    private Vector2 originalOffset;
+    private float deltaX = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        boxCollider = GetComponent<BoxCollider2D>();
+
+        if (boxCollider != null)
+            originalOffset = boxCollider.offset;
+
         var player = GameObject.Find("Player").GetComponent<Player>();  
-        var deltaX = player.transform.position.x - transform.position.x;
+        deltaX = player.transform.position.x - transform.position.x;
         if (deltaX > 0)
         {
             gameObject.GetComponent<SpriteRenderer>().flipX = true;
-            flippedX = true;
         }
         gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right * forceMultiplier * deltaX);
+
+        // Time.timeScale = 0.1f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (flippedX)
+        if (spriteRenderer.flipX)
         {
-            if (!isGrounded && transform.eulerAngles.z > -125)
+            if (!isGrounded && (transform.eulerAngles.z > 235 || transform.eulerAngles.z == 0))
             {
-                transform.Rotate(0, 0, -0.5f);
+                transform.Rotate(0, 0, -3f / Mathf.Abs(deltaX));
             }
         }
         else
         {
             if (!isGrounded && transform.eulerAngles.z < 125)
             {           
-                transform.Rotate(0, 0, 0.5f);
+                transform.Rotate(0, 0, 3f / Mathf.Abs(deltaX));
+            }
+        }
+
+        if (boxCollider != null)
+        {
+            if (spriteRenderer.flipX)
+            {
+                // Flip the collider offset on X axis
+                boxCollider.offset = new Vector2(-originalOffset.x, originalOffset.y);
+            }
+            else
+            {
+                // Reset collider offset when not flipped
+                boxCollider.offset = originalOffset;
             }
         }
     }

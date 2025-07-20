@@ -28,6 +28,5 @@ public sealed class GameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         inputManager = InputManager.instance;
         statsTextManager = GetComponent<StatsTextManager>();
-
     }
 }
