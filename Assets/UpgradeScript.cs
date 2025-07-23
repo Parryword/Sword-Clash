@@ -17,14 +17,21 @@ public class UpgradeScript : MonoBehaviour
     {
         
     }
-
-    private void OnMouseEnter()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        upgradePanel.SetActive(true);
+        Debug.Log("Test");
+
+        if (collision.gameObject.name.Equals("Player"))
+        {
+            upgradePanel.SetActive(true);
+        }
     }
 
-    private void OnMouseExit()
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        upgradePanel.SetActive(false);
+        if (collision.gameObject.name.Equals("Player"))
+        {
+            upgradePanel.SetActive(false);
+        }
     }
 }
