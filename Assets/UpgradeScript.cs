@@ -5,6 +5,9 @@ using UnityEngine;
 public class UpgradeScript : MonoBehaviour
 {
     public GameObject upgradePanel;
+    public GameObject leftTower;
+    public GameObject rightTower;
+    public GameObject gateHouse;
 
     // Start is called before the first frame update
     void Start()
