@@ -1,35 +1,45 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] private GameObject[] sound;
-    [SerializeField] private GameObject[] music;
+    [SerializeField] private AudioSource[] soundEffect;
+    [SerializeField] private AudioSource[] music;
     [SerializeField] private int musicIndex = -1;
+    private readonly HashSet<Sound> suppressingEffects = new();
+    private bool musicSuppressed;
 
     private void FixedUpdate()
     {
         PlaySequentially();
+        RevokeSuppression();
     }
 
-    public void PlaySound(Sound sound)
+    public void PlaySoundEffect(Sound sound, bool suppressMusic = false)
     {
-        switch (sound)
+        if (suppressMusic)
         {
-            case Sound.BASIC_ATTACK: this.sound[0].GetComponent<AudioSource>().Play(); break;
-            case Sound.BLEED: this.sound[1].GetComponent<AudioSource>().Play(); break;
-            case Sound.COIN: this.sound[3].GetComponent<AudioSource>().Play(); break;
+            music[musicIndex].Stop();
+            suppressingEffects.Add(sound);
+            musicSuppressed = true;
         }
+        soundEffect[(int)sound].Play();
+    }
+
+    private void RevokeSuppression()
+    {
+        suppressingEffects.RemoveWhere(s => !soundEffect[(int)s].isPlaying);
     }
 
     private void PlayMusic(int index)
     {
-        music[index].GetComponent<AudioSource>().Play();
+        music[index].Play();
     }
 
     public void Play(int index, bool force)
     {
         if (force) {
-            music[musicIndex].GetComponent<AudioSource>().Stop();
+            music[musicIndex].Stop();
         }
         musicIndex = index - 1;
     }
@@ -38,7 +48,7 @@ public class SoundManager : MonoBehaviour
     {
         try
         {
-            return !music[index].GetComponent<AudioSource>().isPlaying;
+            return !music[index].isPlaying;
         } catch {
             return true;
         }
@@ -46,24 +56,18 @@ public class SoundManager : MonoBehaviour
 
     private void PlaySequentially()
     {
-        if (HasEnded(musicIndex))
-        {
-            if (musicIndex == music.Length - 1)
-            {
-                musicIndex = 0;
-            }
-            else
-            {
-                musicIndex++;
-            }
-            PlayMusic(musicIndex);
-        }
+        if (!HasEnded(musicIndex) || musicSuppressed)
+            return;
+
+        musicIndex = (musicIndex == music.Length - 1) ? 0 : musicIndex + 1;
+        PlayMusic(musicIndex);
     }
 }
 
 public enum Sound
 {
-    BASIC_ATTACK,
-    BLEED,
-    COIN
+    BASIC_ATTACK = 0,
+    BLEED = 1,
+    COIN = 4,
+    SUCCESS = 5,
 }

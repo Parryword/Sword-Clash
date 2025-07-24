@@ -10,6 +10,8 @@ public class ObjectiveManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textArea;
     public TextMeshProUGUI victoryText;
     [SerializeField] GateScript[] doors;
+    public SoundManager soundManager;
+    public Player player;
     
     public bool level1Completed;
     public bool level2Completed;
@@ -30,8 +32,8 @@ public class ObjectiveManager : MonoBehaviour
     {
         if (enemies[0] == null && enemies[1] != null && enemies[2] != null)
         {
-            //  textArea.text = "Objectives\n•Reach the castle.";
-            //textArea = "Objectives\n•Reach the castle";
+            //  textArea.text = "Objectives\nï¿½Reach the castle.";
+            //textArea = "Objectives\nï¿½Reach the castle";
             setObjective("Reach the castle");
         }
 
@@ -40,8 +42,7 @@ public class ObjectiveManager : MonoBehaviour
             level1Completed = true;
             doors[0].unlock();
             setObjective("Enter the castle");
-            // music[0].GetComponent<AudioSource>().Stop();
-            // music[1].GetComponent<AudioSource>().Play();
+            soundManager.PlaySoundEffect(Sound.SUCCESS, true);
 
         }
 
@@ -50,17 +51,16 @@ public class ObjectiveManager : MonoBehaviour
             level2Completed = true;
             doors[1].unlock();
             setObjective("Enter the dungeon");
-            // music[0].GetComponent<AudioSource>().Stop();
-            // music[1].GetComponent<AudioSource>().Play();
+            soundManager.PlaySoundEffect(Sound.SUCCESS, true);
         }
 
-        if (level1Completed && !level2Completed && GameObject.FindObjectOfType<Player>().stage == 2)
+        if (level1Completed && !level2Completed && player.stage == 2)
         {
             //   textArea.text = "Objective\nKill the guards.";
             setObjective("Kill the guards");
         }
 
-        if (level2Completed && !level3Completed && GameObject.FindObjectOfType<Player>().stage == 3)
+        if (level2Completed && !level3Completed && player.stage == 3)
         {
          //   textArea.text = "Objective\nKill the lord.";
             setObjective("Kill the lord");
@@ -70,8 +70,7 @@ public class ObjectiveManager : MonoBehaviour
         {
             level3Completed = true;
             setObjective();
-            // music[0].GetComponent<AudioSource>().Stop();
-            // music[1].GetComponent<AudioSource>().Play();
+            soundManager.PlaySoundEffect(Sound.SUCCESS, true);
             victoryText.gameObject.SetActive(true);
         }
     }
@@ -88,7 +87,7 @@ public class ObjectiveManager : MonoBehaviour
         sb.Append("Objectives\n");
         foreach (var item in objectives)
         {
-            sb.Append("• " + item + "\n");
+            sb.Append("ï¿½ " + item + "\n");
         }
 
         textArea.text = sb.ToString();
