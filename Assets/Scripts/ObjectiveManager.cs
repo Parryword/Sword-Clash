@@ -7,10 +7,8 @@ using System.Text;
 public class ObjectiveManager : MonoBehaviour
 {
     public GameObject[] enemies;
-    [SerializeField]
-    private TextMeshProUGUI textArea;
+    [SerializeField] private TextMeshProUGUI textArea;
     public TextMeshProUGUI victoryText;
-    public GameObject[] music;
     [SerializeField] GateScript[] doors;
     
     public bool level1Completed;
@@ -42,10 +40,8 @@ public class ObjectiveManager : MonoBehaviour
             level1Completed = true;
             doors[0].unlock();
             setObjective("Enter the castle");
-            Debug.Log("Will stop");
-            music[0].GetComponent<AudioSource>().Stop();
-            Debug.Log("Will play");
-            music[1].GetComponent<AudioSource>().Play();
+            // music[0].GetComponent<AudioSource>().Stop();
+            // music[1].GetComponent<AudioSource>().Play();
 
         }
 
@@ -54,10 +50,8 @@ public class ObjectiveManager : MonoBehaviour
             level2Completed = true;
             doors[1].unlock();
             setObjective("Enter the dungeon");
-            Debug.Log("Will stop");
-            music[0].GetComponent<AudioSource>().Stop();
-            Debug.Log("Will play");
-            music[1].GetComponent<AudioSource>().Play();
+            // music[0].GetComponent<AudioSource>().Stop();
+            // music[1].GetComponent<AudioSource>().Play();
         }
 
         if (level1Completed && !level2Completed && GameObject.FindObjectOfType<Player>().stage == 2)
@@ -76,10 +70,8 @@ public class ObjectiveManager : MonoBehaviour
         {
             level3Completed = true;
             setObjective();
-            Debug.Log("Will stop");
-            music[0].GetComponent<AudioSource>().Stop();
-            Debug.Log("Will play");
-            music[1].GetComponent<AudioSource>().Play();
+            // music[0].GetComponent<AudioSource>().Stop();
+            // music[1].GetComponent<AudioSource>().Play();
             victoryText.gameObject.SetActive(true);
         }
     }
@@ -92,7 +84,7 @@ public class ObjectiveManager : MonoBehaviour
             return;
         }
 
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new();
         sb.Append("Objectives\n");
         foreach (var item in objectives)
         {

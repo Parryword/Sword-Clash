@@ -2,7 +2,6 @@ using UnityEngine;
 
 public sealed class GameManager : MonoBehaviour
 {
-    public GameManager instance;
     public Player player;
     public InputManager inputManager;
     public StatsTextManager statsTextManager;

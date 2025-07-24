@@ -46,7 +46,7 @@ public class CoinScript : MonoBehaviour
         if (Mathf.Abs(playerDistance) < 1)
         {
             player.goldAmount++;
-            soundManager.playSound(Sound.COIN);
+            soundManager.PlaySound(Sound.COIN);
             Destroy(gameObject);
         }
 

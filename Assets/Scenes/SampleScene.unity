@@ -2958,6 +2958,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradePanel: {fileID: 973889005}
+  leftTower: {fileID: 1387386875}
+  rightTower: {fileID: 808151932}
+  gateHouse: {fileID: 1203804952}
 --- !u!1 &471469837
 GameObject:
   m_ObjectHideFlags: 0
@@ -6473,10 +6476,10 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 370cdac82e3769740bcfbeb43c532d30, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -7639,10 +7642,10 @@ GameObject:
   - component: {fileID: 808151933}
   - component: {fileID: 808151935}
   - component: {fileID: 808151934}
-  - component: {fileID: 808151936}
   - component: {fileID: 808151937}
+  - component: {fileID: 808151938}
   m_Layer: 0
-  m_Name: UpgradeButton (1)
+  m_Name: GateHouseUpgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7737,20 +7740,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &808151936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 808151932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97075fb64100dc4449c97147192e98cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
-  pressedColor: {r: 0.3019608, g: 0.3019608, b: 0.3019608, a: 1}
 --- !u!61 &808151937
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7777,6 +7766,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &808151938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808151932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4328d71a5709ec74b90c43b4837a7f87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  pressedColor: {r: 0.3, g: 0.3, b: 0.3, a: 1}
 --- !u!1 &865081270
 GameObject:
   m_ObjectHideFlags: 0
@@ -8112,6 +8115,11 @@ MonoBehaviour:
   - {fileID: 34484329}
   - {fileID: 2013712224}
   - {fileID: 1804638866}
+  music:
+  - {fileID: 636123537}
+  - {fileID: 1644624836}
+  - {fileID: 1544074664}
+  musicIndex: -1
 --- !u!114 &964467137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8145,7 +8153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 394b0dc247a136641bea1656d573044e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instance: {fileID: 0}
   player: {fileID: 0}
   inputManager: {fileID: 0}
   statsTextManager: {fileID: 0}
@@ -9038,9 +9045,6 @@ MonoBehaviour:
   - {fileID: 1962929128}
   textArea: {fileID: 1136853995}
   victoryText: {fileID: 81503649}
-  music:
-  - {fileID: 636123537}
-  - {fileID: 1644624836}
   doors:
   - {fileID: 1732380581}
   - {fileID: 1324547074}
@@ -9142,10 +9146,10 @@ GameObject:
   - component: {fileID: 1203804953}
   - component: {fileID: 1203804955}
   - component: {fileID: 1203804954}
-  - component: {fileID: 1203804956}
   - component: {fileID: 1203804957}
+  - component: {fileID: 1203804958}
   m_Layer: 0
-  m_Name: UpgradeButton (2)
+  m_Name: TowerRUpgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9240,20 +9244,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1203804956
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1203804952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97075fb64100dc4449c97147192e98cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  pressedColor: {r: 0.3019608, g: 0.3019608, b: 0.3019608, a: 1}
 --- !u!61 &1203804957
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9280,6 +9270,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &1203804958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203804952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4328d71a5709ec74b90c43b4837a7f87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  pressedColor: {r: 0.3, g: 0.3, b: 0.3, a: 1}
 --- !u!1 &1225799061
 GameObject:
   m_ObjectHideFlags: 0
@@ -10904,11 +10908,10 @@ GameObject:
   - component: {fileID: 1387386876}
   - component: {fileID: 1387386878}
   - component: {fileID: 1387386877}
-  - component: {fileID: 1387386879}
   - component: {fileID: 1387386880}
-  - component: {fileID: 1387386881}
+  - component: {fileID: 1387386882}
   m_Layer: 0
-  m_Name: UpgradeButton
+  m_Name: TowerLUpgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11003,20 +11006,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1387386879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1387386875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97075fb64100dc4449c97147192e98cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
-  pressedColor: {r: 0.3019608, g: 0.3019608, b: 0.3019608, a: 1}
 --- !u!61 &1387386880
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11043,7 +11032,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
---- !u!114 &1387386881
+--- !u!114 &1387386882
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11052,9 +11041,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1387386875}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86dc3409b9eded246b9acdf317d39961, type: 3}
+  m_Script: {fileID: 11500000, guid: 4328d71a5709ec74b90c43b4837a7f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoverColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  pressedColor: {r: 0.3, g: 0.3, b: 0.3, a: 1}
 --- !u!1 &1387960369
 GameObject:
   m_ObjectHideFlags: 0
@@ -12012,6 +12003,134 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1509607343}
   m_CullTransparentMesh: 1
+--- !u!1 &1544074664
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1544074666}
+  - component: {fileID: 1544074665}
+  m_Layer: 0
+  m_Name: Music Sardar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1544074665
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544074664}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 79142bc9472d0234197df4a21940005f, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1544074666
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544074664}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -119, y: 40, z: 0.054285094}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1876717228}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1637787372
 GameObject:
   m_ObjectHideFlags: 0
@@ -14605,6 +14724,7 @@ Transform:
   - {fileID: 2013712226}
   - {fileID: 1644624838}
   - {fileID: 636123539}
+  - {fileID: 1544074666}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
