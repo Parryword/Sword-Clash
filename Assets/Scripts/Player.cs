@@ -17,7 +17,7 @@ public class Player : FightingObject
     public int enemyIndex;
     public int stage;
     public BandageScript bandage;
-    public int goldAmount { set; get; }
+    public int goldAmount;
 
     // GUI
     [SerializeField]
