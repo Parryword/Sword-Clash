@@ -9610,6 +9610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86f45f4fe6b98e64aa7eec1dc153e822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 454336953}
   deltaTime: 5
   arrowPrefab: {fileID: 5267023219531783653, guid: fd8e0a888d1caeb4ca62903615c7c0c7, type: 3}
   range: 15
@@ -14307,6 +14308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86f45f4fe6b98e64aa7eec1dc153e822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 454336953}
   deltaTime: 5
   arrowPrefab: {fileID: 5267023219531783653, guid: fd8e0a888d1caeb4ca62903615c7c0c7, type: 3}
   range: 15

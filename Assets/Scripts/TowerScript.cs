@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TowerScript : MonoBehaviour
-{
-    [SerializeField] private int deltaTime = 5;
-    [SerializeField] private GameObject arrowPrefab;
-    [SerializeField] private int range = 15;
+{   
+    public Player player;
+    public int deltaTime = 5;
+    public GameObject arrowPrefab;
+    public int range = 15;
 
     private float timer = 0f;
     
@@ -19,7 +20,6 @@ public class TowerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var player = GameObject.Find("Player");
         timer += Time.deltaTime;
         
         if (timer >= deltaTime)
