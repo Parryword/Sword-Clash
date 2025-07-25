@@ -9614,6 +9614,7 @@ MonoBehaviour:
   deltaTime: 5
   arrowPrefab: {fileID: 5267023219531783653, guid: fd8e0a888d1caeb4ca62903615c7c0c7, type: 3}
   range: 15
+  target: 1
 --- !u!1 &1271532735
 GameObject:
   m_ObjectHideFlags: 0
@@ -14312,6 +14313,7 @@ MonoBehaviour:
   deltaTime: 5
   arrowPrefab: {fileID: 5267023219531783653, guid: fd8e0a888d1caeb4ca62903615c7c0c7, type: 3}
   range: 15
+  target: 1
 --- !u!1 &1872540640
 GameObject:
   m_ObjectHideFlags: 0
@@ -16237,6 +16239,10 @@ PrefabInstance:
     - target: {fileID: -7804438625640318377, guid: fd8e0a888d1caeb4ca62903615c7c0c7, type: 3}
       propertyPath: m_Offset.y
       value: 0.059371475
+      objectReference: {fileID: 0}
+    - target: {fileID: 3472901500903975947, guid: fd8e0a888d1caeb4ca62903615c7c0c7, type: 3}
+      propertyPath: player
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5267023219531783652, guid: fd8e0a888d1caeb4ca62903615c7c0c7, type: 3}
       propertyPath: m_SortingOrder

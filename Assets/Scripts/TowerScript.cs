@@ -8,6 +8,7 @@ public class TowerScript : MonoBehaviour
     public int deltaTime = 5;
     public GameObject arrowPrefab;
     public int range = 15;
+    public Target target;
 
     private float timer = 0f;
     
@@ -26,8 +27,18 @@ public class TowerScript : MonoBehaviour
         {
             var spawnPosition = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 5);
             if (Mathf.Abs(player.transform.position.x - gameObject.transform.position.x) < range)
-                Instantiate(arrowPrefab, spawnPosition, Quaternion.identity);
+            {
+                var arrow = Instantiate(arrowPrefab, spawnPosition, Quaternion.identity);
+                var arrowScript = arrow.GetComponent<ArrowScript>();
+                arrowScript.target = target;
+            }
             timer = 0f;
         }
     }
+}
+
+public enum Target
+{
+    Player,
+    Enemy
 }

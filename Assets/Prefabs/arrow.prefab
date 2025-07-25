@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6e51f52c0f712d4882bcb8ac76a3378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 0
+  target: 1
   forceMultiplier: 50
 --- !u!50 &6926158746616891358
 Rigidbody2D:

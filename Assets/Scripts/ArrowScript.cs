@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ArrowScript : MonoBehaviour
 {
-    [SerializeField] private bool isGrounded = false;
-    [SerializeField] private int forceMultiplier = 50;
+    public Target target = Target.Enemy;
+    public int forceMultiplier = 50;
+    
+    private bool isGrounded;
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider;
     private Vector2 originalOffset;
@@ -20,8 +23,29 @@ public class ArrowScript : MonoBehaviour
         if (boxCollider != null)
             originalOffset = boxCollider.offset;
 
-        var player = GameObject.Find("Player").GetComponent<Player>();  
-        deltaX = player.transform.position.x - transform.position.x;
+        GameObject targetObject = null;
+
+        if (target == Target.Player)
+        {
+            targetObject = GameObject.FindGameObjectWithTag("Player");
+        }
+        if (target == Target.Enemy)
+        {
+            targetObject = GameObject.FindGameObjectsWithTag("Enemy")
+                .OrderBy(e => Mathf.Abs(e.transform.position.x - transform.position.x))
+                .FirstOrDefault();;
+        }
+
+        if (targetObject != null)
+        {
+            deltaX = targetObject.transform.position.x - transform.position.x;
+        }
+        else
+        {
+            Debug.Log("No target found");
+            Destroy(gameObject);
+        }
+        
         if (deltaX > 0)
         {
             gameObject.GetComponent<SpriteRenderer>().flipX = true;
