@@ -2867,9 +2867,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradePanel: {fileID: 973889005}
-  leftTower: {fileID: 1387386875}
-  rightTower: {fileID: 1203804952}
-  gateHouse: {fileID: 808151932}
+  gateHouseSlot: {fileID: 808151932}
+  leftTowerSlot: {fileID: 1387386875}
+  rightTowerSlot: {fileID: 1203804952}
   gateHouseLevelText: {fileID: 612491905}
   leftTowerLevelText: {fileID: 423311985}
   rightTowerLevelText: {fileID: 581775703}
@@ -2879,6 +2879,11 @@ MonoBehaviour:
   gateHouseGold: {fileID: 67354797}
   leftTowerGold: {fileID: 558447096}
   rightTowerGold: {fileID: 1371914843}
+  gateHouse: {fileID: 1400272412}
+  leftTower: {fileID: 1269507427}
+  rightTower: {fileID: 1839623184}
+  door: {fileID: 1732380577}
+  ruins: {fileID: 1282392870}
   player: {fileID: 454336953}
 --- !u!1 &471469837
 GameObject:
@@ -9712,7 +9717,7 @@ GameObject:
   - component: {fileID: 1282392873}
   - component: {fileID: 1282392872}
   m_Layer: 0
-  m_Name: ruins
+  m_Name: Ruins
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

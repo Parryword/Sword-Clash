@@ -7,9 +7,9 @@ using UnityEngine;
 public class UpgradeScript : MonoBehaviour
 {
     public GameObject upgradePanel;
-    public GameObject leftTower;
-    public GameObject rightTower;
-    public GameObject gateHouse;
+    public GameObject gateHouseSlot;
+    public GameObject leftTowerSlot;
+    public GameObject rightTowerSlot;
     public TextMeshPro gateHouseLevelText;
     public TextMeshPro leftTowerLevelText;
     public TextMeshPro rightTowerLevelText;
@@ -19,6 +19,11 @@ public class UpgradeScript : MonoBehaviour
     public GameObject gateHouseGold;
     public GameObject leftTowerGold;
     public GameObject rightTowerGold;
+    public GameObject gateHouse;
+    public GameObject leftTower;
+    public GameObject rightTower;
+    public GameObject door;
+    public GameObject ruins;
     public Player player;
     
     private int leftTowerLevel;
@@ -33,8 +38,12 @@ public class UpgradeScript : MonoBehaviour
     void Start()
     {
         upgradePanel.SetActive(false);
+        leftTowerSlot.SetActive(false);
+        rightTowerSlot.SetActive(false);
+        gateHouse.SetActive(false);
         leftTower.SetActive(false);
         rightTower.SetActive(false);
+        door.SetActive(false);
     }
 
     // Update is called once per frame
@@ -42,7 +51,20 @@ public class UpgradeScript : MonoBehaviour
     {
         if (gateHouseLevel > 0)
         {
+            leftTowerSlot.SetActive(true);
+            rightTowerSlot.SetActive(true);
+            gateHouse.SetActive(true);
+            door.SetActive(true);
+            ruins.SetActive(false);
+        }
+
+        if (leftTowerLevel > 0)
+        {
             leftTower.SetActive(true);
+        }
+
+        if (rightTowerLevel > 0)
+        {
             rightTower.SetActive(true);
         }
     }
