@@ -87,7 +87,7 @@ public class ObjectiveManager : MonoBehaviour
         sb.Append("Objectives\n");
         foreach (var item in objectives)
         {
-            sb.Append("� " + item + "\n");
+            sb.Append("• " + item + "\n");
         }
 
         textArea.text = sb.ToString();

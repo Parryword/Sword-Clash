@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class SlotScript : MonoBehaviour
 {
-    private SpriteRenderer sr;
     public Color hoverColor = new(0.5f, 0.5f, 0.5f, 1);
     public Color pressedColor = new(0.3f, 0.3f, 0.3f, 1);
+    public UpgradeScript upgrade;
+    public BuildingType buildingType;
+    
+    private SpriteRenderer sr;
     private Color originalColor;
     private bool isMouseOver = false;
 
@@ -40,6 +43,7 @@ public class SlotScript : MonoBehaviour
     private void OnMouseDown()
     {
         sr.color = pressedColor;
+        upgrade.Upgrade(buildingType);
     }
 
     private void OnMouseUp()

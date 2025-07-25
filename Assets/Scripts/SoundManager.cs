@@ -29,6 +29,10 @@ public class SoundManager : MonoBehaviour
     private void RevokeSuppression()
     {
         suppressingEffects.RemoveWhere(s => !soundEffect[(int)s].isPlaying);
+        if (suppressingEffects.Count == 0)
+        {
+            musicSuppressed = false;
+        }
     }
 
     private void PlayMusic(int index)

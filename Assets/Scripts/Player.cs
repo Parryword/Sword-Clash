@@ -83,8 +83,8 @@ public class Player : FightingObject
         }
 
         // RESIZES HEALTH BAR
-        int width = 400 * health / maxHealth;
-        healthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(width, 40);
+        int width = 380 * health / maxHealth;
+        healthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(width, 35);
     }
 
     private void LateUpdate()
@@ -150,7 +150,7 @@ public class Player : FightingObject
                 playerState = PlayerState.RUN_RIGHT;
                 return;
             }
-            else if (inputManager.GetKeyUp(KeyBindingActions.Run))
+            if (inputManager.GetKeyUp(KeyBindingActions.Run))
             {
                 animator.SetBool("running", false);
             }
@@ -164,7 +164,7 @@ public class Player : FightingObject
                 playerState = PlayerState.RUN_LEFT;
                 return;
             }
-            else if (inputManager.GetKeyUp(KeyBindingActions.Run))
+            if (inputManager.GetKeyUp(KeyBindingActions.Run))
             {
                 animator.SetBool("running", false);
             }
@@ -334,7 +334,7 @@ public class Player : FightingObject
     {
         if (true)
         {
-            blood.GetComponent<BloodObject>().startBleed(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.2f));
+            blood.GetComponent<Blood>().StartBleed(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.2f));
         }
     }
 
@@ -344,7 +344,6 @@ public class Player : FightingObject
         {
             Destroy(gameObject);
             Time.timeScale = 0;
-            Debug.Log("YOU DIED!");
         }
     }
 }
