@@ -1078,7 +1078,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: f16396f175bbd9a4b8c6e0cdbbb671d5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2290,6 +2290,7 @@ GameObject:
   - component: {fileID: 423311984}
   - component: {fileID: 423311986}
   - component: {fileID: 423311985}
+  - component: {fileID: 423311987}
   m_Layer: 0
   m_Name: Level
   m_TagString: Untagged
@@ -2451,6 +2452,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!210 &423311987
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 423311983}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 12
 --- !u!1 &423335001
 GameObject:
   m_ObjectHideFlags: 0
@@ -3002,7 +3014,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 11
   m_Sprite: {fileID: 21300000, guid: f369af63acc765d4c817798b92843d38, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3326,7 +3338,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: f16396f175bbd9a4b8c6e0cdbbb671d5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5730,6 +5742,7 @@ GameObject:
   - component: {fileID: 581775702}
   - component: {fileID: 581775704}
   - component: {fileID: 581775703}
+  - component: {fileID: 581775705}
   m_Layer: 0
   m_Name: Level
   m_TagString: Untagged
@@ -5891,6 +5904,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!210 &581775705
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581775701}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 12
 --- !u!1 &582943737
 GameObject:
   m_ObjectHideFlags: 0
@@ -5963,7 +5987,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 11
   m_Sprite: {fileID: 21300000, guid: 7b98ce744de94dd4888264a932014b6f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -6119,6 +6143,7 @@ GameObject:
   - component: {fileID: 612491904}
   - component: {fileID: 612491906}
   - component: {fileID: 612491905}
+  - component: {fileID: 612491907}
   m_Layer: 0
   m_Name: Level
   m_TagString: Untagged
@@ -6280,6 +6305,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!210 &612491907
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 612491903}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 12
 --- !u!1 &636123537
 GameObject:
   m_ObjectHideFlags: 0
@@ -7565,7 +7601,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: ab7094a9d7cecc14c8f01293d2308be5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -8965,7 +9001,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 11
   m_Sprite: {fileID: 21300000, guid: f369af63acc765d4c817798b92843d38, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -9074,7 +9110,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: ab7094a9d7cecc14c8f01293d2308be5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -9921,7 +9957,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.3, y: -1.4}
+  m_AnchoredPosition: {x: -0.35, y: -1.4}
   m_SizeDelta: {x: 1.2, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1302142549
@@ -9978,7 +10014,7 @@ MonoBehaviour:
   m_fontSizeMin: 4
   m_fontSizeMax: 6
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -10653,7 +10689,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: f16396f175bbd9a4b8c6e0cdbbb671d5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -10762,7 +10798,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: ab7094a9d7cecc14c8f01293d2308be5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -11433,7 +11469,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.3793, y: -1.4}
+  m_AnchoredPosition: {x: -0.35, y: -1.4}
   m_SizeDelta: {x: 1.2, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1500345743
@@ -11490,7 +11526,7 @@ MonoBehaviour:
   m_fontSizeMin: 4
   m_fontSizeMax: 6
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -12197,7 +12233,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.3, y: -1.4}
+  m_AnchoredPosition: {x: -0.35, y: -1.4}
   m_SizeDelta: {x: 1.2, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1655337384
@@ -12254,7 +12290,7 @@ MonoBehaviour:
   m_fontSizeMin: 4
   m_fontSizeMax: 6
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
