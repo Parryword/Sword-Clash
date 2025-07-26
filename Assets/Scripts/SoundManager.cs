@@ -15,6 +15,11 @@ public class SoundManager : MonoBehaviour
         RevokeSuppression();
     }
 
+    /// <summary>
+    /// TODO: Slash sfx is stopped when it is immediately played twice. Fix that.
+    /// </summary>
+    /// <param name="sound"></param>
+    /// <param name="suppressMusic"></param>
     public void PlaySoundEffect(Sound sound, bool suppressMusic = false)
     {
         if (suppressMusic)
