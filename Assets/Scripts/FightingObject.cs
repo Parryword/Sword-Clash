@@ -33,7 +33,7 @@ public abstract class FightingObject : AnimatableObject
     public virtual void Bleed()
     {
         Debug.Log("Enemy bleeds");
-        GameObject.Find("GameManager").GetComponent<SoundManager>().PlaySoundEffect(Sound.BASIC_ATTACK);
+        GameObject.Find("GameManager").GetComponent<SoundManager>().PlaySoundEffect(Sound.BasicAttack);
         blood.GetComponent<Blood>().StartBleed(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.2f));
     }
 

@@ -32,6 +32,7 @@ public class UpgradeScript : MonoBehaviour
     private readonly int[] leftTowerPrice = {3, 7, 15};
     private readonly int[] rightTowerPrice = {3, 7, 15};
     private readonly int[] gateHousePrice = {5, 12, 25};
+    private SoundManager soundManager;
 
 
     // Start is called before the first frame update
@@ -44,6 +45,7 @@ public class UpgradeScript : MonoBehaviour
         leftTower.SetActive(false);
         rightTower.SetActive(false);
         door.SetActive(false);
+        soundManager = FindObjectOfType<SoundManager>();
     }
 
     // Update is called once per frame
@@ -140,6 +142,7 @@ public class UpgradeScript : MonoBehaviour
         {
             gold.SetActive(false);
         }
+        soundManager.PlaySoundEffect(Sound.Construction);
     }
 
     

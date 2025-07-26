@@ -9,9 +9,10 @@ public class SlotScript : MonoBehaviour
     public UpgradeScript upgrade;
     public BuildingType buildingType;
     
-    private SpriteRenderer sr;
     private Color originalColor;
     private bool isMouseOver = false;
+    private SpriteRenderer sr;
+    private SoundManager soundManager;
 
     // Start is called before the first frame update
     void Start()

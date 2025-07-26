@@ -24,6 +24,7 @@ public class SoundManager : MonoBehaviour
             musicSuppressed = true;
         }
         soundEffect[(int)sound].Play();
+        Debug.Log(soundEffect[(int)sound].name);
     }
 
     private void RevokeSuppression()
@@ -70,8 +71,9 @@ public class SoundManager : MonoBehaviour
 
 public enum Sound
 {
-    BASIC_ATTACK = 0,
-    BLEED = 1,
-    COIN = 4,
-    SUCCESS = 5,
+    BasicAttack = 0,
+    Bleed = 1,
+    Coin = 4,
+    Success = 5,
+    Construction = 6
 }

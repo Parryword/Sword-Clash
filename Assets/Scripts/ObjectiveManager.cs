@@ -11,6 +11,7 @@ public class ObjectiveManager : MonoBehaviour
     public TextMeshProUGUI victoryText;
     public SoundManager soundManager;
     public Player player;
+    public int objectivesCompleted;
 
     // Start is called before the first frame update
     void Start()
@@ -26,15 +27,17 @@ public class ObjectiveManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (enemies[0] == null && enemies[1] != null && enemies[2] != null)
+        if (enemies[0] == null && enemies[1] != null && enemies[2] != null && objectivesCompleted == 0)
         {
             setObjective("Reach the castle");
+            objectivesCompleted++;
         }
 
-        if (enemies[0] == null && enemies[1] == null && enemies[2] == null )
+        if (enemies[0] == null && enemies[1] == null && enemies[2] == null && objectivesCompleted == 1)
         {
             setObjective("Build the castle");
-            soundManager.PlaySoundEffect(Sound.SUCCESS, true);
+            soundManager.PlaySoundEffect(Sound.Success, true);
+            objectivesCompleted++;
 
         }
     }
