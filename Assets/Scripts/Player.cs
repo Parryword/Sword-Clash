@@ -339,7 +339,7 @@ public class Player : FightingObject
 
     protected override void Die()
     {
-        if (health <= 0) return;
+        if (health > 0) return;
         Destroy(gameObject);
         Time.timeScale = 0;
     }
