@@ -50,21 +50,19 @@ public class Enemy : FightingObject
     {
         if (ShouldWalk())
         {
-            if (playerDistance > 0 && IsRightClear())
+            if (IsDirectionRight() && IsRightClear())
             {
-                Debug.Log("Right");
                 gameObject.transform.position += new Vector3(speed, 0, 0);
                 spriteRenderer.flipX = false;
                 animator.SetBool("walking", true);
             }
-            else if (playerDistance < 0 && IsLeftClear())
+            else if (IsDirectionLeft() && IsLeftClear())
             {
-                Debug.Log("Left");
                 gameObject.transform.position -= new Vector3(speed, 0, 0);
                 spriteRenderer.flipX = true;
                 animator.SetBool("walking", true);
             }
-            else if (playerDistance < 0 && !IsRightClear() || playerDistance > 0 && !IsLeftClear())
+            else if (IsDirectionLeft() && !IsRightClear() || IsDirectionRight() && !IsLeftClear())
             {
                 animator.SetBool("walking", false);
             }
@@ -210,8 +208,12 @@ public class Enemy : FightingObject
 
     private bool IsDirectionRight()
     {
-        playerDistance = gameObject.transform.position.x - player.transform.position.x;
         return playerDistance > 0;
+    }
+
+    private bool IsDirectionLeft()
+    {
+        return !IsDirectionRight();
     }
 
     IEnumerator StopFlanking()
