@@ -8,32 +8,28 @@ using static GameManager;
 
 public class Player : FightingObject
 {
-    public PlayerState playerState;
-    public FightingObject[] enemies;
-    public FightingObject lockedEnemy;
-    public int enemyIndex;
-    public BandageScript bandage;
     public int goldAmount;
+    public PlayerState playerState;
     public TextMeshProUGUI textFieldGold;
     public GameObject targetIndicator;
     public GameObject healthBar;
     public InputManager inputManager;
-
+    public BandageScript bandage;
+    public FightingObject[] enemies;
+    public FightingObject lockedEnemy;
+    
     private float lockedDistance;
+    private int enemyIndex;
     private GameObject enemyObject;
-
+    private StatsTextManager statsTextManager;
+    private RectTransform healthBarRect;
 
     void Start()
     {
-        maxHealth = 30;
-        health = maxHealth;
-        damage = 4;
-        defense = 0;
-        level = 1;
-        enemyIndex = 0;
-
         keyDisabled = false;
         enemyObject = null;
+        statsTextManager = GameObject.Find("GameManager").GetComponent<StatsTextManager>();
+        healthBarRect = healthBar.GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
@@ -43,7 +39,7 @@ public class Player : FightingObject
             HandleKeys();
 
         if (lockedEnemy != null)
-            lockedDistance = lockedEnemy.transform.position.x - gameObject.transform.position.x;
+            lockedDistance = GetDistance(lockedEnemy);
     }
 
     private void FixedUpdate()
@@ -74,13 +70,13 @@ public class Player : FightingObject
 
         // RESIZES HEALTH BAR
         int width = 380 * health / maxHealth;
-        healthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(width, 35);
+        healthBarRect.sizeDelta = new Vector2(width, 35);
     }
 
     private void LateUpdate()
     {
         textFieldGold.text = goldAmount.ToString();
-        GameObject.Find("GameManager").GetComponent<StatsTextManager>().updateText(health.ToString(),
+        statsTextManager.updateText(health.ToString(),
             maxHealth.ToString(), damage.ToString(), defense.ToString(), level.ToString());
     }
 
@@ -89,8 +85,7 @@ public class Player : FightingObject
         int prev = 0;
         if (enemies != null)
             prev = enemies.Length;
-        enemies = GameObject.FindObjectsOfType<FightingObject>();
-        enemies = (from e in enemies where e.level == level && e.tag == "Enemy" select e).ToArray();
+        enemies = FindObjectsOfType<Enemy>();
 
         int curr = enemies.Length;
 
@@ -130,7 +125,7 @@ public class Player : FightingObject
     {
         if (inputManager.GetKeyDown(KeyBindingActions.Dash))
         {
-            if (IsFighting("left") || IsFighting("right"))
+            if (IsFighting())
             {
                 playerState = PlayerState.DASH;
                 keyDisabled = true;
@@ -166,20 +161,6 @@ public class Player : FightingObject
 
             playerState = PlayerState.WALK_LEFT;
         }
-        /*
-        else if (playerState == PlayerState.WALK_LEFT || playerState == PlayerState.WALK_RIGHT && inputManager.GetKeyDown(KeyBindingActions.Run))
-        {
-
-        }*/
-        /*
-        else if (inputManager.GetKeyUp(KeyBindingActions.WalkRight) && playerState == PlayerState.WALK_RIGHT)
-        {
-            playerState = PlayerState.IDLE;
-        }
-        else if (inputManager.GetKeyUp(KeyBindingActions.WalkLeft) && playerState == PlayerState.WALK_LEFT)
-        {
-            playerState = PlayerState.IDLE;
-        }*/
         else
         {
             playerState = PlayerState.IDLE;
@@ -202,7 +183,7 @@ public class Player : FightingObject
     private void WalkRight()
     {
         animator.SetBool("walking", true);
-        if (IsFighting("right"))
+        if (IsFighting())
         {
             if (lockedDistance > 0)
             {
@@ -216,19 +197,19 @@ public class Player : FightingObject
 
         if (inputManager.GetKey(KeyBindingActions.WalkRight))
         {
-            if (!IsFighting("right"))
+            if (!IsFighting())
             {
                 spriteRenderer.flipX = false;
             }
 
-            gameObject.transform.position += new Vector3(horizontalSpeed, verticalSpeed, 0);
+            gameObject.transform.position += new Vector3(speed, 0, 0);
         }
     }
 
     private void WalkLeft()
     {
         animator.SetBool("walking", true);
-        if (IsFighting("left"))
+        if (IsFighting())
         {
             if (lockedDistance > 0)
             {
@@ -242,12 +223,12 @@ public class Player : FightingObject
 
         if (inputManager.GetKey(KeyBindingActions.WalkLeft))
         {
-            if (!IsFighting("left"))
+            if (!IsFighting())
             {
                 spriteRenderer.flipX = true;
             }
-
-            gameObject.transform.position += new Vector3(-horizontalSpeed, verticalSpeed, 0);
+            
+            gameObject.transform.position += new Vector3(-speed, 0, 0);
         }
     }
 
@@ -255,7 +236,7 @@ public class Player : FightingObject
     {
         animator.SetBool("running", true);
         spriteRenderer.flipX = false;
-        gameObject.transform.position += new Vector3(horizontalSpeed * 1.5f, verticalSpeed, 0);
+        gameObject.transform.position += new Vector3(speed * 1.5f, 0, 0);
     }
 
     private void RunLeft()
@@ -263,7 +244,7 @@ public class Player : FightingObject
         animator.SetBool("running", true);
         spriteRenderer.flipX = true;
 
-        gameObject.transform.position += new Vector3(-horizontalSpeed * 1.5f, verticalSpeed, 0);
+        gameObject.transform.position += new Vector3(-speed * 1.5f, 0, 0);
     }
 
     private void Dash()
@@ -288,17 +269,11 @@ public class Player : FightingObject
         }
     }
 
-    public new void OnTriggerStay2D(Collider2D collision)
+    public void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "Enemy")
+        if (collision.CompareTag("Enemy"))
         {
-            if (spriteRenderer.flipX == false &&
-                collision.gameObject.transform.position.x - gameObject.transform.position.x > 1)
-            {
-                enemyObject = collision.gameObject;
-            }
-            else if (spriteRenderer.flipX == true &&
-                     collision.gameObject.transform.position.x - gameObject.transform.position.x < 1)
+            if (IsNotTooClose(collision))
             {
                 enemyObject = collision.gameObject;
             }
@@ -309,26 +284,28 @@ public class Player : FightingObject
         }
     }
 
+    private bool IsNotTooClose(Collider2D collision)
+    {
+        return spriteRenderer.flipX == false &&
+            collision.gameObject.transform.position.x - gameObject.transform.position.x > 1 || spriteRenderer.flipX &&
+            collision.gameObject.transform.position.x - gameObject.transform.position.x < -1;
+    }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         enemyObject = null;
     }
 
-    private bool IsFighting(string direction)
+    private bool IsFighting()
     {
         if (Mathf.Abs(lockedDistance) < 10 && lockedEnemy != null)
         {
-            animator.SetBool("fighting", false);
             animator.SetBool("fightingfoward", true);
-
             return true;
         }
-        else
-        {
-            animator.SetBool("fighting", false);
-            animator.SetBool("fightingfoward", false);
-            return false;
-        }
+        
+        animator.SetBool("fightingfoward", false);
+        return false;
     }
 
     public override void Bleed()

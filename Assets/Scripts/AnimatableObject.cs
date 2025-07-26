@@ -7,23 +7,17 @@ using static GameManager;
 
 public abstract class AnimatableObject : MonoBehaviour
 {
-    [SerializeField] protected float horizontalSpeed;
-    [SerializeField] protected float verticalSpeed;
     public string entityName;
+    public bool keyDisabled;
+    public bool animationDisabled;
     public Animator animator;
     public Rigidbody2D rigidBody;
     public PolygonCollider2D colliderBox;
     public SpriteRenderer spriteRenderer;
-    public bool keyDisabled;
-    public bool animationDisabled;
-
-    protected void notBusy()
-    {
-        keyDisabled = false;
-    }
-
-    private List<Vector2> points = new List<Vector2>();
-    private List<Vector2> simplifiedPoints = new List<Vector2>();
+    
+    private List<Vector2> points = new();
+    private List<Vector2> simplifiedPoints = new();
+    
     protected void UpdatePolygonCollider2D(float tolerance = 0.05f)
     {
         colliderBox.pathCount = spriteRenderer.sprite.GetPhysicsShapeCount();

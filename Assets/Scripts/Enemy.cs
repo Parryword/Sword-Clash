@@ -5,17 +5,24 @@ using UnityEngine;
 
 public class Enemy : FightingObject
 {
-    private float playerDistance;
-    public float attackDistance;
-    private float agroDistance;
     public int dropCount = 3;
-    private bool isFlankingLeft, isFlankingRight;
+    public float attackDistance;
+    public float agroDistance;
+    public float playerDistance;
+    public bool isFlankingLeft, isFlankingRight;
     public GameObject enemyObject;
-    [SerializeField] protected GameObject coinPrefab;
-    private Player player;
+    public GameObject coinPrefab;
+    public Player player;
 
     void Start()
     {
+        animator = GetComponent<Animator>();
+        rigidBody = GetComponent<Rigidbody2D>();
+        colliderBox = GetComponent<PolygonCollider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        player = GameObject.Find("Player").GetComponent<Player>();
+        
+        Debug.Log(Physics2D.queriesHitTriggers.ToString());
     }
 
     void Update()
@@ -44,26 +51,21 @@ public class Enemy : FightingObject
     {
         playerDistance = gameObject.transform.position.x - player.transform.position.x;
 
-        if (Mathf.Abs(playerDistance) < agroDistance && Mathf.Abs(playerDistance) > attackDistance && !isFlankingLeft &&
-            !isFlankingRight)
+        if (ShouldWalk())
         {
             if (playerDistance < 0 && IsRightClear())
             {
-                gameObject.transform.position += new Vector3(0.08f, 0, 0);
+                gameObject.transform.position += new Vector3(speed, 0, 0);
                 spriteRenderer.flipX = false;
                 animator.SetBool("walking", true);
             }
             else if (playerDistance > 0 && IsLeftClear())
             {
-                gameObject.transform.position -= new Vector3(0.08f, 0, 0);
+                gameObject.transform.position -= new Vector3(speed, 0, 0);
                 spriteRenderer.flipX = true;
                 animator.SetBool("walking", true);
             }
-            else if (playerDistance < 0 && !IsRightClear())
-            {
-                animator.SetBool("walking", false);
-            }
-            else if (playerDistance > 0 && !IsLeftClear())
+            else if (playerDistance < 0 && !IsRightClear() || playerDistance > 0 && !IsLeftClear())
             {
                 animator.SetBool("walking", false);
             }
@@ -72,6 +74,17 @@ public class Enemy : FightingObject
         {
             animator.SetBool("walking", false);
         }
+    }
+
+    private bool ShouldWalk()
+    {
+        return IsInAgroDistance() && !IsInAttackDistance() && !isFlankingLeft &&
+               !isFlankingRight;
+    }
+
+    private bool IsInAttackDistance()
+    {
+        return Mathf.Abs(playerDistance) < attackDistance;
     }
 
     public void OnTriggerStay2D(Collider2D collision)
@@ -95,29 +108,31 @@ public class Enemy : FightingObject
             enemyObject.GetComponent<Player>().Bleed();
         }
     }
-    
+
     private bool IsLeftClear()
     {
         var hits = Physics2D.RaycastAll(transform.position, Vector2.left, 2);
         var enemies = hits
             .Where(hit => hit.transform.CompareTag("Enemy"))
             .Select(hit => hit.collider.gameObject).ToList();
-        return enemies.Count > 0;
+        Debug.Log(enemies.Count);
+        return enemies.Count < 2;
     }
-    
+
     private bool IsRightClear()
     {
         var hits = Physics2D.RaycastAll(transform.position, Vector2.right, 2);
         var enemies = hits
             .Where(hit => hit.transform.CompareTag("Enemy"))
             .Select(hit => hit.collider.gameObject).ToList();
-        return enemies.Count > 0;
+        Debug.Log(enemies.Count);
+        return enemies.Count < 2;
     }
 
     private void FlankLeft()
     {
-        if (!IsLeftClear() && Mathf.Abs(GetDistance(player)) > attackDistance && !isFlankingLeft && !isFlankingRight &&
-            GetDistance(player) < 0 && !isFlankingRight || isFlankingLeft)
+        if (!IsLeftClear() && IsInAgroDistance() && !isFlankingLeft && !isFlankingRight &&
+            GetDistance(player) < 0 || isFlankingLeft)
         {
             spriteRenderer.flipX = true;
             if (isFlankingLeft == false)
@@ -142,7 +157,7 @@ public class Enemy : FightingObject
                 }
             }
         }
-        else if (isFlankingLeft && Mathf.Abs(GetDistance(player)) < attackDistance)
+        else if (isFlankingLeft && !IsInAgroDistance())
         {
             gameObject.transform.position += new Vector3(-0.08f, 0, 0);
             animator.SetBool("walking", true);
@@ -151,8 +166,8 @@ public class Enemy : FightingObject
 
     private void FlankRight()
     {
-        if (!IsRightClear() && Mathf.Abs(GetDistance(player)) > attackDistance && !isFlankingLeft && !isFlankingRight &&
-            GetDistance(player) > 0 && !isFlankingLeft || isFlankingRight)
+        if (!IsRightClear() && IsInAgroDistance() && !isFlankingLeft && !isFlankingRight &&
+            GetDistance(player) > 0 || isFlankingRight)
         {
             spriteRenderer.flipX = false;
             if (isFlankingRight == false)
@@ -177,7 +192,7 @@ public class Enemy : FightingObject
                 }
             }
         }
-        else if (isFlankingRight && Mathf.Abs(GetDistance(player)) > attackDistance)
+        else if (isFlankingRight && !IsInAgroDistance())
         {
             gameObject.transform.position += new Vector3(0.08f, 0, 0);
             animator.SetBool("walking", true);
@@ -193,13 +208,12 @@ public class Enemy : FightingObject
     IEnumerator StopFlanking()
     {
         float seconds = Mathf.Abs(GetDistance(player)) * 2 / (0.08f * 50);
-        Debug.Log(seconds);
         yield return new WaitForSeconds(seconds);
         isFlankingLeft = false;
         isFlankingRight = false;
         spriteRenderer.flipX = GetDistance(player) <= 0;
     }
-    
+
     private void DropLoot()
     {
         for (int i = 0; i < dropCount; i++)
@@ -207,11 +221,16 @@ public class Enemy : FightingObject
             Instantiate(coinPrefab, gameObject.transform.position, Quaternion.identity);
         }
     }
-    
+
     protected override void Die()
     {
         if (health > 0) return;
         DropLoot();
         Destroy(gameObject);
+    }
+
+    private bool IsInAgroDistance()
+    {
+        return GetAbsoluteDistance(player) < agroDistance;
     }
 }

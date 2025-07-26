@@ -11,6 +11,7 @@ using static GameManager;
 public abstract class FightingObject : AnimatableObject
 {
     public int maxHealth, health, damage, defense, level;
+    public float speed;
     public GameObject blood;
     
     // Start is called before the first frame update
@@ -39,5 +40,10 @@ public abstract class FightingObject : AnimatableObject
     protected float GetDistance(FightingObject target)
     {
         return target.transform.position.x - gameObject.transform.position.x;
+    }
+
+    protected float GetAbsoluteDistance(FightingObject target)
+    {
+        return Mathf.Abs(GetDistance(target));
     }
 }

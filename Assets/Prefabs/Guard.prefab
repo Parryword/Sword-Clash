@@ -121,27 +121,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca591260bd54186adfee0c91310e5c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalSpeed: 0
-  verticalSpeed: 0
   entityName: 
+  keyDisabled: 0
+  animationDisabled: 0
   animator: {fileID: 0}
   rigidBody: {fileID: 0}
   colliderBox: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  keyDisabled: 0
-  animationDisabled: 0
   maxHealth: 10
-  health: 0
+  health: 10
   damage: 3
   defense: 0
   level: 0
-  blood: {fileID: 0}
-  attackDistance: 0
+  speed: 0.08
+  blood: {fileID: 8348463839304988110}
   dropCount: 3
+  attackDistance: 2
+  agroDistance: 10
+  playerDistance: 0
   isFlankingLeft: 0
   isFlankingRight: 0
   enemyObject: {fileID: 0}
-  coinPrefab: {fileID: 0}
+  coinPrefab: {fileID: 5054269490438477740, guid: 4def43d3c31890b4a83daf84737e2c0b, type: 3}
+  player: {fileID: 0}
 --- !u!50 &8348463839135187376
 Rigidbody2D:
   serializedVersion: 4
@@ -313,12 +315,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aca17ec5f0f0c540a907b520987e6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalSpeed: 0
-  verticalSpeed: 0
   entityName: 
+  keyDisabled: 0
+  animationDisabled: 0
   animator: {fileID: 8348463839304988105}
   rigidBody: {fileID: 0}
   colliderBox: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  keyDisabled: 0
-  animationDisabled: 0
