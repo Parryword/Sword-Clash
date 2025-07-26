@@ -70,8 +70,8 @@ public class Player : FightingObject
         }
 
         // RESIZES HEALTH BAR
-        int width = 380 * health / maxHealth;
-        healthBarRect.sizeDelta = new Vector2(width, 35);
+        var width = healthBarRect.sizeDelta.x * health / maxHealth;
+        healthBarRect.sizeDelta = new Vector2(width, healthBarRect.sizeDelta.y);
     }
 
     private void LateUpdate()
