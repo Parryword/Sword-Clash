@@ -92,18 +92,13 @@ public class Enemy : FightingObject
 
     public override void HitEnemy()
     {
-        if (enemyObject != null && enemyObject.CompareTag("Player"))
+        if (enemyObject == null || !enemyObject.CompareTag("Player")) return;
+        int dmgAmount = damage - player.defense;
+        if (dmgAmount < 1)
         {
-            Debug.Log("Player has been hit by" + gameObject.name);
-            int dmgAmount = damage - player.defense;
-            if (dmgAmount < 1)
-            {
-                dmgAmount = 1;
-            }
-
-            enemyObject.GetComponent<FightingObject>().health -= dmgAmount;
-            enemyObject.GetComponent<Player>().Bleed();
+            dmgAmount = 1;
         }
+        enemyObject.GetComponent<FightingObject>().TakeDamage(dmgAmount);
     }
 
     private bool IsLeftClear()

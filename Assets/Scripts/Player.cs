@@ -258,14 +258,8 @@ public class Player : FightingObject
     {
         if (enemyObject != null)
         {
-            Debug.Log(enemyObject.name);
-            enemyObject.GetComponent<FightingObject>().Bleed();
-            enemyObject.GetComponent<FightingObject>().health -= damage;
+            enemyObject.GetComponent<FightingObject>().TakeDamage(damage);
             enemyObject = null;
-        }
-        else
-        {
-            Debug.Log("There are no enemies nearby.");
         }
     }
 

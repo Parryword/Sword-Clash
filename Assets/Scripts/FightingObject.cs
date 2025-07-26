@@ -37,6 +37,20 @@ public abstract class FightingObject : AnimatableObject
         blood.GetComponent<Blood>().StartBleed(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.2f));
     }
 
+    public void TakeDamage(int value)
+    {
+        Bleed();
+        health -= value;
+        StartCoroutine("Colorize");
+    }
+
+    IEnumerator Colorize()
+    {
+        spriteRenderer.color = new Color(1, 0.6f, 0.6f);
+        yield return new WaitForSeconds(0.25f);
+        spriteRenderer.color = new Color(1, 1, 1);
+    }
+
     protected float GetDistance(FightingObject target)
     {
         return target.transform.position.x - gameObject.transform.position.x;
