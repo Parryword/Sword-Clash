@@ -40,7 +40,7 @@ public class ObjectiveManager : MonoBehaviour
         if (enemies[0] == null && enemies[1] == null && enemies[2] == null && level1Completed == false)
         {
             level1Completed = true;
-            doors[0].unlock();
+            doors[0].Unlock();
             setObjective("Enter the castle");
             soundManager.PlaySoundEffect(Sound.SUCCESS, true);
 
@@ -49,18 +49,18 @@ public class ObjectiveManager : MonoBehaviour
         if (enemies[3] == null && enemies[4] == null && level2Completed == false)
         {
             level2Completed = true;
-            doors[1].unlock();
+            doors[1].Unlock();
             setObjective("Enter the dungeon");
             soundManager.PlaySoundEffect(Sound.SUCCESS, true);
         }
 
-        if (level1Completed && !level2Completed && player.stage == 2)
+        if (level1Completed && !level2Completed)
         {
             //   textArea.text = "Objective\nKill the guards.";
             setObjective("Kill the guards");
         }
 
-        if (level2Completed && !level3Completed && player.stage == 3)
+        if (level2Completed && !level3Completed)
         {
          //   textArea.text = "Objective\nKill the lord.";
             setObjective("Kill the lord");

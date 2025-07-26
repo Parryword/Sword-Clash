@@ -51,8 +51,6 @@ public class ArrowScript : MonoBehaviour
             gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
         gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right * forceMultiplier * deltaX);
-
-        // Time.timeScale = 0.1f;
     }
 
     // Update is called once per frame

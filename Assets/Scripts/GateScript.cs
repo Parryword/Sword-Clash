@@ -29,11 +29,10 @@ public class GateScript : MonoBehaviour
             GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(teleportX, teleportY, 0);
             GameObject.FindObjectOfType<Player>().level++;
             GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(teleportX, teleportY, -10);
-            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().stage = stage;
         }
     }
 
-    public void unlock()
+    public void Unlock()
     {
         unlocked = true;
     }

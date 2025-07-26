@@ -8,28 +8,19 @@ using static GameManager;
 
 public class Player : FightingObject
 {
-    // Player stats
-    [SerializeField]
     public PlayerState playerState;
-    FightingObject[] enemies;
+    public FightingObject[] enemies;
     public FightingObject lockedEnemy;
-    private float lockedDistance;
     public int enemyIndex;
-    public int stage;
     public BandageScript bandage;
     public int goldAmount;
+    public TextMeshProUGUI textFieldGold;
+    public GameObject targetIndicator;
+    public GameObject healthBar;
+    public InputManager inputManager;
 
-    // GUI
-    [SerializeField]
-    private TextMeshProUGUI textFieldGold;
-
-    [SerializeField]
-    private GameObject targetIndicator;
-    [SerializeField]
-    private GameObject healthBar;
-    private InputManager inputManager;
-
-    // Managers
+    private float lockedDistance;
+    private GameObject enemyObject;
 
 
     void Start()
@@ -39,21 +30,18 @@ public class Player : FightingObject
         damage = 4;
         defense = 0;
         level = 1;
-        stage = 1;
         enemyIndex = 0;
 
         keyDisabled = false;
         enemyObject = null;
-
-        inputManager = GameObject.Find("GameManager").GetComponent<InputManager>();
     }
 
     // Update is called once per frame
     void Update()
-    {   
+    {
         if (!keyDisabled)
             HandleKeys();
-        
+
         if (lockedEnemy != null)
             lockedDistance = lockedEnemy.transform.position.x - gameObject.transform.position.x;
     }
@@ -79,7 +67,9 @@ public class Player : FightingObject
         // MOVES TARGET INDICATOR
         if (lockedEnemy != null)
         {
-            targetIndicator.transform.position = new Vector3(lockedEnemy.transform.position.x, lockedEnemy.transform.position.y + 3 + Mathf.Sin(Time.realtimeSinceStartup * 3) / 3, lockedEnemy.transform.position.z);
+            targetIndicator.transform.position = new Vector3(lockedEnemy.transform.position.x,
+                lockedEnemy.transform.position.y + 3 + Mathf.Sin(Time.realtimeSinceStartup * 3) / 3,
+                lockedEnemy.transform.position.z);
         }
 
         // RESIZES HEALTH BAR
@@ -90,7 +80,8 @@ public class Player : FightingObject
     private void LateUpdate()
     {
         textFieldGold.text = goldAmount.ToString();
-        GameObject.Find("GameManager").GetComponent<StatsTextManager>().updateText(health.ToString(), maxHealth.ToString(), damage.ToString(), defense.ToString(), level.ToString());
+        GameObject.Find("GameManager").GetComponent<StatsTextManager>().updateText(health.ToString(),
+            maxHealth.ToString(), damage.ToString(), defense.ToString(), level.ToString());
     }
 
     private void ScanEnemy()
@@ -113,8 +104,9 @@ public class Player : FightingObject
         {
             targetIndicator.SetActive(true);
             lockedEnemy = enemies[enemyIndex];
-        } else if (enemies.Length == 0)
-        {   
+        }
+        else if (enemies.Length == 0)
+        {
             lockedEnemy = null;
             targetIndicator.SetActive(false);
         }
@@ -135,21 +127,23 @@ public class Player : FightingObject
     }
 
     private void HandleKeys()
-    {   
+    {
         if (inputManager.GetKeyDown(KeyBindingActions.Dash))
-        {   
-            if (IsFighting("left") || IsFighting("right")) {
+        {
+            if (IsFighting("left") || IsFighting("right"))
+            {
                 playerState = PlayerState.DASH;
                 keyDisabled = true;
             }
         }
-        else if (inputManager.GetKey(KeyBindingActions.WalkRight)) 
+        else if (inputManager.GetKey(KeyBindingActions.WalkRight))
         {
             if (inputManager.GetKey(KeyBindingActions.Run))
             {
                 playerState = PlayerState.RUN_RIGHT;
                 return;
             }
+
             if (inputManager.GetKeyUp(KeyBindingActions.Run))
             {
                 animator.SetBool("running", false);
@@ -164,10 +158,12 @@ public class Player : FightingObject
                 playerState = PlayerState.RUN_LEFT;
                 return;
             }
+
             if (inputManager.GetKeyUp(KeyBindingActions.Run))
             {
                 animator.SetBool("running", false);
             }
+
             playerState = PlayerState.WALK_LEFT;
         }
         /*
@@ -217,12 +213,14 @@ public class Player : FightingObject
                 spriteRenderer.flipX = true;
             }
         }
+
         if (inputManager.GetKey(KeyBindingActions.WalkRight))
         {
             if (!IsFighting("right"))
             {
                 spriteRenderer.flipX = false;
             }
+
             gameObject.transform.position += new Vector3(horizontalSpeed, verticalSpeed, 0);
         }
     }
@@ -241,12 +239,14 @@ public class Player : FightingObject
                 spriteRenderer.flipX = true;
             }
         }
+
         if (inputManager.GetKey(KeyBindingActions.WalkLeft))
         {
             if (!IsFighting("left"))
             {
                 spriteRenderer.flipX = true;
             }
+
             gameObject.transform.position += new Vector3(-horizontalSpeed, verticalSpeed, 0);
         }
     }
@@ -255,8 +255,7 @@ public class Player : FightingObject
     {
         animator.SetBool("running", true);
         spriteRenderer.flipX = false;
-            gameObject.transform.position += new Vector3(horizontalSpeed * 1.5f, verticalSpeed, 0);
-        
+        gameObject.transform.position += new Vector3(horizontalSpeed * 1.5f, verticalSpeed, 0);
     }
 
     private void RunLeft()
@@ -264,8 +263,7 @@ public class Player : FightingObject
         animator.SetBool("running", true);
         spriteRenderer.flipX = true;
 
-            gameObject.transform.position += new Vector3(-horizontalSpeed * 1.5f, verticalSpeed, 0);
-        
+        gameObject.transform.position += new Vector3(-horizontalSpeed * 1.5f, verticalSpeed, 0);
     }
 
     private void Dash()
@@ -275,7 +273,7 @@ public class Player : FightingObject
         animator.SetTrigger("dashing");
     }
 
-    public override void HitEnemy ()
+    public override void HitEnemy()
     {
         if (enemyObject != null)
         {
@@ -283,21 +281,24 @@ public class Player : FightingObject
             enemyObject.GetComponent<FightingObject>().Bleed();
             enemyObject.GetComponent<FightingObject>().health -= damage;
             enemyObject = null;
-        } else
+        }
+        else
         {
             Debug.Log("There are no enemies nearby.");
         }
     }
 
     public new void OnTriggerStay2D(Collider2D collision)
-    {   
+    {
         if (collision.tag == "Enemy")
         {
-            if (spriteRenderer.flipX == false && collision.gameObject.transform.position.x - gameObject.transform.position.x > 1)
+            if (spriteRenderer.flipX == false &&
+                collision.gameObject.transform.position.x - gameObject.transform.position.x > 1)
             {
                 enemyObject = collision.gameObject;
             }
-            else if (spriteRenderer.flipX == true && collision.gameObject.transform.position.x - gameObject.transform.position.x < 1)
+            else if (spriteRenderer.flipX == true &&
+                     collision.gameObject.transform.position.x - gameObject.transform.position.x < 1)
             {
                 enemyObject = collision.gameObject;
             }
@@ -327,30 +328,31 @@ public class Player : FightingObject
             animator.SetBool("fighting", false);
             animator.SetBool("fightingfoward", false);
             return false;
-        }          
+        }
     }
 
     public override void Bleed()
     {
-        if (true)
-        {
-            blood.GetComponent<Blood>().StartBleed(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.2f));
-        }
+        blood.GetComponent<Blood>()
+            .StartBleed(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.2f));
     }
 
-    public override void Die()
+    protected override void Die()
     {
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-            Time.timeScale = 0;
-        }
+        if (health <= 0) return;
+        Destroy(gameObject);
+        Time.timeScale = 0;
     }
 }
 
 
 public enum PlayerState
 {
-    IDLE, WALK_LEFT, WALK_RIGHT, DASH, RUN_LEFT, RUN_RIGHT,
+    IDLE,
+    WALK_LEFT,
+    WALK_RIGHT,
+    DASH,
+    RUN_LEFT,
+    RUN_RIGHT,
     STUNNED
 }

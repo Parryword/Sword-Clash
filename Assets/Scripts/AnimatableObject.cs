@@ -5,7 +5,7 @@ using System.Linq;
 using static GameManager;
 
 
-public class AnimatableObject : MonoBehaviour
+public abstract class AnimatableObject : MonoBehaviour
 {
     [SerializeField] protected float horizontalSpeed;
     [SerializeField] protected float verticalSpeed;
