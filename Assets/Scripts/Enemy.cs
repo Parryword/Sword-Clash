@@ -27,6 +27,7 @@ public class Enemy : FightingObject
 
     void Update()
     {
+        playerDistance = GetDistance(player);
     }
 
     void FixedUpdate()
@@ -41,7 +42,7 @@ public class Enemy : FightingObject
 
     void Slash()
     {
-        if (Mathf.Abs(playerDistance) < attackDistance && isFlankingLeft == false && isFlankingRight == false)
+        if (IsInAttackDistance() && isFlankingLeft == false && isFlankingRight == false)
         {
             animator.SetTrigger("slash");
         }
@@ -49,18 +50,18 @@ public class Enemy : FightingObject
 
     void Walk()
     {
-        playerDistance = gameObject.transform.position.x - player.transform.position.x;
-
         if (ShouldWalk())
         {
-            if (playerDistance < 0 && IsRightClear())
+            if (playerDistance > 0 && IsRightClear())
             {
+                Debug.Log("Right");
                 gameObject.transform.position += new Vector3(speed, 0, 0);
                 spriteRenderer.flipX = false;
                 animator.SetBool("walking", true);
             }
-            else if (playerDistance > 0 && IsLeftClear())
+            else if (playerDistance < 0 && IsLeftClear())
             {
+                Debug.Log("Left");
                 gameObject.transform.position -= new Vector3(speed, 0, 0);
                 spriteRenderer.flipX = true;
                 animator.SetBool("walking", true);
@@ -114,8 +115,13 @@ public class Enemy : FightingObject
         var hits = Physics2D.RaycastAll(transform.position, Vector2.left, 2);
         var enemies = hits
             .Where(hit => hit.transform.CompareTag("Enemy"))
-            .Select(hit => hit.collider.gameObject).ToList();
-        Debug.Log(enemies.Count);
+            .Select(hit => hit.collider.gameObject)
+            .Where(go =>
+            {
+                var enemy = go.GetComponent<Enemy>();
+                return !enemy.isFlankingLeft && !enemy.isFlankingRight;
+            })
+            .ToList();
         return enemies.Count < 2;
     }
 
@@ -124,21 +130,26 @@ public class Enemy : FightingObject
         var hits = Physics2D.RaycastAll(transform.position, Vector2.right, 2);
         var enemies = hits
             .Where(hit => hit.transform.CompareTag("Enemy"))
-            .Select(hit => hit.collider.gameObject).ToList();
-        Debug.Log(enemies.Count);
+            .Select(hit => hit.collider.gameObject)
+            .Where(hit =>
+            {
+                var enemy = hit.gameObject.GetComponent<Enemy>();
+                return !enemy.isFlankingLeft && !enemy.isFlankingRight;
+            })
+            .ToList();
         return enemies.Count < 2;
     }
 
     private void FlankLeft()
     {
-        if (!IsLeftClear() && IsInAgroDistance() && !isFlankingLeft && !isFlankingRight &&
+        if (!IsLeftClear() && !IsInAttackDistance() && IsInAgroDistance() && !isFlankingLeft && !isFlankingRight &&
             GetDistance(player) < 0 || isFlankingLeft)
         {
             spriteRenderer.flipX = true;
             if (isFlankingLeft == false)
             {
                 isFlankingLeft = true;
-                StartCoroutine("stopFlanking");
+                StartCoroutine("StopFlanking");
             }
 
             gameObject.transform.position += new Vector3(-0.08f, 0, 0);
@@ -157,7 +168,7 @@ public class Enemy : FightingObject
                 }
             }
         }
-        else if (isFlankingLeft && !IsInAgroDistance())
+        else if (isFlankingLeft && IsInAttackDistance())
         {
             gameObject.transform.position += new Vector3(-0.08f, 0, 0);
             animator.SetBool("walking", true);
@@ -166,7 +177,7 @@ public class Enemy : FightingObject
 
     private void FlankRight()
     {
-        if (!IsRightClear() && IsInAgroDistance() && !isFlankingLeft && !isFlankingRight &&
+        if (!IsRightClear() && !IsInAttackDistance() && IsInAgroDistance() && !isFlankingLeft && !isFlankingRight &&
             GetDistance(player) > 0 || isFlankingRight)
         {
             spriteRenderer.flipX = false;
@@ -192,7 +203,7 @@ public class Enemy : FightingObject
                 }
             }
         }
-        else if (isFlankingRight && !IsInAgroDistance())
+        else if (isFlankingRight && !IsInAttackDistance())
         {
             gameObject.transform.position += new Vector3(0.08f, 0, 0);
             animator.SetBool("walking", true);
