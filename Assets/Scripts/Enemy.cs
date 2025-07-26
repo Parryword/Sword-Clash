@@ -21,8 +21,6 @@ public class Enemy : FightingObject
         colliderBox = GetComponent<PolygonCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         player = GameObject.Find("Player").GetComponent<Player>();
-        
-        Debug.Log(Physics2D.queriesHitTriggers.ToString());
     }
 
     void Update()
@@ -142,7 +140,7 @@ public class Enemy : FightingObject
 
     private void FlankLeft()
     {
-        if (!IsLeftClear() && !IsInAttackDistance() && IsInAgroDistance() && !isFlankingLeft && !isFlankingRight &&
+        if (!IsLeftClear() && !IsInAttackDistance() && IsInAgroDistance() && !isFlankingRight &&
             GetDistance(player) < 0 || isFlankingLeft)
         {
             spriteRenderer.flipX = true;
@@ -177,7 +175,7 @@ public class Enemy : FightingObject
 
     private void FlankRight()
     {
-        if (!IsRightClear() && !IsInAttackDistance() && IsInAgroDistance() && !isFlankingLeft && !isFlankingRight &&
+        if (!IsRightClear() && !IsInAttackDistance() && IsInAgroDistance() && !isFlankingLeft &&
             GetDistance(player) > 0 || isFlankingRight)
         {
             spriteRenderer.flipX = false;
