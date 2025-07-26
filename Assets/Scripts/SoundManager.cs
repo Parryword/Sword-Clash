@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,12 +15,7 @@ public class SoundManager : MonoBehaviour
         PlaySequentially();
         RevokeSuppression();
     }
-
-    /// <summary>
-    /// TODO: Slash sfx is stopped when it is immediately played twice. Fix that.
-    /// </summary>
-    /// <param name="sound"></param>
-    /// <param name="suppressMusic"></param>
+    
     public void PlaySoundEffect(Sound sound, bool suppressMusic = false)
     {
         if (suppressMusic)
@@ -28,9 +24,16 @@ public class SoundManager : MonoBehaviour
             suppressingEffects.Add(sound);
             musicSuppressed = true;
         }
-
-        soundEffect[(int)sound].Play();
+        var sfx = Instantiate(soundEffect[(int)sound]);
+        sfx.Play();
+        StartCoroutine(DestroyAudioSource(sfx));
         Debug.Log(soundEffect[(int)sound].name);
+    }
+
+    IEnumerator DestroyAudioSource(AudioSource source)
+    {
+        yield return new WaitForSeconds(source.clip.length);
+        Destroy(source.gameObject);
     }
 
     private void RevokeSuppression()

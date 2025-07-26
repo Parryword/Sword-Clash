@@ -15,8 +15,8 @@ public abstract class AnimatableObject : MonoBehaviour
     public PolygonCollider2D colliderBox;
     public SpriteRenderer spriteRenderer;
     
-    private List<Vector2> points = new();
-    private List<Vector2> simplifiedPoints = new();
+    private readonly List<Vector2> points = new();
+    private readonly List<Vector2> simplifiedPoints = new();
     
     protected void UpdatePolygonCollider2D(float tolerance = 0.05f)
     {
