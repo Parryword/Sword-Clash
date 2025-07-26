@@ -23,6 +23,7 @@ public class Player : FightingObject
     private GameObject enemyObject;
     private StatsTextManager statsTextManager;
     private RectTransform healthBarRect;
+    private float healthBarWidth;
 
     new void Start()
     {
@@ -31,6 +32,7 @@ public class Player : FightingObject
         enemyObject = null;
         statsTextManager = GameObject.Find("GameManager").GetComponent<StatsTextManager>();
         healthBarRect = healthBar.GetComponent<RectTransform>();
+        healthBarWidth = healthBarRect.sizeDelta.x;
     }
 
     // Update is called once per frame
@@ -50,12 +52,12 @@ public class Player : FightingObject
         if (!animationDisabled)
             switch (playerState)
             {
-                case PlayerState.IDLE: Idle(); break;
-                case PlayerState.WALK_LEFT: WalkLeft(); break;
-                case PlayerState.WALK_RIGHT: WalkRight(); break;
-                case PlayerState.DASH: Dash(); break;
-                case PlayerState.RUN_LEFT: RunLeft(); break;
-                case PlayerState.RUN_RIGHT: RunRight(); break;
+                case PlayerState.Idle: Idle(); break;
+                case PlayerState.WalkLeft: WalkLeft(); break;
+                case PlayerState.WalkRight: WalkRight(); break;
+                case PlayerState.Dash: Dash(); break;
+                case PlayerState.RunLeft: RunLeft(); break;
+                case PlayerState.RunRight: RunRight(); break;
             }
 
         UpdatePolygonCollider2D();
@@ -70,7 +72,7 @@ public class Player : FightingObject
         }
 
         // RESIZES HEALTH BAR
-        var width = healthBarRect.sizeDelta.x * health / maxHealth;
+        var width = healthBarWidth * health / maxHealth;
         healthBarRect.sizeDelta = new Vector2(width, healthBarRect.sizeDelta.y);
     }
 
@@ -128,7 +130,7 @@ public class Player : FightingObject
         {
             if (IsFighting())
             {
-                playerState = PlayerState.DASH;
+                playerState = PlayerState.Dash;
                 keyDisabled = true;
             }
         }
@@ -136,7 +138,7 @@ public class Player : FightingObject
         {
             if (inputManager.GetKey(KeyBindingActions.Run))
             {
-                playerState = PlayerState.RUN_RIGHT;
+                playerState = PlayerState.RunRight;
                 return;
             }
 
@@ -145,13 +147,13 @@ public class Player : FightingObject
                 animator.SetBool("running", false);
             }
 
-            playerState = PlayerState.WALK_RIGHT;
+            playerState = PlayerState.WalkRight;
         }
         else if (inputManager.GetKey(KeyBindingActions.WalkLeft))
         {
             if (inputManager.GetKey(KeyBindingActions.Run))
             {
-                playerState = PlayerState.RUN_LEFT;
+                playerState = PlayerState.RunLeft;
                 return;
             }
 
@@ -160,11 +162,11 @@ public class Player : FightingObject
                 animator.SetBool("running", false);
             }
 
-            playerState = PlayerState.WALK_LEFT;
+            playerState = PlayerState.WalkLeft;
         }
         else
         {
-            playerState = PlayerState.IDLE;
+            playerState = PlayerState.Idle;
         }
 
         if (inputManager.GetKeyDown(KeyBindingActions.Focus))
@@ -251,17 +253,17 @@ public class Player : FightingObject
     private void Dash()
     {
         animationDisabled = true;
-        //colliderBox.isTrigger = false;
         animator.SetTrigger("dashing");
     }
 
     public override void HitEnemy()
     {
-        if (enemyObject != null)
-        {
-            enemyObject.GetComponent<FightingObject>().TakeDamage(damage, Random.value < crit);
-            enemyObject = null;
-        }
+        if (enemyObject == null) return;
+        var enemy = enemyObject.GetComponent<FightingObject>();
+        var isCrit = Random.value < crit;
+        var dmgAmount = damage * (isCrit ? 2 : 1) - enemy.defense;
+        enemy.TakeDamage(dmgAmount, isCrit);
+        enemyObject = null;
     }
 
     public void OnTriggerStay2D(Collider2D collision)
@@ -320,11 +322,11 @@ public class Player : FightingObject
 
 public enum PlayerState
 {
-    IDLE,
-    WALK_LEFT,
-    WALK_RIGHT,
-    DASH,
-    RUN_LEFT,
-    RUN_RIGHT,
-    STUNNED
+    Idle,
+    WalkLeft,
+    WalkRight,
+    Dash,
+    RunLeft,
+    RunRight,
+    Stunned
 }

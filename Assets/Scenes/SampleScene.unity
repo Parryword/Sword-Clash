@@ -7598,7 +7598,7 @@ MonoBehaviour:
   damage: 3
   defense: 0
   level: 1
-  crit: 0
+  crit: 0.1
   speed: 0.08
   blood: {fileID: 40002226}
   dropCount: 3
@@ -10492,7 +10492,7 @@ MonoBehaviour:
   damage: 3
   defense: 1
   level: 1
-  crit: 0
+  crit: 0.1
   speed: 0.08
   blood: {fileID: 423335001}
   dropCount: 3

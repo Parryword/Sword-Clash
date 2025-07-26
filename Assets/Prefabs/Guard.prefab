@@ -133,6 +133,7 @@ MonoBehaviour:
   damage: 3
   defense: 0
   level: 0
+  crit: 0.1
   speed: 0.08
   blood: {fileID: 8348463839304988110}
   dropCount: 3

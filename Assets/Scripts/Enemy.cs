@@ -94,12 +94,13 @@ public class Enemy : FightingObject
     public override void HitEnemy()
     {
         if (enemyObject == null || !enemyObject.CompareTag("Player")) return;
-        int dmgAmount = damage - player.defense;
+        var isCrit = Random.value < crit;
+        var dmgAmount = damage * (isCrit ? 2 : 1) - player.defense;
         if (dmgAmount < 1)
         {
             dmgAmount = 1;
         }
-        enemyObject.GetComponent<FightingObject>().TakeDamage(dmgAmount, Random.value < crit);
+        enemyObject.GetComponent<FightingObject>().TakeDamage(dmgAmount, isCrit);
     }
 
     private bool IsLeftClear()
