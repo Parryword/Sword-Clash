@@ -23,6 +23,7 @@ public class SoundManager : MonoBehaviour
             suppressingEffects.Add(sound);
             musicSuppressed = true;
         }
+
         soundEffect[(int)sound].Play();
         Debug.Log(soundEffect[(int)sound].name);
     }
@@ -43,18 +44,22 @@ public class SoundManager : MonoBehaviour
 
     public void Play(int index, bool force)
     {
-        if (force) {
+        if (force)
+        {
             music[musicIndex].Stop();
         }
+
         musicIndex = index - 1;
     }
- 
+
     private bool HasEnded(int index)
     {
         try
         {
             return !music[index].isPlaying;
-        } catch {
+        }
+        catch
+        {
             return true;
         }
     }
@@ -72,8 +77,8 @@ public class SoundManager : MonoBehaviour
 public enum Sound
 {
     BasicAttack = 0,
-    Bleed = 1,
     Coin = 4,
     Success = 5,
-    Construction = 6
+    Construction = 6,
+    Bleed = 7
 }

@@ -11,13 +11,16 @@ using static GameManager;
 public abstract class FightingObject : AnimatableObject
 {
     public int maxHealth, health, damage, defense, level;
+    public float crit;
     public float speed;
     public GameObject blood;
     
+    protected SoundManager soundManager;
+    
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
-
+        soundManager = FindObjectOfType<SoundManager>();
     }
 
     // Update is called once per frame
@@ -33,13 +36,20 @@ public abstract class FightingObject : AnimatableObject
     public virtual void Bleed()
     {
         Debug.Log("Enemy bleeds");
-        GameObject.Find("GameManager").GetComponent<SoundManager>().PlaySoundEffect(Sound.BasicAttack);
         blood.GetComponent<Blood>().StartBleed(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.2f));
     }
 
-    public void TakeDamage(int value)
-    {
-        Bleed();
+    public void TakeDamage(int value, bool isCrit = false)
+    {   
+        if (isCrit)
+        {
+            Bleed();
+            soundManager.PlaySoundEffect(Sound.Bleed);
+        }
+        else
+        {
+            soundManager.PlaySoundEffect(Sound.BasicAttack);
+        }
         health -= value;
         StartCoroutine("Colorize");
     }

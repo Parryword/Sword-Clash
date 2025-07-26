@@ -24,8 +24,9 @@ public class Player : FightingObject
     private StatsTextManager statsTextManager;
     private RectTransform healthBarRect;
 
-    void Start()
+    new void Start()
     {
+        base.Start();
         keyDisabled = false;
         enemyObject = null;
         statsTextManager = GameObject.Find("GameManager").GetComponent<StatsTextManager>();
@@ -258,7 +259,7 @@ public class Player : FightingObject
     {
         if (enemyObject != null)
         {
-            enemyObject.GetComponent<FightingObject>().TakeDamage(damage);
+            enemyObject.GetComponent<FightingObject>().TakeDamage(damage, Random.value < crit);
             enemyObject = null;
         }
     }

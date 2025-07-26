@@ -14,8 +14,9 @@ public class Enemy : FightingObject
     public GameObject coinPrefab;
     public Player player;
 
-    void Start()
+    new void Start()
     {
+        base.Start();
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
         colliderBox = GetComponent<PolygonCollider2D>();
@@ -98,7 +99,7 @@ public class Enemy : FightingObject
         {
             dmgAmount = 1;
         }
-        enemyObject.GetComponent<FightingObject>().TakeDamage(dmgAmount);
+        enemyObject.GetComponent<FightingObject>().TakeDamage(dmgAmount, Random.value < crit);
     }
 
     private bool IsLeftClear()

@@ -2659,6 +2659,7 @@ MonoBehaviour:
   damage: 3
   defense: 0
   level: 0
+  crit: 0.1
   speed: 0.08
   blood: {fileID: 1099022848}
   goldAmount: 500
@@ -7597,6 +7598,7 @@ MonoBehaviour:
   damage: 3
   defense: 0
   level: 1
+  crit: 0
   speed: 0.08
   blood: {fileID: 40002226}
   dropCount: 3
@@ -7803,6 +7805,7 @@ MonoBehaviour:
   - {fileID: 2013712225}
   - {fileID: 1644624837}
   - {fileID: 739233257}
+  - {fileID: 1271532736}
   music:
   - {fileID: 636123538}
   - {fileID: 1544074665}
@@ -8536,6 +8539,7 @@ MonoBehaviour:
   victoryText: {fileID: 81503649}
   soundManager: {fileID: 964467136}
   player: {fileID: 454336953}
+  objectivesCompleted: 0
 --- !u!1 &1178132331
 GameObject:
   m_ObjectHideFlags: 0
@@ -10488,6 +10492,7 @@ MonoBehaviour:
   damage: 3
   defense: 1
   level: 1
+  crit: 0
   speed: 0.08
   blood: {fileID: 423335001}
   dropCount: 3
