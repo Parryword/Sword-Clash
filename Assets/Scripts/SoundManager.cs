@@ -9,8 +9,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource[] soundEffect;
     [SerializeField] private AudioSource[] music;
     [SerializeField] private int musicIndex = -1;
-    private readonly HashSet<Sound> suppressingEffects = new();
-    private bool musicSuppressed;
+    private readonly HashSet<AudioSource> suppressingEffects = new();
 
     private void Awake()
     {
@@ -22,36 +21,28 @@ public class SoundManager : MonoBehaviour
     private void FixedUpdate()
     {
         PlaySequentially();
-        RevokeSuppression();
     }
     
     public void PlaySoundEffect(Sound sound, bool suppressMusic = false)
     {
-        if (suppressMusic)
-        {
-            music[musicIndex].Stop();
-            suppressingEffects.Add(sound);
-            musicSuppressed = true;
-        }
+
         var sfx = Instantiate(soundEffect[(int)sound]);
         sfx.Play();
         StartCoroutine(DestroyAudioSource(sfx));
+        
+        if (suppressMusic)
+        {
+            music[musicIndex].Stop();
+            suppressingEffects.Add(sfx);
+        }
         Debug.Log(soundEffect[(int)sound].name);
     }
 
     IEnumerator DestroyAudioSource(AudioSource source)
     {
         yield return new WaitForSeconds(source.clip.length);
+        suppressingEffects.Remove(source);
         Destroy(source.gameObject);
-    }
-
-    private void RevokeSuppression()
-    {
-        suppressingEffects.RemoveWhere(s => !soundEffect[(int)s].isPlaying);
-        if (suppressingEffects.Count == 0)
-        {
-            musicSuppressed = false;
-        }
     }
 
     private void PlayMusic(int index)
@@ -84,7 +75,7 @@ public class SoundManager : MonoBehaviour
 
     private void PlaySequentially()
     {
-        if (IsPLaying(musicIndex) || musicSuppressed)
+        if (IsPLaying(musicIndex) || suppressingEffects.Count > 0)
             return;
 
         musicIndex = (musicIndex == music.Length - 1) ? 0 : musicIndex + 1;
