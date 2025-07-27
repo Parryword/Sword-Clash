@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
@@ -9,6 +11,13 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private int musicIndex = -1;
     private readonly HashSet<Sound> suppressingEffects = new();
     private bool musicSuppressed;
+
+    private void Awake()
+    {
+        var list = music.ToList();
+        list = list.OrderBy(x => UnityEngine.Random.value).ToList();
+        music = list.ToArray();
+    }
 
     private void FixedUpdate()
     {
@@ -48,6 +57,7 @@ public class SoundManager : MonoBehaviour
     private void PlayMusic(int index)
     {
         music[index].Play();
+        Debug.Log(music[index].name);
     }
 
     public void Play(int index, bool force)
@@ -60,21 +70,21 @@ public class SoundManager : MonoBehaviour
         musicIndex = index - 1;
     }
 
-    private bool HasEnded(int index)
+    private bool IsPLaying(int index)
     {
         try
         {
-            return !music[index].isPlaying;
+            return music[index].isPlaying;
         }
         catch
         {
-            return true;
+            return false;
         }
     }
 
     private void PlaySequentially()
     {
-        if (!HasEnded(musicIndex) || musicSuppressed)
+        if (IsPLaying(musicIndex) || musicSuppressed)
             return;
 
         musicIndex = (musicIndex == music.Length - 1) ? 0 : musicIndex + 1;
