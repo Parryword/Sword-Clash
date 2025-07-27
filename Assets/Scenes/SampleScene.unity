@@ -8015,8 +8015,6 @@ MonoBehaviour:
   - {fileID: 739233257}
   - {fileID: 1271532736}
   music:
-  - {fileID: 636123538}
-  - {fileID: 1544074665}
   - {fileID: 560261314}
   - {fileID: 294209529}
   musicIndex: -1

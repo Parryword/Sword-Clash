@@ -14,6 +14,8 @@ public class Enemy : FightingObject
     public GameObject coinPrefab;
     public Player player;
 
+    private float movementRandom;
+
     new void Start()
     {
         base.Start();
@@ -22,18 +24,21 @@ public class Enemy : FightingObject
         colliderBox = GetComponent<PolygonCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         player = GameObject.Find("Player").GetComponent<Player>();
+        movementRandom = Random.Range(0, 1);
+        speed += Random.Range(-0.01f, 0.01f);
     }
 
     void Update()
     {
         playerDistance = GetDistance(player);
     }
-
+    
+    // TODO Re-implement flaking behaviour
     void FixedUpdate()
     {
         Walk();
-        FlankRight();
-        FlankLeft();
+        // FlankRight();
+        // FlankLeft();
         Slash();
         UpdatePolygonCollider2D();
         Die();
@@ -51,21 +56,17 @@ public class Enemy : FightingObject
     {
         if (ShouldWalk())
         {
-            if (IsDirectionRight() && IsRightClear())
+            if (IsDirectionRight())
             {
                 gameObject.transform.position += new Vector3(speed, 0, 0);
                 spriteRenderer.flipX = false;
                 animator.SetBool("walking", true);
             }
-            else if (IsDirectionLeft() && IsLeftClear())
+            else if (IsDirectionLeft())
             {
                 gameObject.transform.position -= new Vector3(speed, 0, 0);
                 spriteRenderer.flipX = true;
                 animator.SetBool("walking", true);
-            }
-            else if (IsDirectionLeft() && !IsRightClear() || IsDirectionRight() && !IsLeftClear())
-            {
-                animator.SetBool("walking", false);
             }
         }
         else
@@ -82,7 +83,7 @@ public class Enemy : FightingObject
 
     private bool IsInAttackDistance()
     {
-        return Mathf.Abs(playerDistance) < attackDistance;
+        return Mathf.Abs(playerDistance) < attackDistance - movementRandom;
     }
 
     public void OnTriggerStay2D(Collider2D collision)
@@ -141,6 +142,7 @@ public class Enemy : FightingObject
             spriteRenderer.flipX = true;
             if (isFlankingLeft == false)
             {
+                Debug.Log("FlankingLeft");
                 isFlankingLeft = true;
                 StartCoroutine("StopFlanking");
             }
@@ -176,8 +178,9 @@ public class Enemy : FightingObject
             spriteRenderer.flipX = false;
             if (isFlankingRight == false)
             {
+                Debug.Log("flankingRight");
                 isFlankingRight = true;
-                StartCoroutine("stopFlanking");
+                StartCoroutine("StopFlanking");
             }
 
             gameObject.transform.position += new Vector3(0.08f, 0, 0);

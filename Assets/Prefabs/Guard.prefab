@@ -142,6 +142,7 @@ MonoBehaviour:
   playerDistance: 0
   isFlankingLeft: 0
   isFlankingRight: 0
+  flankingInterval: 5
   enemyObject: {fileID: 0}
   coinPrefab: {fileID: 5054269490438477740, guid: 4def43d3c31890b4a83daf84737e2c0b, type: 3}
   player: {fileID: 0}
