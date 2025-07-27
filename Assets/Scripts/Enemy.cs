@@ -14,7 +14,7 @@ public class Enemy : FightingObject
     public GameObject coinPrefab;
     public Player player;
 
-    private float movementRandom;
+    public float movementRandom;
 
     new void Start()
     {
@@ -24,7 +24,7 @@ public class Enemy : FightingObject
         colliderBox = GetComponent<PolygonCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         player = GameObject.Find("Player").GetComponent<Player>();
-        movementRandom = Random.Range(0, 1);
+        movementRandom = Random.Range(-1f, 1f);
         speed += Random.Range(-0.01f, 0.01f);
     }
 
