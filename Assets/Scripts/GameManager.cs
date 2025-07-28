@@ -12,5 +12,6 @@ public sealed class GameManager : MonoBehaviour
         player = GameObject.Find("Player").GetComponent<Player>();
         inputManager = GetComponent<InputManager>();
         statsTextManager = GetComponent<StatsTextManager>();
+        Application.runInBackground = true;
     }
 }

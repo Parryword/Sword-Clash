@@ -61,21 +61,23 @@ public class SoundManager : MonoBehaviour
         musicIndex = index - 1;
     }
 
-    private bool IsPLaying(int index)
+    private bool IsPLaying()
     {
         try
-        {
-            return music[index].isPlaying;
+        {   
+            // Debug.Log(music[0].isPlaying + " " + music[1].isPlaying);
+            return music.ToList().Exists(m => m.isPlaying);
         }
         catch
         {
+            // Debug.Log("error");
             return false;
         }
     }
 
     private void PlaySequentially()
     {
-        if (IsPLaying(musicIndex) || suppressingEffects.Count > 0)
+        if (IsPLaying() || suppressingEffects.Count > 0)
             return;
 
         musicIndex = (musicIndex == music.Length - 1) ? 0 : musicIndex + 1;
