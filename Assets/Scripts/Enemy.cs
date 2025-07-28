@@ -13,8 +13,8 @@ public class Enemy : FightingObject
     public GameObject enemyObject;
     public GameObject coinPrefab;
     public Player player;
-
     public float movementRandom;
+    public ObjectiveManager objectiveManager;
 
     new void Start()
     {
@@ -26,6 +26,7 @@ public class Enemy : FightingObject
         player = GameObject.Find("Player").GetComponent<Player>();
         movementRandom = Random.Range(-1f, 1f);
         speed += Random.Range(-0.01f, 0.01f);
+        objectiveManager = FindObjectOfType<ObjectiveManager>();
     }
 
     void Update()
@@ -87,7 +88,8 @@ public class Enemy : FightingObject
     }
 
     public void OnTriggerStay2D(Collider2D collision)
-    {
+    {   
+        Debug.Log("OnTriggerStay2D");
         if (collision.CompareTag("Player"))
             enemyObject = collision.gameObject;
     }
@@ -237,6 +239,7 @@ public class Enemy : FightingObject
     {
         if (health > 0) return;
         DropLoot();
+        objectiveManager.enemies.Remove(this);
         Destroy(gameObject);
     }
 

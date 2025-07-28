@@ -86,17 +86,29 @@ public class ArrowScript : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name.Equals("Player"))
+        if (target == Target.Player && collision.transform.CompareTag("Player"))
         {
+            Debug.Log(collision.gameObject.name);
             var player = collision.gameObject.GetComponent<Player>();
-            player.Bleed();
-            player.health -= 1;
+            player.TakeDamage(1);
+            isGrounded = true;
+            Destroy(gameObject);
         }
-
-        isGrounded = true;
-        Destroy(gameObject);
+        else if (target == Target.Enemy && collision.transform.CompareTag("Enemy"))
+        {
+            Debug.Log(collision.gameObject.name);
+            var enemy = collision.gameObject.GetComponent<Enemy>();
+            enemy.TakeDamage(1);
+            isGrounded = true;
+            Destroy(gameObject);
+        }
+        else if (collision.transform.CompareTag("Obstacle"))
+        {
+            isGrounded = true;
+            Destroy(gameObject);
+        }
     }
 
     private void OnCollisionExit(Collision collision)

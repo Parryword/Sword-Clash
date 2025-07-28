@@ -1,62 +1,81 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using TMPro;
 using System.Text;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class ObjectiveManager : MonoBehaviour
 {
-    public GameObject[] enemies;
-    [SerializeField] private TextMeshProUGUI textArea;
+    public TextMeshProUGUI textArea;
     public TextMeshProUGUI victoryText;
     public SoundManager soundManager;
     public Player player;
-    public int objectivesCompleted;
+    public GameObject prefab;
+    public GameObject westSpawnPoint, eastSpawnPoint;
+    public GameObject nextRoundButton;
+    public int[] enemyCount;
+    public int stage;
+    public List<Enemy> enemies;
 
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-
     }
 
     private void FixedUpdate()
     {
-        if (enemies[0] == null && enemies[1] == null && enemies[2] == null && objectivesCompleted == 0)
+        if (enemies.Count == 0)
         {
-            setObjective("Reach the castle");
-            objectivesCompleted++;
-        }
-
-        if (enemies[0] == null && enemies[1] == null && enemies[2] == null && objectivesCompleted == 1)
-        {
-            setObjective("Build the castle");
-            soundManager.PlaySoundEffect(Sound.Success, true);
-            objectivesCompleted++;
-
+            nextRoundButton.SetActive(true);
         }
     }
 
-    public void setObjective (params string[] objectives)
+    public void NextStage()
+    {
+        for (var i = 0; i < enemyCount[stage]; i++)
+        {
+            var isLeft = Random.value < 0.5f;
+            var enemy = Instantiate(prefab,
+                isLeft ? westSpawnPoint.transform.position : eastSpawnPoint.transform.position, Quaternion.identity);
+            enemies.Add(enemy.GetComponent<Enemy>());
+        }
+
+        stage++;
+        
+        SetObjective("Defend the castle.");
+        
+        nextRoundButton.SetActive(false);
+    }
+
+    public void SetObjective(params string[] objectives)
     {
         if (objectives.Length == 0)
         {
-            setObjective("All completed");
-            return;
+            objectives = new string[] { "All completed" };
         }
 
         StringBuilder sb = new();
-        sb.Append("Objectives\n");
-        foreach (var item in objectives)
-        {
-            sb.Append("• " + item + "\n");
-        }
-
-        textArea.text = sb.ToString();
+        sb.Append("Stage: " + stage + "\n");
+        // sb.Append("Objectives\n");
+        // foreach (var item in objectives)
+        // {
+        //     sb.Append("• " + item + "\n");
+        // }
+        // textArea.text = sb.ToString();
     }
+}
+
+class Objective
+{
+    private String title;
+    private String description;
 }

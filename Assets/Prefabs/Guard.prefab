@@ -138,14 +138,15 @@ MonoBehaviour:
   blood: {fileID: 8348463839304988110}
   dropCount: 3
   attackDistance: 2
-  agroDistance: 10
+  agroDistance: 999
   playerDistance: 0
   isFlankingLeft: 0
   isFlankingRight: 0
-  flankingInterval: 5
   enemyObject: {fileID: 0}
   coinPrefab: {fileID: 5054269490438477740, guid: 4def43d3c31890b4a83daf84737e2c0b, type: 3}
   player: {fileID: 0}
+  movementRandom: 0
+  objectiveManager: {fileID: 0}
 --- !u!50 &8348463839135187376
 Rigidbody2D:
   serializedVersion: 4
@@ -177,7 +178,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
