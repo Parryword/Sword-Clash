@@ -49,12 +49,6 @@ public class SlotScript : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if (isMouseOver) {
-            sr.color = hoverColor;
-        }
-        else
-        {
-            sr.color = originalColor;
-        }
+        sr.color = isMouseOver ? hoverColor : originalColor;
     }
 }
