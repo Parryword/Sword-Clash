@@ -2968,6 +2968,9 @@ MonoBehaviour:
   door: {fileID: 1732380577}
   ruins: {fileID: 1282392870}
   player: {fileID: 454336953}
+  leftTowerLevel: 0
+  rightTowerLevel: 0
+  gateHouseLevel: 0
 --- !u!1 &471469837
 GameObject:
   m_ObjectHideFlags: 0
@@ -8089,6 +8092,8 @@ MonoBehaviour:
   enemyCount: 020000000400000006000000080000000a000000
   stage: 0
   enemies: []
+  upgrade: {fileID: 456563032}
+  gateHouseUpgraded: 0
 --- !u!1 &973889005
 GameObject:
   m_ObjectHideFlags: 0

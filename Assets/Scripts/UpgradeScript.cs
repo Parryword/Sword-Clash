@@ -25,10 +25,9 @@ public class UpgradeScript : MonoBehaviour
     public GameObject door;
     public GameObject ruins;
     public Player player;
-    
-    private int leftTowerLevel;
-    private int rightTowerLevel;
-    private int gateHouseLevel;
+    public int leftTowerLevel;
+    public int rightTowerLevel;
+    public int gateHouseLevel;
     private readonly int[] leftTowerPrice = {3, 7, 15};
     private readonly int[] rightTowerPrice = {3, 7, 15};
     private readonly int[] gateHousePrice = {5, 12, 25};

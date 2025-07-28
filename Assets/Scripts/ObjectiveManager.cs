@@ -20,10 +20,14 @@ public class ObjectiveManager : MonoBehaviour
     public int[] enemyCount;
     public int stage;
     public List<Enemy> enemies;
+    public UpgradeScript upgrade;
+    public bool gateHouseUpgraded;
 
     // Start is called before the first frame update
     void Start()
     {
+        nextRoundButton.SetActive(false);
+        SetObjective("Build the castle");
     }
 
     // Update is called once per frame
@@ -33,9 +37,10 @@ public class ObjectiveManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (enemies.Count == 0)
+        if (enemies.Count == 0 && upgrade.gateHouseLevel > 0)
         {
             nextRoundButton.SetActive(true);
+            SetObjective("Start the wave");
         }
     }
 
@@ -65,12 +70,11 @@ public class ObjectiveManager : MonoBehaviour
 
         StringBuilder sb = new();
         sb.Append("Stage: " + stage + "\n");
-        // sb.Append("Objectives\n");
-        // foreach (var item in objectives)
-        // {
-        //     sb.Append("• " + item + "\n");
-        // }
-        // textArea.text = sb.ToString();
+        foreach (var item in objectives)
+        {
+            sb.Append("• " + item + "\n");
+        }
+        textArea.text = sb.ToString();
     }
 }
 
