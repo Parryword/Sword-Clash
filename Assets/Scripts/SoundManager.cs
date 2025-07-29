@@ -6,13 +6,18 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] private AudioSource[] soundEffect;
-    [SerializeField] private AudioSource[] music;
+    private AudioSource sfxSource;
+    private AudioSource musicSource;
+    [SerializeField] private AudioClip[] sfx;
+    [SerializeField] private AudioClip[] music;
     [SerializeField] private int musicIndex = -1;
     private readonly HashSet<AudioSource> suppressingEffects = new();
 
-    private void Awake()
+    private void Start()
     {
+        sfxSource = GameObject.Find("SFX").GetComponent<AudioSource>();
+        musicSource = GameObject.Find("Music").GetComponent<AudioSource>();
+        
         var list = music.ToList();
         list = list.OrderBy(x => UnityEngine.Random.value).ToList();
         music = list.ToArray();
@@ -24,18 +29,19 @@ public class SoundManager : MonoBehaviour
     }
     
     public void PlaySoundEffect(Sound sound, bool suppressMusic = false)
-    {
-
-        var sfx = Instantiate(soundEffect[(int)sound]);
-        sfx.Play();
-        StartCoroutine(DestroyAudioSource(sfx));
+    {   
+        sfxSource.clip = sfx[(int)sound];
+        var source = Instantiate(sfxSource);
+        source.Play();
+        StartCoroutine(DestroyAudioSource(source));
         
         if (suppressMusic)
         {
-            music[musicIndex].Stop();
-            suppressingEffects.Add(sfx);
+            musicSource.Stop();
+            suppressingEffects.Add(source);
         }
-        Debug.Log(soundEffect[(int)sound].name);
+        
+        // Debug.Log(this.sfx[(int)sound].name);
     }
 
     IEnumerator DestroyAudioSource(AudioSource source)
@@ -47,30 +53,19 @@ public class SoundManager : MonoBehaviour
 
     private void PlayMusic(int index)
     {
-        music[index].Play();
-        Debug.Log(music[index].name);
-    }
-
-    public void Play(int index, bool force)
-    {
-        if (force)
-        {
-            music[musicIndex].Stop();
-        }
-
-        musicIndex = index - 1;
+        musicSource.clip = music[index];
+        musicSource.Play();
+        // Debug.Log(music[index].name);
     }
 
     private bool IsPLaying()
     {
         try
         {   
-            // Debug.Log(music[0].isPlaying + " " + music[1].isPlaying);
-            return music.ToList().Exists(m => m.isPlaying);
+            return musicSource.isPlaying;
         }
         catch
         {
-            // Debug.Log("error");
             return false;
         }
     }
@@ -88,8 +83,7 @@ public class SoundManager : MonoBehaviour
 public enum Sound
 {
     BasicAttack = 0,
-    Coin = 4,
-    Success = 5,
-    Construction = 6,
-    Bleed = 7
+    Coin = 1,
+    Construction = 2,
+    Bleed = 3
 }
