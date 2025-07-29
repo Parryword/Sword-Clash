@@ -17,11 +17,12 @@ public class ObjectiveManager : MonoBehaviour
     public GameObject prefab;
     public GameObject westSpawnPoint, eastSpawnPoint;
     public GameObject nextRoundButton;
-    public int[] enemyCount;
     public int stage;
-    public List<Enemy> enemies;
     public UpgradeScript upgrade;
     public bool gateHouseUpgraded;
+    public int[] enemyCount;
+    public List<Enemy> enemies;
+
 
     // Start is called before the first frame update
     void Start()
