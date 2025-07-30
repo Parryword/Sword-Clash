@@ -6,11 +6,11 @@ public class SlotScript : MonoBehaviour
 {
     public Color hoverColor = new(0.5f, 0.5f, 0.5f, 1);
     public Color pressedColor = new(0.3f, 0.3f, 0.3f, 1);
-    public UpgradeScript upgrade;
+    public Building upgrade;
     public BuildingType buildingType;
     
     private Color originalColor;
-    private bool isMouseOver = false;
+    private bool isMouseOver;
     private SpriteRenderer sr;
     private SoundManager soundManager;
 

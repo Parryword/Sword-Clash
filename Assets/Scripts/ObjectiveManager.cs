@@ -18,7 +18,7 @@ public class ObjectiveManager : MonoBehaviour, ISubject
     public GameObject westSpawnPoint, eastSpawnPoint;
     public GameObject nextRoundButton;
     public int stage;
-    public UpgradeScript upgrade;
+    public Building upgrade;
     public bool gateHouseUpgraded;
     public int[] enemyCount;
     public List<Enemy> enemies;
