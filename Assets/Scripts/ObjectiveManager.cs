@@ -8,7 +8,7 @@ using System.Text;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class ObjectiveManager : MonoBehaviour
+public class ObjectiveManager : MonoBehaviour, ISubject
 {
     public TextMeshProUGUI textArea;
     public TextMeshProUGUI victoryText;
@@ -23,6 +23,7 @@ public class ObjectiveManager : MonoBehaviour
     public int[] enemyCount;
     public List<Enemy> enemies;
 
+    private readonly List<IObserver> observers = new();
 
     // Start is called before the first frame update
     void Start()
@@ -60,9 +61,11 @@ public class ObjectiveManager : MonoBehaviour
         SetObjective("Defend the castle.");
         
         nextRoundButton.SetActive(false);
+        
+        Notify();
     }
 
-    public void SetObjective(params string[] objectives)
+    private void SetObjective(params string[] objectives)
     {
         if (objectives.Length == 0)
         {
@@ -77,10 +80,22 @@ public class ObjectiveManager : MonoBehaviour
         }
         textArea.text = sb.ToString();
     }
-}
 
-class Objective
-{
-    private String title;
-    private String description;
+    public void Attach(IObserver observer)
+    {
+        observers.Add(observer);
+    }
+
+    public void Detach(IObserver observer)
+    {
+        observers.Remove(observer);
+    }
+
+    public void Notify()
+    {
+        foreach (var observer in observers)
+        {
+            observer.Refresh();
+        }
+    }
 }
