@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class SlotScript : MonoBehaviour
 {
+    public GameObject slotIcon;
+    public GameObject priceIcon;
+    public TextMeshPro levelText;
+    public TextMeshPro priceText;
     public Color hoverColor = new(0.5f, 0.5f, 0.5f, 1);
     public Color pressedColor = new(0.3f, 0.3f, 0.3f, 1);
     public Castle upgrade;
-    public BuildingType buildingType;
+    public SlotType slotType;
     
     private Color originalColor;
     private bool isMouseOver;
@@ -44,7 +49,7 @@ public class SlotScript : MonoBehaviour
     private void OnMouseDown()
     {
         sr.color = pressedColor;
-        upgrade.Upgrade(buildingType);
+        upgrade.Upgrade(slotType);
     }
 
     private void OnMouseUp()

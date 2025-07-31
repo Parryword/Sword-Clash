@@ -231,10 +231,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4328d71a5709ec74b90c43b4837a7f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotIcon: {fileID: 3619615368118220933}
+  priceIcon: {fileID: 329916569364895463}
+  levelText: {fileID: 3374395937123672245}
+  priceText: {fileID: 875856099317317166}
   hoverColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   pressedColor: {r: 0.3, g: 0.3, b: 0.3, a: 1}
   upgrade: {fileID: 0}
-  buildingType: 0
+  slotType: 0
 --- !u!1 &3619615368118220933
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,18 +7,9 @@ using UnityEngine;
 public class Castle : MonoBehaviour
 {
     public GameObject upgradePanel;
-    public GameObject gateHouseSlot;
-    public GameObject leftTowerSlot;
-    public GameObject rightTowerSlot;
-    public TextMeshPro gateHouseLevelText;
-    public TextMeshPro leftTowerLevelText;
-    public TextMeshPro rightTowerLevelText;
-    public TextMeshPro gateHousePriceText;
-    public TextMeshPro leftTowerPriceText;
-    public TextMeshPro rightTowerPriceText;
-    public GameObject gateHouseGold;
-    public GameObject leftTowerGold;
-    public GameObject rightTowerGold;
+    public SlotScript gateHouseSlot;
+    public SlotScript leftTowerSlot;
+    public SlotScript rightTowerSlot;
     public GameObject gateHouse;
     public GameObject leftTower;
     public GameObject rightTower;
@@ -38,8 +29,8 @@ public class Castle : MonoBehaviour
     void Start()
     {
         upgradePanel.SetActive(false);
-        leftTowerSlot.SetActive(false);
-        rightTowerSlot.SetActive(false);
+        leftTowerSlot.gameObject.SetActive(false);
+        rightTowerSlot.gameObject.SetActive(false);
         gateHouse.SetActive(false);
         leftTower.SetActive(false);
         rightTower.SetActive(false);
@@ -52,8 +43,8 @@ public class Castle : MonoBehaviour
     {
         if (gateHouseLevel > 0)
         {
-            leftTowerSlot.SetActive(true);
-            rightTowerSlot.SetActive(true);
+            leftTowerSlot.gameObject.SetActive(true);
+            rightTowerSlot.gameObject.SetActive(true);
             gateHouse.SetActive(true);
             door.SetActive(true);
             ruins.SetActive(false);
@@ -70,7 +61,7 @@ public class Castle : MonoBehaviour
         }
     }
 
-    public void Upgrade(BuildingType building)
+    public void Upgrade(SlotType slot)
     {
         int currentLevel;
         int[] prices;
@@ -79,28 +70,28 @@ public class Castle : MonoBehaviour
         GameObject gold;
 
         // Select building data
-        switch (building)
+        switch (slot)
         {
-            case BuildingType.GateHouse:
+            case SlotType.GateHouse:
                 currentLevel = gateHouseLevel;
                 prices = gateHousePrice;
-                levelText = gateHouseLevelText;
-                priceText = gateHousePriceText;
-                gold = gateHouseGold;
+                levelText = gateHouseSlot.levelText; 
+                priceText = gateHouseSlot.priceText; 
+                gold = gateHouseSlot.priceIcon;
                 break;
-            case BuildingType.LeftTower:
+            case SlotType.LeftTower:
                 currentLevel = leftTowerLevel;
                 prices = leftTowerPrice;
-                levelText = leftTowerLevelText;
-                priceText = leftTowerPriceText;
-                gold = leftTowerGold;
+                levelText = leftTowerSlot.levelText;;
+                priceText = leftTowerSlot.priceText;
+                gold = leftTowerSlot.priceIcon;
                 break;
-            case BuildingType.RightTower:
+            case SlotType.RightTower:
                 currentLevel = rightTowerLevel;
                 prices = rightTowerPrice;
-                levelText = rightTowerLevelText;
-                priceText = rightTowerPriceText;
-                gold = rightTowerGold;
+                levelText = rightTowerSlot.levelText;
+                priceText = rightTowerSlot.priceText;;
+                gold = rightTowerSlot.priceIcon;;
                 break;
             default:
                 throw new InvalidOperationException("Unknown building type");
@@ -109,7 +100,7 @@ public class Castle : MonoBehaviour
         // Max level check
         if (currentLevel >= prices.Length)
         {
-            Debug.Log($"{building} is already at max level.");
+            Debug.Log($"{slot} is already at max level.");
             return;
         }
 
@@ -127,11 +118,11 @@ public class Castle : MonoBehaviour
         currentLevel++;
 
         // Update correct level variable
-        switch (building)
+        switch (slot)
         {
-            case BuildingType.GateHouse: gateHouseLevel = currentLevel; break;
-            case BuildingType.LeftTower: leftTowerLevel = currentLevel; break;
-            case BuildingType.RightTower: rightTowerLevel = currentLevel; break;
+            case SlotType.GateHouse: gateHouseLevel = currentLevel; break;
+            case SlotType.LeftTower: leftTowerLevel = currentLevel; break;
+            case SlotType.RightTower: rightTowerLevel = currentLevel; break;
         }
 
         // Update UI texts
@@ -182,7 +173,7 @@ public class Castle : MonoBehaviour
     }
 }
 
-public enum BuildingType
+public enum SlotType
 {
     GateHouse,
     LeftTower,
