@@ -6,7 +6,7 @@ public class SlotScript : MonoBehaviour
 {
     public Color hoverColor = new(0.5f, 0.5f, 0.5f, 1);
     public Color pressedColor = new(0.3f, 0.3f, 0.3f, 1);
-    public Building upgrade;
+    public Castle upgrade;
     public BuildingType buildingType;
     
     private Color originalColor;

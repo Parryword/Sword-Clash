@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Building : MonoBehaviour
+public class Castle : MonoBehaviour
 {
     public GameObject upgradePanel;
     public GameObject gateHouseSlot;
