@@ -5895,39 +5895,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &905531565 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4083032293574169836, guid: 102a7314fe384407c8cde1d314d90926, type: 3}
-  m_PrefabInstance: {fileID: 4083032292605251570}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4328d71a5709ec74b90c43b4837a7f87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &905531566 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4083032293384296432, guid: 102a7314fe384407c8cde1d314d90926, type: 3}
-  m_PrefabInstance: {fileID: 4083032292605251570}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4328d71a5709ec74b90c43b4837a7f87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &905531567 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4083032291797116016, guid: 102a7314fe384407c8cde1d314d90926, type: 3}
-  m_PrefabInstance: {fileID: 4083032292605251570}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4328d71a5709ec74b90c43b4837a7f87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &962665224
 GameObject:
   m_ObjectHideFlags: 0
@@ -11529,22 +11496,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Castle
       objectReference: {fileID: 0}
-    - target: {fileID: 4083032292150859434, guid: 102a7314fe384407c8cde1d314d90926, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 454336953}
-    - target: {fileID: 4083032292150859434, guid: 102a7314fe384407c8cde1d314d90926, type: 3}
-      propertyPath: gateHouseSlot
-      value: 
-      objectReference: {fileID: 905531567}
-    - target: {fileID: 4083032292150859434, guid: 102a7314fe384407c8cde1d314d90926, type: 3}
-      propertyPath: leftTowerSlot
-      value: 
-      objectReference: {fileID: 905531566}
-    - target: {fileID: 4083032292150859434, guid: 102a7314fe384407c8cde1d314d90926, type: 3}
-      propertyPath: rightTowerSlot
-      value: 
-      objectReference: {fileID: 905531565}
     - target: {fileID: 4083032292929905638, guid: 102a7314fe384407c8cde1d314d90926, type: 3}
       propertyPath: player
       value: 

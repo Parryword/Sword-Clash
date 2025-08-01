@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Castle : MonoBehaviour
+public class Castle : Building
 {
     public GameObject upgradePanel;
     public SlotScript gateHouseSlot;
@@ -16,12 +16,6 @@ public class Castle : MonoBehaviour
     public GameObject door;
     public GameObject ruins;
     public Player player;
-    public int leftTowerLevel;
-    public int rightTowerLevel;
-    public int gateHouseLevel;
-    private readonly int[] leftTowerPrice = {3, 7, 15};
-    private readonly int[] rightTowerPrice = {3, 7, 15};
-    private readonly int[] gateHousePrice = {5, 12, 25};
     private SoundManager soundManager;
 
 
@@ -41,7 +35,7 @@ public class Castle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gateHouseLevel > 0)
+        if (gateHouseSlot.level > 0)
         {
             leftTowerSlot.gameObject.SetActive(true);
             rightTowerSlot.gameObject.SetActive(true);
@@ -50,53 +44,25 @@ public class Castle : MonoBehaviour
             ruins.SetActive(false);
         }
 
-        if (leftTowerLevel > 0)
+        if (leftTowerSlot.level > 0)
         {
             leftTower.SetActive(true);
         }
 
-        if (rightTowerLevel > 0)
+        if (rightTowerSlot.level > 0)
         {
             rightTower.SetActive(true);
         }
     }
 
-    public void Upgrade(SlotType slot)
+    public override void Upgrade(SlotScript slot)
     {
-        int currentLevel;
-        int[] prices;
-        TextMeshPro levelText;
-        TextMeshPro priceText;
-        GameObject gold;
-
-        // Select building data
-        switch (slot)
-        {
-            case SlotType.GateHouse:
-                currentLevel = gateHouseLevel;
-                prices = gateHousePrice;
-                levelText = gateHouseSlot.levelText; 
-                priceText = gateHouseSlot.priceText; 
-                gold = gateHouseSlot.priceIcon;
-                break;
-            case SlotType.LeftTower:
-                currentLevel = leftTowerLevel;
-                prices = leftTowerPrice;
-                levelText = leftTowerSlot.levelText;;
-                priceText = leftTowerSlot.priceText;
-                gold = leftTowerSlot.priceIcon;
-                break;
-            case SlotType.RightTower:
-                currentLevel = rightTowerLevel;
-                prices = rightTowerPrice;
-                levelText = rightTowerSlot.levelText;
-                priceText = rightTowerSlot.priceText;;
-                gold = rightTowerSlot.priceIcon;;
-                break;
-            default:
-                throw new InvalidOperationException("Unknown building type");
-        }
-
+        int currentLevel = slot.level;
+        int[] prices = slot.price;
+        TextMeshPro levelText  = slot.levelText;
+        TextMeshPro priceText = slot.priceText;
+        GameObject gold = slot.priceIcon;
+        
         // Max level check
         if (currentLevel >= prices.Length)
         {
@@ -116,14 +82,8 @@ public class Castle : MonoBehaviour
         // Deduct gold and upgrade
         player.goldAmount -= price;
         currentLevel++;
-
-        // Update correct level variable
-        switch (slot)
-        {
-            case SlotType.GateHouse: gateHouseLevel = currentLevel; break;
-            case SlotType.LeftTower: leftTowerLevel = currentLevel; break;
-            case SlotType.RightTower: rightTowerLevel = currentLevel; break;
-        }
+        
+        slot.level = currentLevel;
 
         // Update UI texts
         levelText.text = currentLevel < prices.Length ? ToRoman(currentLevel + 1) : "MAX";
@@ -171,11 +131,4 @@ public class Castle : MonoBehaviour
             upgradePanel.SetActive(false);
         }
     }
-}
-
-public enum SlotType
-{
-    GateHouse,
-    LeftTower,
-    RightTower
 }

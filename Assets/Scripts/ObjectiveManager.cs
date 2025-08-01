@@ -18,7 +18,7 @@ public class ObjectiveManager : MonoBehaviour, ISubject
     public GameObject westSpawnPoint, eastSpawnPoint;
     public GameObject nextRoundButton;
     public int stage;
-    public Castle upgrade;
+    public Castle castle;
     public bool gateHouseUpgraded;
     public int[] enemyCount;
     public List<Enemy> enemies;
@@ -39,7 +39,7 @@ public class ObjectiveManager : MonoBehaviour, ISubject
 
     private void FixedUpdate()
     {
-        if (enemies.Count == 0 && upgrade.gateHouseLevel > 0)
+        if (enemies.Count == 0 && castle.gateHouseSlot.level > 0)
         {
             nextRoundButton.SetActive(true);
             SetObjective("Start the wave");

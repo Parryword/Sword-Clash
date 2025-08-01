@@ -181,10 +181,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4328d71a5709ec74b90c43b4837a7f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotIcon: {fileID: 0}
+  priceIcon: {fileID: 0}
+  levelText: {fileID: 0}
+  priceText: {fileID: 0}
   hoverColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   pressedColor: {r: 0.3, g: 0.3, b: 0.3, a: 1}
   upgrade: {fileID: 4083032292150859434}
-  buildingType: 0
+  slotType: 0
 --- !u!1 &4083032292009618829
 GameObject:
   m_ObjectHideFlags: 0
@@ -883,18 +887,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradePanel: {fileID: 4083032291631370783}
-  gateHouseSlot: {fileID: 4083032291797116046}
-  leftTowerSlot: {fileID: 4083032293384296457}
-  rightTowerSlot: {fileID: 4083032293574169834}
-  gateHouseLevelText: {fileID: 4083032292009618803}
-  leftTowerLevelText: {fileID: 4083032292184061315}
-  rightTowerLevelText: {fileID: 4083032292040277669}
-  gateHousePriceText: {fileID: 4083032293260802685}
-  leftTowerPriceText: {fileID: 4083032293114199642}
-  rightTowerPriceText: {fileID: 4083032293469475239}
-  gateHouseGold: {fileID: 4083032292537962335}
-  leftTowerGold: {fileID: 4083032292055217674}
-  rightTowerGold: {fileID: 4083032293406051753}
+  gateHouseSlot: {fileID: 4083032291797116016}
+  leftTowerSlot: {fileID: 4083032293384296432}
+  rightTowerSlot: {fileID: 4083032293574169836}
   gateHouse: {fileID: 4083032293362973166}
   leftTower: {fileID: 4083032293500021393}
   rightTower: {fileID: 4083032292929905634}
@@ -1989,10 +1984,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4328d71a5709ec74b90c43b4837a7f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotIcon: {fileID: 0}
+  priceIcon: {fileID: 0}
+  levelText: {fileID: 0}
+  priceText: {fileID: 0}
   hoverColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   pressedColor: {r: 0.3, g: 0.3, b: 0.3, a: 1}
   upgrade: {fileID: 4083032292150859434}
-  buildingType: 1
+  slotType: 0
 --- !u!1 &4083032293406051753
 GameObject:
   m_ObjectHideFlags: 0
@@ -2624,10 +2623,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4328d71a5709ec74b90c43b4837a7f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotIcon: {fileID: 0}
+  priceIcon: {fileID: 0}
+  levelText: {fileID: 0}
+  priceText: {fileID: 0}
   hoverColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   pressedColor: {r: 0.3, g: 0.3, b: 0.3, a: 1}
   upgrade: {fileID: 4083032292150859434}
-  buildingType: 2
+  slotType: 0
 --- !u!1 &4083032293576773785
 GameObject:
   m_ObjectHideFlags: 0
