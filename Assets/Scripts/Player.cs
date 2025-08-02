@@ -18,7 +18,7 @@ public class Player : FightingObject
     
     private float lockedDistance;
     private int enemyIndex;
-    private GameObject enemyObject;
+    private Enemy enemyObject;
     private RectTransform healthBarRect;
     private float healthBarWidth;
 
@@ -268,7 +268,7 @@ public class Player : FightingObject
         {
             if (IsNotTooClose(collision))
             {
-                enemyObject = collision.gameObject;
+                enemyObject = collision.GetComponent<Enemy>();
             }
             else
             {

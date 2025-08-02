@@ -40,7 +40,6 @@ public abstract class FightingObject : AnimatableObject
         if (isCrit)
         {
             Bleed();
-            int a = 1;
             Globals.soundManager.PlaySoundEffect(Sound.Bleed);
         }
         else
