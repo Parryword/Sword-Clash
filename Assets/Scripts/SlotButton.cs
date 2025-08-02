@@ -30,6 +30,14 @@ public class SlotButton : MonoBehaviour
     {
         
     }
+
+    public void UpdateUI(string level, string price, bool isMaxLevel)
+    {
+        levelText.text = level;
+        priceText.text = price;
+        priceIcon.SetActive(!isMaxLevel);
+    }
+    
     void OnMouseEnter()
     {
         // Called when the mouse starts hovering over the collider

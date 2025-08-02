@@ -66,98 +66,28 @@ public class Castle : MonoBehaviour, ICastle
 
     public void UpgradeGateHouse()
     {
-        var currentLevel = gateHouse.level;
-        var prices = gateHouse.price;
-        var levelText  = gateHouseButton.levelText;
-        var priceText = gateHouseButton.priceText;
-        var gold = gateHouseButton.priceIcon;
-        
-        // Max level check
-        if (currentLevel >= prices.Length)
-        {
-            Debug.Log($"{gateHouse} is already at max level.");
-            return;
-        }
-
-        int price = prices[currentLevel];
-
-        // Check gold
-        if (player.goldAmount < price)
-        {
-            Debug.Log("Not enough gold.");
-            return;
-        }
-
-        // Deduct gold and upgrade
-        player.goldAmount -= price;
-        currentLevel++;
-        
-        gateHouse.level = currentLevel;
-
-        // Update UI texts
-        levelText.text = currentLevel < prices.Length ? ToRoman(currentLevel + 1) : "MAX";
-        priceText.text = currentLevel < prices.Length ? prices[currentLevel].ToString() : "";
-        if (currentLevel == prices.Length)
-        {
-            gold.SetActive(false);
-        }
-        soundManager.PlaySoundEffect(Sound.Construction);
-        gateHouse.Upgrade();
+        UpgradeTower(gateHouse, gateHouseButton);
     }
     
     public void UpgradeRightTower()
     {
-        var currentLevel = rightTower.level;
-        var prices = rightTower.price;
-        var levelText  = rightTowerButton.levelText;
-        var priceText = rightTowerButton.priceText;
-        var gold = rightTowerButton.priceIcon;
-        
-        // Max level check
-        if (currentLevel >= prices.Length)
-        {
-            Debug.Log($"{rightTower} is already at max level.");
-            return;
-        }
-
-        int price = prices[currentLevel];
-
-        // Check gold
-        if (player.goldAmount < price)
-        {
-            Debug.Log("Not enough gold.");
-            return;
-        }
-
-        // Deduct gold and upgrade
-        player.goldAmount -= price;
-        currentLevel++;
-        
-        rightTower.level = currentLevel;
-
-        // Update UI texts
-        levelText.text = currentLevel < prices.Length ? ToRoman(currentLevel + 1) : "MAX";
-        priceText.text = currentLevel < prices.Length ? prices[currentLevel].ToString() : "";
-        if (currentLevel == prices.Length)
-        {
-            gold.SetActive(false);
-        }
-        soundManager.PlaySoundEffect(Sound.Construction);
-        rightTower.Upgrade();
+        UpgradeTower(rightTower, rightTowerButton);
     }
     
     public void UpgradeLeftTower()
     {
-        var currentLevel = leftTower.level;
-        var prices = leftTower.price;
-        var levelText  = leftTowerButton.levelText;
-        var priceText = leftTowerButton.priceText;
-        var gold = leftTowerButton.priceIcon;
-        
+        UpgradeTower(leftTower, leftTowerButton);
+    }
+
+    private void UpgradeTower(TowerScript tower, SlotButton button)
+    {
+        var currentLevel = tower.level;
+        var prices = tower.price;
+
         // Max level check
         if (currentLevel >= prices.Length)
         {
-            Debug.Log($"{leftTower} is already at max level.");
+            Debug.Log($"{tower} is already at max level.");
             return;
         }
 
@@ -174,19 +104,19 @@ public class Castle : MonoBehaviour, ICastle
         player.goldAmount -= price;
         currentLevel++;
         
-        leftTower.level = currentLevel;
+        tower.level = currentLevel;
 
         // Update UI texts
-        levelText.text = currentLevel < prices.Length ? ToRoman(currentLevel + 1) : "MAX";
-        priceText.text = currentLevel < prices.Length ? prices[currentLevel].ToString() : "";
-        if (currentLevel == prices.Length)
-        {
-            gold.SetActive(false);
-        }
-        soundManager.PlaySoundEffect(Sound.Construction);
-        leftTower.Upgrade();
-    }
+        var newLevelText = currentLevel < prices.Length ? ToRoman(currentLevel + 1) : "MAX";
+        var newPriceText = currentLevel < prices.Length ? prices[currentLevel].ToString() : "";
+        var isMaxLevel = currentLevel < prices.Length;
+        
+        button.UpdateUI(newLevelText, newPriceText, isMaxLevel);;
 
+        soundManager.PlaySoundEffect(Sound.Construction);
+        tower.Upgrade();
+    }
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.name.Equals("Player"))
