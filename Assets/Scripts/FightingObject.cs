@@ -14,8 +14,7 @@ public abstract class FightingObject : AnimatableObject
     public float crit;
     public float speed;
     public GameObject blood;
-    
-    protected SoundManager soundManager;
+    public SoundManager soundManager;
     
     // Start is called before the first frame update
     protected void Start()

@@ -39,7 +39,7 @@ public class ObjectiveManager : MonoBehaviour, ISubject
 
     private void FixedUpdate()
     {
-        if (enemies.Count == 0 && castle.gateHouseSlot.level > 0)
+        if (enemies.Count == 0 && castle.gateHouse.level > 0)
         {
             nextRoundButton.SetActive(true);
             SetObjective("Start the wave");

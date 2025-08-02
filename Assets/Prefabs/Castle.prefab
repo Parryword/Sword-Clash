@@ -181,14 +181,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4328d71a5709ec74b90c43b4837a7f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotIcon: {fileID: 0}
-  priceIcon: {fileID: 0}
-  levelText: {fileID: 0}
-  priceText: {fileID: 0}
+  slotIcon: {fileID: 4083032292041182219}
+  priceIcon: {fileID: 4083032292537962335}
+  levelText: {fileID: 4083032292009618803}
+  priceText: {fileID: 4083032293260802685}
   hoverColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   pressedColor: {r: 0.3, g: 0.3, b: 0.3, a: 1}
-  upgrade: {fileID: 4083032292150859434}
-  slotType: 0
+  onClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4083032292150859434}
+        m_TargetAssemblyTypeName: Castle, Assembly-CSharp
+        m_MethodName: UpgradeGateHouse
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4083032292009618829
 GameObject:
   m_ObjectHideFlags: 0
@@ -887,18 +900,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradePanel: {fileID: 4083032291631370783}
-  gateHouseSlot: {fileID: 4083032291797116016}
-  leftTowerSlot: {fileID: 4083032293384296432}
-  rightTowerSlot: {fileID: 4083032293574169836}
+  gateHouseButton: {fileID: 0}
+  leftTowerButton: {fileID: 0}
+  rightTowerButton: {fileID: 0}
   gateHouse: {fileID: 4083032293362973166}
   leftTower: {fileID: 4083032293500021393}
   rightTower: {fileID: 4083032292929905634}
   door: {fileID: 4083032293028743251}
   ruins: {fileID: 4083032293478796500}
-  player: {fileID: 0}
-  leftTowerLevel: 0
-  rightTowerLevel: 0
-  gateHouseLevel: 0
 --- !u!1 &4083032292184061341
 GameObject:
   m_ObjectHideFlags: 0
@@ -1290,6 +1299,8 @@ MonoBehaviour:
   arrowPrefab: {fileID: 5267023219531783653, guid: fd8e0a888d1caeb4ca62903615c7c0c7, type: 3}
   range: 15
   target: 1
+  level: 0
+  price: 
 --- !u!1 &4083032293028743251
 GameObject:
   m_ObjectHideFlags: 0
@@ -1837,6 +1848,8 @@ MonoBehaviour:
   arrowPrefab: {fileID: 5267023219531783653, guid: fd8e0a888d1caeb4ca62903615c7c0c7, type: 3}
   range: 15
   target: 1
+  level: 0
+  price: 
 --- !u!1 &4083032293384296457
 GameObject:
   m_ObjectHideFlags: 0
@@ -1984,14 +1997,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4328d71a5709ec74b90c43b4837a7f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotIcon: {fileID: 0}
-  priceIcon: {fileID: 0}
-  levelText: {fileID: 0}
-  priceText: {fileID: 0}
+  slotIcon: {fileID: 4083032292146455246}
+  priceIcon: {fileID: 4083032292055217674}
+  levelText: {fileID: 4083032292184061315}
+  priceText: {fileID: 4083032293114199642}
   hoverColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   pressedColor: {r: 0.3, g: 0.3, b: 0.3, a: 1}
-  upgrade: {fileID: 4083032292150859434}
-  slotType: 0
+  onClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4083032292150859434}
+        m_TargetAssemblyTypeName: Castle, Assembly-CSharp
+        m_MethodName: UpgradeLeftTower
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4083032293406051753
 GameObject:
   m_ObjectHideFlags: 0
@@ -2476,6 +2502,8 @@ MonoBehaviour:
   arrowPrefab: {fileID: 5267023219531783653, guid: fd8e0a888d1caeb4ca62903615c7c0c7, type: 3}
   range: 15
   target: 1
+  level: 0
+  price: 
 --- !u!1 &4083032293574169834
 GameObject:
   m_ObjectHideFlags: 0
@@ -2623,14 +2651,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4328d71a5709ec74b90c43b4837a7f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotIcon: {fileID: 0}
-  priceIcon: {fileID: 0}
-  levelText: {fileID: 0}
-  priceText: {fileID: 0}
+  slotIcon: {fileID: 4083032293576773785}
+  priceIcon: {fileID: 4083032293406051753}
+  levelText: {fileID: 4083032292040277669}
+  priceText: {fileID: 4083032293469475239}
   hoverColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   pressedColor: {r: 0.3, g: 0.3, b: 0.3, a: 1}
-  upgrade: {fileID: 4083032292150859434}
-  slotType: 0
+  onClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4083032292150859434}
+        m_TargetAssemblyTypeName: Castle, Assembly-CSharp
+        m_MethodName: UpgradeRightTower
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4083032293576773785
 GameObject:
   m_ObjectHideFlags: 0

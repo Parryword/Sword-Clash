@@ -2,23 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class SlotScript : MonoBehaviour
+public class SlotButton : MonoBehaviour
 {
-    public int[] price;
-    public int level;
     public GameObject slotIcon;
     public GameObject priceIcon;
     public TextMeshPro levelText;
     public TextMeshPro priceText;
     public Color hoverColor = new(0.5f, 0.5f, 0.5f, 1);
     public Color pressedColor = new(0.3f, 0.3f, 0.3f, 1);
-    public Building building;
+    public UnityEvent onClick;
     
     private Color originalColor;
     private bool isMouseOver;
     private SpriteRenderer sr;
-    private SoundManager soundManager;
 
     // Start is called before the first frame update
     void Start()
@@ -50,7 +48,7 @@ public class SlotScript : MonoBehaviour
     private void OnMouseDown()
     {
         sr.color = pressedColor;
-        building.Upgrade(this);
+        onClick.Invoke();
     }
 
     private void OnMouseUp()

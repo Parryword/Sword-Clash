@@ -10,6 +10,8 @@ public class TowerScript : MonoBehaviour
     public GameObject arrowPrefab;
     public int range = 15;
     public Target target;
+    public int level;
+    public int[] price;
 
     private float timer = 0f;
 
@@ -51,6 +53,17 @@ public class TowerScript : MonoBehaviour
 
             timer = 0f;
         }
+    }
+
+    public void Upgrade()
+    {
+        if (deltaTime <= 1)
+        {
+            Debug.Log("Cannot be upgraded further.");
+            return;
+        };
+        deltaTime -= 1;
+        Debug.Log("Tower upgraded");
     }
 }
 
