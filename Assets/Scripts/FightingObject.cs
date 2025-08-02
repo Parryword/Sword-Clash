@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Unity.Mathematics;
-using static GameManager;
 
 /// <summary>
 /// Extract some of this to Enemy.cs
@@ -14,12 +13,10 @@ public abstract class FightingObject : AnimatableObject
     public float crit;
     public float speed;
     public GameObject blood;
-    public SoundManager soundManager;
     
     // Start is called before the first frame update
     protected void Start()
     {
-        soundManager = FindObjectOfType<SoundManager>();
     }
 
     // Update is called once per frame
@@ -43,17 +40,18 @@ public abstract class FightingObject : AnimatableObject
         if (isCrit)
         {
             Bleed();
-            soundManager.PlaySoundEffect(Sound.Bleed);
+            int a = 1;
+            Globals.soundManager.PlaySoundEffect(Sound.Bleed);
         }
         else
         {
-            soundManager.PlaySoundEffect(Sound.BasicAttack);
+            Globals.soundManager.PlaySoundEffect(Sound.BasicAttack);
         }
         health -= value;
-        StartCoroutine("Colorize");
+        StartCoroutine(nameof(Colorize));
     }
 
-    IEnumerator Colorize()
+    private IEnumerator Colorize()
     {
         spriteRenderer.color = new Color(1, 0.6f, 0.6f);
         yield return new WaitForSeconds(0.25f);

@@ -12,8 +12,6 @@ public class ObjectiveManager : MonoBehaviour, ISubject
 {
     public TextMeshProUGUI textArea;
     public TextMeshProUGUI victoryText;
-    public SoundManager soundManager;
-    public Player player;
     public GameObject prefab;
     public GameObject westSpawnPoint, eastSpawnPoint;
     public GameObject nextRoundButton;

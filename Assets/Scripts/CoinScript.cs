@@ -12,17 +12,12 @@ public class CoinScript : MonoBehaviour
     private float period = 1f;
     [SerializeField]
     private bool disableAnimation = false;
-    [SerializeField]
-    private SoundManager soundManager;
-    private Player player;
     private float yPos;
     private float playerDistance;
 
     // Start is called before the first frame update
     void Start()
     {
-        soundManager = GameObject.Find("GameManager").GetComponent<SoundManager>();
-        player = GameObject.Find("Player").GetComponent<Player>();
         yPos = gameObject.transform.position.y;
     }
 
@@ -34,7 +29,7 @@ public class CoinScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        playerDistance = player.transform.position.x - gameObject.transform.position.x;
+        playerDistance = Globals.player.transform.position.x - gameObject.transform.position.x;
 
         if (!disableAnimation)
         {
@@ -45,8 +40,8 @@ public class CoinScript : MonoBehaviour
 
         if (Mathf.Abs(playerDistance) < 1)
         {
-            player.goldAmount++;
-            soundManager.PlaySoundEffect(Sound.Coin);
+            Globals.player.goldAmount++;
+            Globals.soundManager.PlaySoundEffect(Sound.Coin);
             Destroy(gameObject);
         }
 

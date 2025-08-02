@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TowerScript : MonoBehaviour
 {
-    public Player player;
     public int deltaTime = 5;
     public ArrowScript arrowPrefab;
     public int range = 15;
@@ -36,10 +35,10 @@ public class TowerScript : MonoBehaviour
 
         if (target == Target.Player)
         {
-            withinRange = Mathf.Abs(player.transform.position.x - transform.position.x) < range;
+            withinRange = Mathf.Abs(Globals.player.transform.position.x - transform.position.x) < range;
         }
 
-        if (target == Target.Enemy && closestEnemy != null) // check if we found any enemy
+        if (target == Target.Enemy && closestEnemy is not null) // check if we found any enemy
         {
             withinRange = Mathf.Abs(closestEnemy.transform.position.x - transform.position.x) < range;
         }

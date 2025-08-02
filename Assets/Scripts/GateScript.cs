@@ -26,9 +26,9 @@ public class GateScript : MonoBehaviour
         if(unlocked == true)
         {
             Debug.Log("Clicked");
-            GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(teleportX, teleportY, 0);
+            Globals.player.transform.position = new Vector3(teleportX, teleportY, 0);
             GameObject.FindObjectOfType<Player>().level++;
-            GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(teleportX, teleportY, -10);
+            Globals.camera.transform.position = new Vector3(teleportX, teleportY, -10);
         }
     }
 

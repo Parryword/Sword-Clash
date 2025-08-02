@@ -3,8 +3,6 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
-using static GameManager;
-
 
 public class Player : FightingObject
 {
@@ -21,7 +19,6 @@ public class Player : FightingObject
     private float lockedDistance;
     private int enemyIndex;
     private GameObject enemyObject;
-    private StatsTextManager statsTextManager;
     private RectTransform healthBarRect;
     private float healthBarWidth;
 
@@ -30,7 +27,6 @@ public class Player : FightingObject
         base.Start();
         keyDisabled = false;
         enemyObject = null;
-        statsTextManager = GameObject.Find("GameManager").GetComponent<StatsTextManager>();
         healthBarRect = healthBar.GetComponent<RectTransform>();
         healthBarWidth = healthBarRect.sizeDelta.x;
     }
@@ -79,7 +75,7 @@ public class Player : FightingObject
     private void LateUpdate()
     {
         textFieldGold.text = goldAmount.ToString();
-        statsTextManager.updateText(health.ToString(),
+        Globals.statsTextManager.UpdateText(health.ToString(),
             maxHealth.ToString(), damage.ToString(), defense.ToString(), level.ToString());
     }
 

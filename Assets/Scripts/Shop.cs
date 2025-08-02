@@ -20,8 +20,6 @@ public class Shop : MonoBehaviour
     [SerializeField] 
     private int[] attackPrices = {2, 3, 5, 8};
     [SerializeField]
-    private Player player;
-    [SerializeField]
     private Button upgradeDefenseButton;
     [SerializeField]
     private Button upgradeAttackButton;
@@ -39,28 +37,30 @@ public class Shop : MonoBehaviour
         
     }
 
-    public void UpgradeDefense()
+    private void UpgradeDefense()
     {
         if (defenseLevel == defensePrices.Length)
             return;
 
-        if (player.goldAmount >= defensePrices[defenseLevel])
-        {
-            player.goldAmount -= defensePrices[defenseLevel++];
-            player.defense++;
-        }
+        if (Globals.player.goldAmount < attackPrices[attackLevel])
+            return;
+        
+        Globals.player.goldAmount -= defensePrices[defenseLevel++];
+        Globals.player.defense++;
+        
     }
 
-    public void UpgradeAttack()
+    private void UpgradeAttack()
     {
         if (attackLevel == attackPrices.Length)
             return;
 
-        if (player.goldAmount >= attackPrices[attackLevel])
-        {
-            player.goldAmount -= attackPrices[attackLevel++];
-            player.damage+=2;
-        }
+        if (Globals.player.goldAmount < attackPrices[attackLevel])
+            return;
+        
+        Globals.player.goldAmount -= attackPrices[attackLevel++];
+        Globals.player.damage+=2;
+        
     }
 
     private void LateUpdate()

@@ -987,7 +987,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 454336945}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -168.95999, y: 30.675, z: 0}
+  m_LocalPosition: {x: -168.95999, y: 30.5, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1043,7 +1043,6 @@ MonoBehaviour:
   crit: 0.1
   speed: 0.08
   blood: {fileID: 1099022848}
-  soundManager: {fileID: 0}
   goldAmount: 111
   playerState: 0
   textFieldGold: {fileID: 1334522379}
@@ -2106,7 +2105,6 @@ GameObject:
   - component: {fileID: 964467135}
   - component: {fileID: 964467136}
   - component: {fileID: 964467137}
-  - component: {fileID: 964467138}
   - component: {fileID: 964467139}
   - component: {fileID: 964467140}
   m_Layer: 0
@@ -2185,25 +2183,8 @@ MonoBehaviour:
   attackLevel: 0
   defensePrices: 02000000030000000500000008000000
   attackPrices: 02000000030000000500000008000000
-  player: {fileID: 454336953}
   upgradeDefenseButton: {fileID: 1002669227}
   upgradeAttackButton: {fileID: 779578608}
---- !u!114 &964467138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 964467132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 394b0dc247a136641bea1656d573044e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  inputManager: {fileID: 0}
-  statsTextManager: {fileID: 0}
-  objectiveManager: {fileID: 0}
 --- !u!114 &964467139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2231,8 +2212,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textArea: {fileID: 1136853995}
   victoryText: {fileID: 81503649}
-  soundManager: {fileID: 964467136}
-  player: {fileID: 454336953}
   prefab: {fileID: 8348463839135187339, guid: bccb78044c55ec94f8d381db54153e71, type: 3}
   westSpawnPoint: {fileID: 1191649380}
   eastSpawnPoint: {fileID: 1796071993}

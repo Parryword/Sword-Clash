@@ -21,11 +21,11 @@ public class StatsTextManager : MonoBehaviour
         
     }
 
-    public void updateText(string HP, string maxHP, string dmg, string def, string lv)
+    public void UpdateText(string hp, string maxHp, string dmg, string def, string lv)
     {
         StringBuilder sb = new StringBuilder();
         sb.Append("Stats\n");
-        sb.Append("HP: " + HP + " / " + maxHP + "\n");
+        sb.Append("HP: " + hp + " / " + maxHp + "\n");
         sb.Append("DMG: " + dmg + "\n");
         sb.Append("DEF: " +  def + "\n");
         sb.Append("LV: " + lv + "\n");

@@ -27,7 +27,7 @@ public class ArrowScript : MonoBehaviour
 
         if (target == Target.Player)
         {
-            targetObject = GameObject.FindGameObjectWithTag("Player");
+            targetObject = Globals.player.gameObject;
         }
         if (target == Target.Enemy)
         {

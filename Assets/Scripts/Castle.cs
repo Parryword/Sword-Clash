@@ -23,9 +23,6 @@ public class Castle : MonoBehaviour, ICastle
     public GameObject door;
     public GameObject ruins;
 
-    private Player player;
-    private SoundManager soundManager;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -36,9 +33,6 @@ public class Castle : MonoBehaviour, ICastle
         leftTower.gameObject.SetActive(false);
         rightTower.gameObject.SetActive(false);
         door.SetActive(false);
-        
-        player = GameObject.Find("Player").GetComponent<Player>();
-        soundManager = GameObject.Find("GameManager").GetComponent<SoundManager>();
     }
 
     // Update is called once per frame
@@ -94,14 +88,14 @@ public class Castle : MonoBehaviour, ICastle
         int price = prices[currentLevel];
 
         // Check gold
-        if (player.goldAmount < price)
+        if (Globals.player.goldAmount < price)
         {
             Debug.Log("Not enough gold.");
             return;
         }
 
         // Deduct gold and upgrade
-        player.goldAmount -= price;
+        Globals.player.goldAmount -= price;
         currentLevel++;
         
         tower.level = currentLevel;
@@ -109,11 +103,11 @@ public class Castle : MonoBehaviour, ICastle
         // Update UI texts
         var newLevelText = currentLevel < prices.Length ? ToRoman(currentLevel + 1) : "MAX";
         var newPriceText = currentLevel < prices.Length ? prices[currentLevel].ToString() : "";
-        var isMaxLevel = currentLevel < prices.Length;
+        var isMaxLevel = currentLevel == prices.Length;
         
         button.UpdateUI(newLevelText, newPriceText, isMaxLevel);;
 
-        soundManager.PlaySoundEffect(Sound.Construction);
+        Globals.soundManager.PlaySoundEffect(Sound.Construction);
         tower.Upgrade();
     }
     

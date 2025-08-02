@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using static GameManager;
-
 
 public abstract class AnimatableObject : MonoBehaviour
 {

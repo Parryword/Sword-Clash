@@ -12,7 +12,6 @@ public class Enemy : FightingObject
     public bool isFlankingLeft, isFlankingRight;
     public GameObject enemyObject;
     public GameObject coinPrefab;
-    public Player player;
     public float movementRandom;
     public ObjectiveManager objectiveManager;
 
@@ -23,7 +22,6 @@ public class Enemy : FightingObject
         rigidBody = GetComponent<Rigidbody2D>();
         colliderBox = GetComponent<PolygonCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        player = GameObject.Find("Player").GetComponent<Player>();
         movementRandom = Random.Range(-1f, 1f);
         speed += Random.Range(-0.01f, 0.01f);
         objectiveManager = FindObjectOfType<ObjectiveManager>();
@@ -31,7 +29,7 @@ public class Enemy : FightingObject
 
     void Update()
     {
-        playerDistance = GetDistance(player);
+        playerDistance = GetDistance(Globals.player);
     }
     
     // TODO Re-implement flaking behaviour
@@ -98,7 +96,7 @@ public class Enemy : FightingObject
     {
         if (enemyObject == null || !enemyObject.CompareTag("Player")) return;
         var isCrit = Random.value < crit;
-        var dmgAmount = damage * (isCrit ? 2 : 1) - player.defense;
+        var dmgAmount = damage * (isCrit ? 2 : 1) - Globals.player.defense;
         if (dmgAmount < 1)
         {
             dmgAmount = 1;
@@ -136,78 +134,6 @@ public class Enemy : FightingObject
         return enemies.Count < 2;
     }
 
-    private void FlankLeft()
-    {
-        if (!IsLeftClear() && !IsInAttackDistance() && IsInAgroDistance() && !isFlankingRight &&
-            GetDistance(player) < 0 || isFlankingLeft)
-        {
-            spriteRenderer.flipX = true;
-            if (isFlankingLeft == false)
-            {
-                Debug.Log("FlankingLeft");
-                isFlankingLeft = true;
-                StartCoroutine("StopFlanking");
-            }
-
-            gameObject.transform.position += new Vector3(-0.08f, 0, 0);
-            animator.SetBool("walking", true);
-
-            if (Mathf.Abs(GetDistance(player)) > 4)
-            {
-                isFlankingLeft = false;
-                if (GetDistance(player) > 0)
-                {
-                    spriteRenderer.flipX = false;
-                }
-                else
-                {
-                    spriteRenderer.flipX = true;
-                }
-            }
-        }
-        else if (isFlankingLeft && IsInAttackDistance())
-        {
-            gameObject.transform.position += new Vector3(-0.08f, 0, 0);
-            animator.SetBool("walking", true);
-        }
-    }
-
-    private void FlankRight()
-    {
-        if (!IsRightClear() && !IsInAttackDistance() && IsInAgroDistance() && !isFlankingLeft &&
-            GetDistance(player) > 0 || isFlankingRight)
-        {
-            spriteRenderer.flipX = false;
-            if (isFlankingRight == false)
-            {
-                Debug.Log("flankingRight");
-                isFlankingRight = true;
-                StartCoroutine("StopFlanking");
-            }
-
-            gameObject.transform.position += new Vector3(0.08f, 0, 0);
-            animator.SetBool("walking", true);
-
-            if (Mathf.Abs(GetDistance(player)) > 4)
-            {
-                isFlankingRight = false;
-                if (GetDistance(player) > 0)
-                {
-                    spriteRenderer.flipX = false;
-                }
-                else
-                {
-                    spriteRenderer.flipX = true;
-                }
-            }
-        }
-        else if (isFlankingRight && !IsInAttackDistance())
-        {
-            gameObject.transform.position += new Vector3(0.08f, 0, 0);
-            animator.SetBool("walking", true);
-        }
-    }
-
     private bool IsDirectionRight()
     {
         return playerDistance > 0;
@@ -220,11 +146,11 @@ public class Enemy : FightingObject
 
     IEnumerator StopFlanking()
     {
-        float seconds = Mathf.Abs(GetDistance(player)) * 2 / (0.08f * 50);
+        float seconds = Mathf.Abs(GetDistance(Globals.player)) * 2 / (0.08f * 50);
         yield return new WaitForSeconds(seconds);
         isFlankingLeft = false;
         isFlankingRight = false;
-        spriteRenderer.flipX = GetDistance(player) <= 0;
+        spriteRenderer.flipX = GetDistance(Globals.player) <= 0;
     }
 
     private void DropLoot()
@@ -245,6 +171,6 @@ public class Enemy : FightingObject
 
     private bool IsInAgroDistance()
     {
-        return GetAbsoluteDistance(player) < agroDistance;
+        return GetAbsoluteDistance(Globals.player) < agroDistance;
     }
 }
