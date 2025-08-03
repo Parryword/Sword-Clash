@@ -21,43 +21,35 @@ public class BandageScript : MonoBehaviour
         
     }
 
-    public void increaseBandage()
+    public void IncreaseBandage()
     {
         count++;
-        updateText();
+        UpdateText();
     }
 
-    public void decreaseBandage()
+    private void DecreaseBandage()
     {
         if (count > 0)
         {
             count--;
-            updateText();
+            UpdateText();
         } else
         {
             Debug.Log("No bandages left.");
         }
     }
 
-    public void useBandage(Player player)
+    public void UseBandage()
     {
-        if (player.health >= 22 && player.health < 30 && count > 0)
-        {
-            player.health = 30;
-            decreaseBandage();
-
-            Debug.Log("Player healed with bandages found in house.");
-        }
-        else if (player.health < 22 && count > 0)
-        {
-            player.health += 8;
-            decreaseBandage();
-
-            Debug.Log("Player healed with bandages found in house.");
-        }
+        var player = Globals.player;
+        
+        if (count < 1) return;
+        
+        player.health = Mathf.Clamp(player.health + 8, 0, player.maxHealth);
+        DecreaseBandage();
     }
 
-    public void updateText()
+    private void UpdateText()
     {
         text.text = count.ToString();
     }

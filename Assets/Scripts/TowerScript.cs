@@ -38,7 +38,7 @@ public class TowerScript : MonoBehaviour
             withinRange = Mathf.Abs(Globals.player.transform.position.x - transform.position.x) < range;
         }
 
-        if (target == Target.Enemy && closestEnemy is not null) // check if we found any enemy
+        if (target == Target.Enemy && closestEnemy is not null)
         {
             withinRange = Mathf.Abs(closestEnemy.transform.position.x - transform.position.x) < range;
         }

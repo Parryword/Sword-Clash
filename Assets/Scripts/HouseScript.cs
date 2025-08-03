@@ -22,7 +22,7 @@ public class HouseScript : MonoBehaviour, IObserver
     {
         if (isUsed) return;
 
-        Globals.player.bandage.increaseBandage();
+        Globals.player.bandage.IncreaseBandage();
         isUsed = true;
     }
 

@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 87363808}
   - component: {fileID: 87363810}
   m_Layer: 5
-  m_Name: Nextwave
+  m_Name: Next
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1283,7 +1283,7 @@ GameObject:
   - component: {fileID: 558764819}
   - component: {fileID: 558764818}
   m_Layer: 5
-  m_Name: StatsBackground
+  m_Name: Stats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2355,7 +2355,7 @@ GameObject:
   - component: {fileID: 1003803196}
   - component: {fileID: 1003803197}
   m_Layer: 5
-  m_Name: ObjectiveBackground
+  m_Name: Objective
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2831,7 +2831,7 @@ GameObject:
   - component: {fileID: 1136853996}
   - component: {fileID: 1136853995}
   m_Layer: 5
-  m_Name: ObjectiveText
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3687,7 +3687,7 @@ GameObject:
   - component: {fileID: 1674724800}
   - component: {fileID: 1674724799}
   m_Layer: 5
-  m_Name: healthbar
+  m_Name: HealthBarValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4129,7 +4129,7 @@ GameObject:
   - component: {fileID: 1957361862}
   - component: {fileID: 1957361861}
   m_Layer: 5
-  m_Name: StatsText
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4521,11 +4521,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2023042493}
         m_TargetAssemblyTypeName: BandageScript, Assembly-CSharp
-        m_MethodName: useBandage
-        m_Mode: 2
+        m_MethodName: UseBandage
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 454336953}
-          m_ObjectArgumentAssemblyTypeName: Player, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4567,7 +4567,7 @@ GameObject:
   - component: {fileID: 2120328521}
   - component: {fileID: 2120328520}
   m_Layer: 5
-  m_Name: Gold
+  m_Name: Money
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4644,7 +4644,7 @@ GameObject:
   - component: {fileID: 2126128529}
   - component: {fileID: 2126128528}
   m_Layer: 5
-  m_Name: healthbarframe
+  m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
