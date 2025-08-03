@@ -4840,6 +4840,10 @@ PrefabInstance:
       propertyPath: rightTowerButton
       value: 
       objectReference: {fileID: 1430503197}
+    - target: {fileID: 4083032292929905634, guid: 102a7314fe384407c8cde1d314d90926, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4083032292929905638, guid: 102a7314fe384407c8cde1d314d90926, type: 3}
       propertyPath: player
       value: 
@@ -4867,6 +4871,14 @@ PrefabInstance:
     - target: {fileID: 4083032292929905638, guid: 102a7314fe384407c8cde1d314d90926, type: 3}
       propertyPath: price.Array.data[3]
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083032293028743251, guid: 102a7314fe384407c8cde1d314d90926, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083032293362973166, guid: 102a7314fe384407c8cde1d314d90926, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4083032293384296432, guid: 102a7314fe384407c8cde1d314d90926, type: 3}
       propertyPath: building
@@ -4899,6 +4911,10 @@ PrefabInstance:
     - target: {fileID: 4083032293384296457, guid: 102a7314fe384407c8cde1d314d90926, type: 3}
       propertyPath: m_Name
       value: TowerLeftButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083032293500021393, guid: 102a7314fe384407c8cde1d314d90926, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4083032293500021397, guid: 102a7314fe384407c8cde1d314d90926, type: 3}
       propertyPath: player
