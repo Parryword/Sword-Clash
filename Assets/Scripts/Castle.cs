@@ -76,7 +76,7 @@ public class Castle : MonoBehaviour, ICastle
     private void UpgradeTower(TowerScript tower, SlotButton button)
     {
         var currentLevel = tower.level;
-        var prices = tower.price;
+        var prices = tower.prices;
 
         // Max level check
         if (currentLevel >= prices.Length)
@@ -105,10 +105,10 @@ public class Castle : MonoBehaviour, ICastle
         var newPriceText = currentLevel < prices.Length ? prices[currentLevel].ToString() : "";
         var isMaxLevel = currentLevel == prices.Length;
         
-        button.UpdateUI(newLevelText, newPriceText, isMaxLevel);;
+        // button.UpdateUI(newLevelText, newPriceText, isMaxLevel);;
 
         Globals.soundManager.PlaySoundEffect(Sound.Construction);
-        tower.Upgrade();
+        // tower.Upgrade();
     }
     
     private void OnTriggerEnter2D(Collider2D collision)

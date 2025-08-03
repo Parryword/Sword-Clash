@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Keybindings", menuName = "Keybindings")]
+[CreateAssetMenu(fileName = "Keybindings", menuName = "Scriptable/Keybindings")]
 public class KeyBindings : ScriptableObject
 {
     [System.Serializable]

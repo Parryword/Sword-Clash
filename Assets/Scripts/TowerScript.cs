@@ -1,21 +1,29 @@
 using System.Linq;
 using UnityEngine;
 
+public interface IUpgradeable
+{
+    public void Upgrade(SlotButton button);
+}
 
-public class TowerScript : MonoBehaviour
+public class TowerScript : Building, IUpgradeable
 {
     public int deltaTime = 5;
-    public ArrowScript arrowPrefab;
     public int range = 15;
     public Target target;
-    public int level;
-    public int[] price;
+    public ArrowScript arrowPrefab;
 
     private float timer = 0f;
+    private 
 
     // Start is called before the first frame update
     void Start()
     {
+    }
+
+    public void Instantiate()
+    {
+        
     }
 
     // Update is called once per frame
@@ -51,15 +59,11 @@ public class TowerScript : MonoBehaviour
 
         timer = 0f;
     }
-    
-    public void Upgrade()
+
+    public override void Upgrade(SlotButton button)
     {
-        if (deltaTime <= 1)
-        {
-            Debug.Log("Cannot be upgraded further.");
-            return;
-        }
-        
+        base.Upgrade(button);
+                
         deltaTime -= 1;
         Debug.Log("Tower upgraded");
     }
