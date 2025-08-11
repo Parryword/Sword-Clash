@@ -1,3 +1,4 @@
+using Building.Intf;
 using Utility;
 
 namespace Building
@@ -7,7 +8,7 @@ namespace Building
     using System.Collections.Generic;
     using UnityEngine;
 
-    public class HouseScript : MonoBehaviour, IObserver
+    public class House : MonoBehaviour, IHouse, IObserver
     {
         private bool isUsed;
 

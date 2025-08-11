@@ -1,3 +1,4 @@
+using Building.Intf;
 using Projectiles;
 
 namespace Building
@@ -7,7 +8,7 @@ namespace Building
     using UnityEngine;
 
 
-    public class TowerScript : MonoBehaviour
+    public class Tower : MonoBehaviour, ITower
     {
         public int deltaTime = 5;
         public ArrowScript arrowPrefab;

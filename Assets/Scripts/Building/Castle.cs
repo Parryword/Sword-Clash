@@ -1,30 +1,20 @@
+using Building.Intf;
 using UI;
 
 namespace Building
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using Building;
-    using TMPro;
     using UnityEngine;
-
-    public interface ICastle
-    {
-        public void UpgradeGateHouse();
-        public void UpgradeLeftTower();
-        public void UpgradeRightTower();
-    }
-
+    
     public class Castle : MonoBehaviour, ICastle
     {
         public GameObject upgradePanel;
         public SlotButton gateHouseButton;
         public SlotButton leftTowerButton;
         public SlotButton rightTowerButton;
-        public TowerScript gateHouse;
-        public TowerScript leftTower;
-        public TowerScript rightTower;
+        public Tower gateHouse;
+        public Tower leftTower;
+        public Tower rightTower;
         public GameObject door;
         public GameObject ruins;
 
@@ -78,7 +68,7 @@ namespace Building
             UpgradeTower(leftTower, leftTowerButton);
         }
 
-        private void UpgradeTower(TowerScript tower, SlotButton button)
+        private void UpgradeTower(Tower tower, SlotButton button)
         {
             var currentLevel = tower.level;
             var prices = tower.price;
